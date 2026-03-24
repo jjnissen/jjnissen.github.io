@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UP &mdash; Pricing &amp; Go-to-Market</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --kiln: #944A2D;
+    --adobe: #B5623A;
+    --fired-clay: #E8713A;
+    --mahogany: #3B2518;
+    --jobsite-green: #4A7C59;
+    --plaster: #E8DDD0;
+    --off-white: #F5EDE3;
+    --india-yellow: #CE923C;
+    --pitch: #1A1A1A;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--off-white);
+    color: var(--pitch);
+    line-height: 1.6;
+    font-size: 15px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  /* HEADER */
+  .hero {
+    background: var(--mahogany);
+    padding: 80px 0 60px;
+    text-align: center;
+    border-bottom: 5px solid var(--fired-clay);
+  }
+  .hero h1 {
+    font-size: 48px;
+    font-weight: 900;
+    color: #fff;
+    letter-spacing: -1px;
+    margin-bottom: 8px;
+  }
+  .hero h1 span { color: var(--fired-clay); }
+  .hero .subtitle {
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--plaster);
+    letter-spacing: 0.5px;
+  }
+  .hero .prepared {
+    margin-top: 24px;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: rgba(232,221,208,0.5);
+  }
+
+  /* SECTIONS */
+  .section {
+    padding: 60px 0 40px;
+  }
+  .section + .section {
+    border-top: 1px solid var(--plaster);
+  }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    color: var(--kiln);
+    margin-bottom: 8px;
+  }
+  .section-title {
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--mahogany);
+    letter-spacing: -0.5px;
+    margin-bottom: 32px;
+    line-height: 1.2;
+  }
+
+  /* SUB SECTIONS */
+  .subsection {
+    margin-bottom: 48px;
+  }
+  .subsection-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--kiln);
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--plaster);
+  }
+  .subsection-subtitle {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--mahogany);
+    margin: 20px 0 10px;
+  }
+
+  p {
+    margin-bottom: 14px;
+    color: var(--pitch);
+  }
+  p.muted {
+    color: #6b5e52;
+    font-size: 14px;
+  }
+
+  strong { font-weight: 600; }
+  .highlight { color: var(--kiln); font-weight: 600; }
+
+  /* PRICE CALLOUT */
+  .price-callout {
+    background: var(--mahogany);
+    color: #fff;
+    padding: 28px 32px;
+    border-radius: 8px;
+    margin: 20px 0;
+    text-align: center;
+  }
+  .price-callout .amount {
+    font-size: 42px;
+    font-weight: 900;
+    color: var(--fired-clay);
+  }
+  .price-callout .label {
+    font-size: 14px;
+    color: var(--plaster);
+    margin-top: 4px;
+  }
+  .price-callout .detail {
+    font-size: 13px;
+    color: rgba(255,255,255,0.65);
+    margin-top: 8px;
+  }
+
+  /* FLOW DIAGRAM */
+  .flow {
+    background: #fff;
+    border: 1px solid var(--plaster);
+    border-radius: 8px;
+    padding: 32px;
+    margin: 24px 0;
+  }
+  .flow-title {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--kiln);
+    margin-bottom: 20px;
+  }
+  .flow-step {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 0;
+    position: relative;
+    padding-left: 36px;
+    padding-bottom: 20px;
+  }
+  .flow-step:last-child { padding-bottom: 0; }
+  .flow-step::before {
+    content: '';
+    position: absolute;
+    left: 12px;
+    top: 28px;
+    bottom: 0;
+    width: 2px;
+    background: var(--plaster);
+  }
+  .flow-step:last-child::before { display: none; }
+  .flow-step .dot {
+    position: absolute;
+    left: 4px;
+    top: 6px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--fired-clay);
+    flex-shrink: 0;
+  }
+  .flow-step:last-child .dot {
+    background: var(--jobsite-green);
+  }
+  .flow-step .arrow {
+    font-size: 18px;
+    color: var(--fired-clay);
+    margin-right: 10px;
+    line-height: 1.4;
+    flex-shrink: 0;
+  }
+  .flow-step .text {
+    font-size: 15px;
+    line-height: 1.5;
+  }
+  .flow-step .text strong {
+    color: var(--mahogany);
+  }
+  .flow-step .text .num {
+    font-weight: 800;
+    color: var(--fired-clay);
+    font-size: 17px;
+  }
+
+  /* TABLES */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 14px;
+  }
+  table th {
+    background: var(--mahogany);
+    color: #fff;
+    font-weight: 600;
+    text-align: left;
+    padding: 12px 16px;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  table th:first-child {
+    border-radius: 6px 0 0 0;
+  }
+  table th:last-child {
+    border-radius: 0 6px 0 0;
+  }
+  table td {
+    padding: 11px 16px;
+    border-bottom: 1px solid var(--plaster);
+    font-variant-numeric: tabular-nums;
+  }
+  table tr:nth-child(even) td {
+    background: rgba(232,221,208,0.25);
+  }
+  table tr:last-child td:first-child {
+    border-radius: 0 0 0 6px;
+  }
+  table tr:last-child td:last-child {
+    border-radius: 0 0 6px 0;
+  }
+  table .row-total td {
+    font-weight: 700;
+    background: rgba(148,74,45,0.08);
+    border-top: 2px solid var(--kiln);
+    color: var(--mahogany);
+  }
+  table .row-highlight td {
+    background: rgba(74,124,89,0.08);
+    font-weight: 600;
+  }
+  td.num, th.num {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* SUMMARY BOX */
+  .summary-box {
+    background: var(--mahogany);
+    border-radius: 8px;
+    padding: 36px 40px;
+    margin: 32px 0;
+    color: #fff;
+  }
+  .summary-box h3 {
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--fired-clay);
+    margin-bottom: 20px;
+  }
+  .summary-box .line {
+    display: flex;
+    align-items: baseline;
+    margin-bottom: 10px;
+    font-size: 15px;
+  }
+  .summary-box .line .num {
+    font-weight: 800;
+    color: var(--fired-clay);
+    margin-right: 10px;
+    font-size: 18px;
+    min-width: 24px;
+  }
+  .summary-box .line .desc {
+    color: var(--plaster);
+  }
+  .summary-box .target {
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255,255,255,0.15);
+    font-size: 14px;
+    color: var(--india-yellow);
+    font-weight: 600;
+  }
+
+  /* METRIC CARDS */
+  .metric-row {
+    display: flex;
+    gap: 16px;
+    margin: 20px 0;
+    flex-wrap: wrap;
+  }
+  .metric-card {
+    flex: 1;
+    min-width: 140px;
+    background: #fff;
+    border: 1px solid var(--plaster);
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+  }
+  .metric-card .value {
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--kiln);
+    line-height: 1.1;
+  }
+  .metric-card .value.green { color: var(--jobsite-green); }
+  .metric-card .label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #8a7d72;
+    margin-top: 6px;
+    font-weight: 500;
+  }
+
+  /* COMPARISON */
+  .vs-table th:nth-child(2) {
+    background: var(--jobsite-green);
+  }
+  .vs-table th:nth-child(3) {
+    background: #777;
+  }
+
+  /* BULLET LIST */
+  ul.clean {
+    list-style: none;
+    padding: 0;
+    margin: 12px 0;
+  }
+  ul.clean li {
+    padding: 6px 0 6px 24px;
+    position: relative;
+    font-size: 14px;
+  }
+  ul.clean li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 14px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--fired-clay);
+  }
+
+  /* DIVIDER */
+  .divider {
+    height: 3px;
+    background: linear-gradient(90deg, var(--kiln), var(--fired-clay), var(--india-yellow));
+    margin: 0;
+    border: none;
+  }
+
+  /* FOOTER */
+  .footer {
+    text-align: center;
+    padding: 40px 0;
+    font-size: 10px;
+    color: #aaa;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+  }
+
+  /* PRINT */
+  @media print {
+    body { background: #fff; font-size: 11px; }
+    .container { max-width: 100%; padding: 0 20px; }
+    .hero { padding: 40px 0 30px; }
+    .hero h1 { font-size: 32px; }
+    .section { padding: 30px 0 20px; }
+    .summary-box { break-inside: avoid; }
+    table { font-size: 10px; break-inside: avoid; }
+    .metric-row { break-inside: avoid; }
+    .flow { break-inside: avoid; }
+  }
+
+  /* TWO COLUMN PRICE */
+  .price-duo {
+    display: flex;
+    gap: 20px;
+    margin: 20px 0;
+  }
+  .price-duo .price-callout {
+    flex: 1;
+    margin: 0;
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="hero">
+  <div class="container">
+    <h1><span>UP</span> Pricing &amp; GTM</h1>
+    <div class="subtitle">How UP Makes Money. How UP Gets Customers.</div>
+    <div class="prepared">Confidential &mdash; March 2026</div>
+  </div>
+</header>
+
+<hr class="divider">
+
+<!-- ============================================================ -->
+<!-- SECTION 1: HOW UP MAKES MONEY -->
+<!-- ============================================================ -->
+
+<div class="container">
+<div class="section">
+  <div class="section-label">Section 1</div>
+  <div class="section-title">How UP Makes Money</div>
+
+  <!-- REVENUE STREAM 1: PROJECT-BASED PRICING -->
+  <div class="subsection">
+    <div class="subsection-title">Revenue Stream 1: Project-Based Pricing</div>
+    <p>This is the core revenue engine. One price. Everything included. No per-seat nonsense.</p>
+
+    <!-- GC PRICING -->
+    <div class="subsection-subtitle">For the General Contractor</div>
+
+    <div class="price-callout">
+      <div class="amount">$15,000<span style="font-size:20px;color:var(--plaster)">/year</span></div>
+      <div class="label">Includes 3 projects. Every additional project: $5,000.</div>
+      <div class="detail">Estimating, bidding, project management, compliance, field ops, document management, financial management. Everything.</div>
+    </div>
+
+    <p>The GC does <strong>not</strong> absorb this cost alone. Here's how the project fee gets spread across the team:</p>
+
+    <div class="flow">
+      <div class="flow-title">Cost Distribution &mdash; How a $5,000 Project Fee Works</div>
+
+      <div class="flow-step">
+        <div class="dot"></div>
+        <div class="text">GC wins a <strong>$2M hospital renovation</strong></div>
+      </div>
+
+      <div class="flow-step">
+        <div class="dot"></div>
+        <div class="text"><strong>25 subcontractors</strong> on the project</div>
+      </div>
+
+      <div class="flow-step">
+        <div class="dot"></div>
+        <div class="text">Project fee: <span class="num">$5,000</span></div>
+      </div>
+
+      <div class="flow-step">
+        <div class="dot"></div>
+        <div class="text">$5,000 &divide; 25 subs = <span class="num">$200 each</span></div>
+      </div>
+
+      <div class="flow-step">
+        <div class="dot"></div>
+        <div class="text"><strong>When does the sub pay?</strong> On their <em>first</em> payment through UP.<br>
+        Sub gets first pay app approved for $80,000. UP deducts $200 automatically. Sub receives <strong>$79,800</strong>.<br>
+        Done. One time. Never again on that project.</div>
+      </div>
+
+      <div class="flow-step">
+        <div class="dot" style="background:var(--jobsite-green)"></div>
+        <div class="text"><strong>GC pays $0 for this project</strong> (absorbed by subs)<br>
+        <span style="color:#8a7d72">Or GC splits it &mdash; GC pays $2,500, subs split $2,500. Configurable per project.</span></div>
+      </div>
+    </div>
+
+    <!-- SUB PRICING -->
+    <div class="subsection-subtitle">For the Subcontractor</div>
+    <p>The sub doesn't "buy" UP. They get <strong>invited to a project</strong>.</p>
+    <ul class="clean">
+      <li>One-time project fee: <strong>$100&ndash;$200</strong>, deducted from first payment</li>
+      <li>Full access to UP for that project &mdash; scheduling, documents, pay apps, compliance, messaging</li>
+      <li>Want UP for your own business? <strong>$200/month</strong> individual seat &mdash; manage your crews, estimating, and books</li>
+    </ul>
+
+    <!-- INDIVIDUAL PRICING -->
+    <div class="subsection-subtitle">For the Individual</div>
+    <div class="price-duo">
+      <div class="price-callout">
+        <div class="amount">$200<span style="font-size:20px;color:var(--plaster)">/month</span></div>
+        <div class="label">One person. Full UP access.</div>
+        <div class="detail">Estimating, document analysis, cost lookups, compliance checks, AI assistant.</div>
+      </div>
+    </div>
+    <p class="muted">This is the product-led growth entry point. One estimator tries it &rarr; shows their PM &rarr; PM shows the owner &rarr; company converts to project-based pricing at $15K/year.</p>
+
+    <!-- COMPARISON TABLE -->
+    <div class="subsection-subtitle">Pricing Tiers at a Glance</div>
+    <table>
+      <thead>
+        <tr>
+          <th></th>
+          <th>Individual</th>
+          <th>Project (3 incl.)</th>
+          <th>Add'l Project</th>
+          <th>Enterprise</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Price</strong></td>
+          <td>$200/mo</td>
+          <td>$15,000/yr</td>
+          <td>$5,000/project</td>
+          <td>Custom</td>
+        </tr>
+        <tr>
+          <td><strong>Users</strong></td>
+          <td>1</td>
+          <td>Unlimited</td>
+          <td>Unlimited</td>
+          <td>Unlimited</td>
+        </tr>
+        <tr>
+          <td><strong>Projects</strong></td>
+          <td>Personal use</td>
+          <td>3 included</td>
+          <td>+1 per $5K</td>
+          <td>Unlimited</td>
+        </tr>
+        <tr>
+          <td><strong>AI Usage</strong></td>
+          <td>Standard allocation</td>
+          <td>Project allocation</td>
+          <td>Project allocation</td>
+          <td>Custom</td>
+        </tr>
+        <tr>
+          <td><strong>Overage</strong></td>
+          <td>Stripe metered</td>
+          <td>Stripe metered</td>
+          <td>Stripe metered</td>
+          <td>Negotiated</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- REVENUE STREAM 2: EMBEDDED FINANCE -->
+  <div class="subsection">
+    <div class="subsection-title">Revenue Stream 2: Embedded Finance</div>
+    <p>This is the long-tail revenue multiplier. Not day 1. This is the <strong>Toast model</strong>: Toast earns 6x more from payments than from software subscriptions.</p>
+    <ul class="clean">
+      <li>When UP processes payments (ACH, cards), UP earns <strong>48&ndash;58 basis points</strong></li>
+      <li>A $30M GC flowing payments through UP = <strong>~$150,000/year</strong> in transaction revenue alone</li>
+      <li>Day 1: GCs pay however they want. UP doesn't force it.</li>
+      <li>Month 6+: UP offers faster processing, earned wage access, materials financing</li>
+      <li>Year 2+: Most payments flow through UP because it's easier. Transaction revenue scales.</li>
+    </ul>
+
+    <div class="subsection-subtitle">Unit Economics: One $30M GC Customer</div>
+    <table>
+      <thead>
+        <tr>
+          <th>Revenue Layer</th>
+          <th class="num">Year 1</th>
+          <th class="num">Year 3</th>
+          <th class="num">Year 5</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Software ($15K + $5K &times; projects)</td>
+          <td class="num">$35,000</td>
+          <td class="num">$50,000</td>
+          <td class="num">$60,000</td>
+        </tr>
+        <tr>
+          <td>Sub project fees (passed through)</td>
+          <td class="num">$15,000</td>
+          <td class="num">$25,000</td>
+          <td class="num">$35,000</td>
+        </tr>
+        <tr>
+          <td>Stripe metered overage</td>
+          <td class="num">$4,000</td>
+          <td class="num">$8,000</td>
+          <td class="num">$12,000</td>
+        </tr>
+        <tr>
+          <td>Embedded finance (bps on GPV)</td>
+          <td class="num">$0</td>
+          <td class="num">$75,000</td>
+          <td class="num">$150,000</td>
+        </tr>
+        <tr class="row-total">
+          <td><strong>Total ACV</strong></td>
+          <td class="num">$54,000</td>
+          <td class="num">$158,000</td>
+          <td class="num">$257,000</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- REVENUE STREAM 3: METERED USAGE -->
+  <div class="subsection">
+    <div class="subsection-title">Revenue Stream 3: Stripe Metered Usage</div>
+    <ul class="clean">
+      <li>Every project gets an AI usage allocation included in the $5K project fee</li>
+      <li>Heavy users who exceed the allocation pay overage via Stripe metered billing</li>
+      <li>Same model as Claude &mdash; generous allocation, only power users hit overage</li>
+      <li>Estimated <strong>10&ndash;15%</strong> of projects hit overage. Average overage: <strong>$500&ndash;$2,000</strong>/project</li>
+    </ul>
+  </div>
+
+  <!-- SUMMARY BOX -->
+  <div class="summary-box">
+    <h3>How UP Makes Money</h3>
+    <div class="line"><span class="num">1.</span> <span class="desc">$15K/year (GC) or $200/mo (individual)</span></div>
+    <div class="line"><span class="num">2.</span> <span class="desc">$5K/project spread across all subs</span></div>
+    <div class="line"><span class="num">3.</span> <span class="desc">Overage on heavy AI usage (Stripe metered)</span></div>
+    <div class="line"><span class="num">4.</span> <span class="desc">Transaction fees on payments (long-tail)</span></div>
+    <div class="target">Target: 80%+ gross margins on all layers</div>
+  </div>
+
+</div>
+</div>
+
+<hr class="divider">
+
+<!-- ============================================================ -->
+<!-- SECTION 2: HOW UP GETS CUSTOMERS -->
+<!-- ============================================================ -->
+
+<div class="container">
+<div class="section">
+  <div class="section-label">Section 2</div>
+  <div class="section-title">How UP Gets Customers</div>
+
+  <!-- AI OUTBOUND -->
+  <div class="subsection">
+    <div class="subsection-title">Top of Funnel: AI-Powered Outbound</div>
+    <p>No BDR team. No SDR team. <strong>AI does outbound.</strong></p>
+    <ul class="clean">
+      <li>AI email platform: $2&ndash;5K/month</li>
+      <li>500 personalized emails/day</li>
+      <li>Construction industry email open rate: 28% (higher than SaaS avg &mdash; less saturated)</li>
+      <li>Reply rate: 3&ndash;5%</li>
+    </ul>
+
+    <div class="subsection-subtitle">The Funnel Math</div>
+    <table>
+      <thead>
+        <tr>
+          <th>Metric</th>
+          <th class="num">Daily</th>
+          <th class="num">Monthly</th>
+          <th class="num">Annual</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Emails sent</td><td class="num">500</td><td class="num">10,000</td><td class="num">120,000</td></tr>
+        <tr><td>Opens (28%)</td><td class="num">140</td><td class="num">2,800</td><td class="num">33,600</td></tr>
+        <tr><td>Replies (3.5%)</td><td class="num">18</td><td class="num">350</td><td class="num">4,200</td></tr>
+        <tr><td>MQLs (qualified replies)</td><td class="num">8</td><td class="num">150</td><td class="num">1,800</td></tr>
+        <tr><td>SQLs (MQL&rarr;SQL at 12%)</td><td class="num">1</td><td class="num">18</td><td class="num">216</td></tr>
+        <tr><td>Demos / trials</td><td class="num">1</td><td class="num">15</td><td class="num">180</td></tr>
+        <tr><td>Closed deals (25% close)</td><td class="num">&mdash;</td><td class="num">4</td><td class="num">45</td></tr>
+        <tr><td>Revenue per deal</td><td class="num">&mdash;</td><td class="num">$15,000</td><td class="num">$15,000</td></tr>
+        <tr class="row-total"><td><strong>Monthly new ARR</strong></td><td class="num">&mdash;</td><td class="num"><strong>$60,000</strong></td><td class="num"><strong>$720,000</strong></td></tr>
+      </tbody>
+    </table>
+
+    <div class="subsection-subtitle">What It Costs to Run This Funnel</div>
+    <table>
+      <thead>
+        <tr>
+          <th>Line Item</th>
+          <th class="num">Annual Cost</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>AI email platform</td><td class="num">$36,000</td></tr>
+        <tr><td>One human AE (base + commission)</td><td class="num">$130,000</td></tr>
+        <tr><td>Email infrastructure (domains, warmup)</td><td class="num">$6,000</td></tr>
+        <tr class="row-total"><td><strong>Total GTM spend</strong></td><td class="num"><strong>~$180,000</strong></td></tr>
+      </tbody>
+    </table>
+
+    <div class="metric-row">
+      <div class="metric-card">
+        <div class="value">$4,000</div>
+        <div class="label">CAC per customer</div>
+      </div>
+      <div class="metric-card">
+        <div class="value green">13.5x</div>
+        <div class="label">LTV:CAC ratio</div>
+      </div>
+      <div class="metric-card">
+        <div class="value">4 mo</div>
+        <div class="label">Payback period</div>
+      </div>
+    </div>
+
+    <div class="subsection-subtitle">AI-First vs. Traditional Sales</div>
+    <table class="vs-table">
+      <thead>
+        <tr>
+          <th></th>
+          <th>AI-First (UP)</th>
+          <th>Traditional</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Headcount</strong></td><td>1 AE + AI tools</td><td>3 SDRs + 2 AEs + 1 CSM</td></tr>
+        <tr><td><strong>Annual cost</strong></td><td>$180,000</td><td>$800,000+</td></tr>
+        <tr><td><strong>Meetings/month</strong></td><td>15&ndash;20</td><td>20&ndash;30</td></tr>
+        <tr><td><strong>CAC</strong></td><td style="color:var(--jobsite-green);font-weight:700">$4,000</td><td>$18,000</td></tr>
+        <tr><td><strong>Break-even</strong></td><td style="color:var(--jobsite-green);font-weight:700">Month 4</td><td>Month 14</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- PLG -->
+  <div class="subsection">
+    <div class="subsection-title">Middle of Funnel: Product-Led Growth</div>
+    <p>This is the Claude model. People try it, love it, tell others.</p>
+
+    <div class="flow">
+      <div class="flow-title">PLG Conversion Path</div>
+      <div class="flow-step">
+        <div class="dot"></div>
+        <div class="text">Individual signs up for <strong>$200/month</strong></div>
+      </div>
+      <div class="flow-step">
+        <div class="dot"></div>
+        <div class="text">Uses it for estimating, cost lookups, document analysis</div>
+      </div>
+      <div class="flow-step">
+        <div class="dot"></div>
+        <div class="text">Shows their PM: <em>"look what this can do"</em></div>
+      </div>
+      <div class="flow-step">
+        <div class="dot"></div>
+        <div class="text">PM shows the owner</div>
+      </div>
+      <div class="flow-step">
+        <div class="dot" style="background:var(--jobsite-green)"></div>
+        <div class="text">Owner converts to project-based pricing at <strong>$15,000/year</strong></div>
+      </div>
+    </div>
+    <p><strong>PLG conversion target:</strong> 15% of individual seats convert to company deals within 6 months.</p>
+  </div>
+
+  <!-- VIRAL -->
+  <div class="subsection">
+    <div class="subsection-title">Bottom of Funnel: Network Effect (Viral)</div>
+    <p>This is the WhatsApp model. Users pull other users in.</p>
+    <ul class="clean">
+      <li>GC starts a project on UP &rarr; invites 25 subs</li>
+      <li>Each sub now has UP on their phone</li>
+      <li>Sub works with 5&ndash;10 other GCs &rarr; tells them about UP</li>
+      <li><strong>K-factor: 2.5&ndash;4.0</strong> &mdash; each customer brings 2.5&ndash;4 new customers</li>
+      <li>At K &gt; 1.0, growth is self-sustaining without marketing spend</li>
+    </ul>
+
+    <div class="subsection-subtitle">Viral Growth Model</div>
+    <table>
+      <thead>
+        <tr>
+          <th>Quarter</th>
+          <th class="num">New from Sales</th>
+          <th class="num">New from Virality</th>
+          <th class="num">Cumulative Customers</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Q1</td><td class="num">10</td><td class="num">0</td><td class="num">10</td></tr>
+        <tr><td>Q2</td><td class="num">10</td><td class="num">15</td><td class="num">35</td></tr>
+        <tr><td>Q3</td><td class="num">10</td><td class="num">45</td><td class="num">90</td></tr>
+        <tr><td>Q4</td><td class="num">10</td><td class="num">90</td><td class="num">190</td></tr>
+        <tr><td>Q5</td><td class="num">10</td><td class="num">165</td><td class="num">365</td></tr>
+        <tr class="row-highlight"><td>Q6</td><td class="num">10</td><td class="num">290</td><td class="num">655</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- CUSTOMER SUCCESS -->
+  <div class="subsection">
+    <div class="subsection-title">Customer Success: Zero Dedicated Team</div>
+    <ul class="clean">
+      <li>The product IS the support. Users chat with UP when they need help.</li>
+      <li>AI agents handle onboarding, training, troubleshooting</li>
+      <li>No CS team needed for first 1,000 customers</li>
+      <li>One person monitors usage analytics and handles escalations</li>
+    </ul>
+    <div class="metric-row">
+      <div class="metric-card">
+        <div class="value green">$0</div>
+        <div class="label">Dedicated CS Spend</div>
+      </div>
+      <div class="metric-card">
+        <div class="value">AI</div>
+        <div class="label">Onboarding &amp; Training</div>
+      </div>
+      <div class="metric-card">
+        <div class="value">1,000</div>
+        <div class="label">Customers Before CS Hire</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GTM SUMMARY BOX -->
+  <div class="summary-box">
+    <h3>How UP Gets Customers</h3>
+    <div class="line"><span class="num">1.</span> <span class="desc">AI Outbound &rarr; 45 deals/year</span></div>
+    <div class="line"><span class="num">2.</span> <span class="desc">PLG ($200/mo &rarr; company conversion)</span></div>
+    <div class="line"><span class="num">3.</span> <span class="desc">Viral network effect (K = 2.5&ndash;4.0)</span></div>
+    <div style="margin-top:16px;padding-top:14px;border-top:1px solid rgba(255,255,255,0.15)">
+      <div class="line"><span class="num" style="color:var(--india-yellow)">&bull;</span> <span class="desc">Total GTM spend: $180K/year</span></div>
+      <div class="line"><span class="num" style="color:var(--india-yellow)">&bull;</span> <span class="desc">CAC: $4,000 per customer</span></div>
+      <div class="line"><span class="num" style="color:var(--india-yellow)">&bull;</span> <span class="desc">LTV:CAC: 13.5x</span></div>
+      <div class="line"><span class="num" style="color:var(--india-yellow)">&bull;</span> <span class="desc">Payback: 4 months</span></div>
+    </div>
+    <div class="target">No BDRs. No SDRs. No CS team. 1 AE + AI tools + the product itself.</div>
+  </div>
+
+</div>
+</div>
+
+<hr class="divider">
+
+<!-- ============================================================ -->
+<!-- SECTION 3: UNIT ECONOMICS AT SCALE -->
+<!-- ============================================================ -->
+
+<div class="container">
+<div class="section">
+  <div class="section-label">Section 3</div>
+  <div class="section-title">Unit Economics at Scale</div>
+
+  <p>Three-year build with compounding from all revenue layers and the viral growth engine.</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Metric</th>
+        <th class="num">Year 1</th>
+        <th class="num">Year 2</th>
+        <th class="num">Year 3</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>GC customers</td><td class="num">45</td><td class="num">200</td><td class="num">800</td></tr>
+      <tr><td>Sub customers (viral)</td><td class="num">200</td><td class="num">2,000</td><td class="num">12,000</td></tr>
+      <tr><td>Individual seats</td><td class="num">500</td><td class="num">3,000</td><td class="num">15,000</td></tr>
+      <tr style="height:8px"><td colspan="4" style="border:none;padding:0"></td></tr>
+      <tr><td>ARR (software)</td><td class="num">$675K</td><td class="num">$3.8M</td><td class="num">$16M</td></tr>
+      <tr><td>ARR (embedded finance)</td><td class="num">$0</td><td class="num">$2M</td><td class="num">$12M</td></tr>
+      <tr><td>ARR (metered overage)</td><td class="num">$50K</td><td class="num">$400K</td><td class="num">$2M</td></tr>
+      <tr class="row-total"><td><strong>Total ARR</strong></td><td class="num"><strong>$725K</strong></td><td class="num"><strong>$6.2M</strong></td><td class="num"><strong>$30M</strong></td></tr>
+      <tr style="height:8px"><td colspan="4" style="border:none;padding:0"></td></tr>
+      <tr><td>Headcount</td><td class="num">5</td><td class="num">12</td><td class="num">20</td></tr>
+      <tr><td>Rev / employee</td><td class="num">$145K</td><td class="num">$517K</td><td class="num">$1.5M</td></tr>
+      <tr class="row-highlight"><td><strong>Gross margin</strong></td><td class="num"><strong>82%</strong></td><td class="num"><strong>78%</strong></td><td class="num"><strong>75%</strong></td></tr>
+    </tbody>
+  </table>
+
+  <div class="metric-row">
+    <div class="metric-card">
+      <div class="value">$30M</div>
+      <div class="label">Year 3 ARR</div>
+    </div>
+    <div class="metric-card">
+      <div class="value green">$1.5M</div>
+      <div class="label">Rev / Employee</div>
+    </div>
+    <div class="metric-card">
+      <div class="value">75%</div>
+      <div class="label">Gross Margin</div>
+    </div>
+    <div class="metric-card">
+      <div class="value green">20</div>
+      <div class="label">Total Headcount</div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="container">
+    Confidential &mdash; Prepared by JettyCove &mdash; March 2026
+  </div>
+</div>
+
+</body>
+</html>
