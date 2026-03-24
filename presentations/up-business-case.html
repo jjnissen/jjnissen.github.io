@@ -1,0 +1,2412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UP -- Business Case | Confidential</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+/* ================================================================
+   CSS VARIABLES
+   ================================================================ */
+:root {
+  --kiln: #944A2D;
+  --kiln-90: rgba(148, 74, 45, 0.9);
+  --kiln-25: rgba(148, 74, 45, 0.25);
+  --kiln-10: rgba(148, 74, 45, 0.10);
+  --kiln-05: rgba(148, 74, 45, 0.05);
+  --adobe: #B5623A;
+  --adobe-80: rgba(181, 98, 58, 0.8);
+  --adobe-15: rgba(181, 98, 58, 0.15);
+  --fired-clay: #E8713A;
+  --fired-clay-15: rgba(232, 113, 58, 0.15);
+  --fired-clay-10: rgba(232, 113, 58, 0.10);
+  --mahogany: #3B2518;
+  --mahogany-80: rgba(59, 37, 24, 0.8);
+  --mahogany-05: rgba(59, 37, 24, 0.05);
+  --jobsite-green: #4A7C59;
+  --jobsite-green-15: rgba(74, 124, 89, 0.15);
+  --jobsite-green-10: rgba(74, 124, 89, 0.10);
+  --jobsite-green-80: rgba(74, 124, 89, 0.8);
+  --plaster: #E8DDD0;
+  --plaster-50: rgba(232, 221, 208, 0.5);
+  --off-white: #F5EDE3;
+  --india-yellow: #CE923C;
+  --india-yellow-15: rgba(206, 146, 60, 0.15);
+  --india-yellow-10: rgba(206, 146, 60, 0.10);
+  --pitch: #1A1A1A;
+  --pitch-95: rgba(26, 26, 26, 0.95);
+  --pitch-80: rgba(26, 26, 26, 0.8);
+  --white: #FFFFFF;
+  --white-10: rgba(255,255,255,0.10);
+  --white-50: rgba(255,255,255,0.50);
+  --white-70: rgba(255,255,255,0.70);
+  --white-80: rgba(255,255,255,0.80);
+  --sidebar-w: 280px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  scroll-behavior: smooth;
+  font-size: 15px;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--off-white);
+  color: var(--mahogany);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.7;
+}
+
+/* ================================================================
+   LAYOUT: SIDEBAR + CONTENT
+   ================================================================ */
+.layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* ---- SIDEBAR / TOC ---- */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-w);
+  height: 100vh;
+  background: var(--mahogany);
+  color: var(--plaster);
+  overflow-y: auto;
+  z-index: 100;
+  padding: 32px 0;
+  border-right: 3px solid var(--kiln);
+}
+
+.sidebar-brand {
+  padding: 0 24px 24px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  margin-bottom: 16px;
+}
+
+.sidebar-brand h1 {
+  font-size: 28px;
+  font-weight: 900;
+  color: var(--fired-clay);
+  letter-spacing: 2px;
+}
+
+.sidebar-brand p {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--plaster);
+  margin-top: 4px;
+  opacity: 0.7;
+}
+
+.sidebar-label {
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--india-yellow);
+  padding: 12px 24px 6px;
+  font-weight: 700;
+}
+
+.sidebar nav a {
+  display: block;
+  padding: 6px 24px 6px 24px;
+  color: var(--plaster);
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.4;
+  transition: all 0.15s;
+  border-left: 3px solid transparent;
+  opacity: 0.75;
+}
+
+.sidebar nav a:hover,
+.sidebar nav a.active {
+  background: rgba(255,255,255,0.06);
+  color: var(--white);
+  opacity: 1;
+  border-left-color: var(--fired-clay);
+}
+
+.sidebar nav a .toc-num {
+  display: inline-block;
+  width: 26px;
+  color: var(--india-yellow);
+  font-weight: 600;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+/* ---- MAIN CONTENT ---- */
+.content {
+  margin-left: var(--sidebar-w);
+  flex: 1;
+  min-width: 0;
+}
+
+/* ================================================================
+   COVER
+   ================================================================ */
+.cover {
+  min-height: 100vh;
+  background: linear-gradient(160deg, var(--mahogany) 0%, var(--pitch) 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 80px 60px;
+  position: relative;
+  overflow: hidden;
+}
+
+.cover::before {
+  content: '';
+  position: absolute;
+  top: -40%;
+  right: -20%;
+  width: 80%;
+  height: 180%;
+  background: radial-gradient(ellipse, var(--kiln-10) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.cover-badge {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  color: var(--india-yellow);
+  font-weight: 600;
+  margin-bottom: 32px;
+}
+
+.cover h1 {
+  font-size: 72px;
+  font-weight: 900;
+  color: var(--white);
+  letter-spacing: 6px;
+  line-height: 1;
+  margin-bottom: 16px;
+}
+
+.cover h2 {
+  font-size: 22px;
+  font-weight: 300;
+  color: var(--plaster);
+  max-width: 600px;
+  line-height: 1.5;
+  margin-bottom: 48px;
+}
+
+.cover-meta {
+  font-size: 11px;
+  color: rgba(232,221,208,0.5);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.cover-divider {
+  width: 80px;
+  height: 3px;
+  background: var(--fired-clay);
+  margin: 24px auto;
+}
+
+.cover-stats {
+  display: flex;
+  gap: 48px;
+  margin-top: 48px;
+}
+
+.cover-stat-num {
+  font-size: 36px;
+  font-weight: 800;
+  color: var(--india-yellow);
+}
+
+.cover-stat-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--plaster);
+  opacity: 0.7;
+  margin-top: 4px;
+}
+
+/* ================================================================
+   SECTIONS
+   ================================================================ */
+.section {
+  padding: 72px 80px;
+  max-width: 100%;
+  position: relative;
+}
+
+.section-light { background: var(--white); }
+.section-alt { background: var(--off-white); }
+.section-plaster { background: var(--plaster); }
+.section-dark { background: var(--pitch); color: var(--plaster); }
+.section-mahogany { background: var(--mahogany); color: var(--plaster); }
+.section-kiln { background: var(--kiln); color: var(--white); }
+
+.section-inner {
+  max-width: 920px;
+  margin: 0 auto;
+}
+
+.section-num {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: var(--kiln);
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.section-dark .section-num,
+.section-mahogany .section-num,
+.section-kiln .section-num {
+  color: var(--india-yellow);
+}
+
+.section h2 {
+  font-size: 32px;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 8px;
+  color: var(--mahogany);
+}
+
+.section-dark h2,
+.section-mahogany h2 { color: var(--white); }
+.section-kiln h2 { color: var(--white); }
+
+.section h3 {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 36px 0 12px;
+  color: var(--kiln);
+}
+
+.section-dark h3,
+.section-mahogany h3 { color: var(--fired-clay); }
+
+.section h4 {
+  font-size: 16px;
+  font-weight: 700;
+  margin: 24px 0 8px;
+  color: var(--adobe);
+}
+
+.section-dark h4,
+.section-mahogany h4 { color: var(--india-yellow); }
+
+.section-subtitle {
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--adobe);
+  margin-bottom: 32px;
+  line-height: 1.5;
+}
+
+.section-dark .section-subtitle { color: var(--plaster); opacity: 0.8; }
+
+.section p {
+  margin-bottom: 16px;
+}
+
+.section ul, .section ol {
+  margin: 0 0 16px 24px;
+}
+
+.section li {
+  margin-bottom: 8px;
+}
+
+/* ================================================================
+   COMPONENTS
+   ================================================================ */
+
+/* ---- Stat Cards ---- */
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  margin: 32px 0;
+}
+
+.stat-card {
+  background: var(--plaster);
+  border-radius: 8px;
+  padding: 24px;
+  text-align: center;
+  border: 1px solid rgba(148,74,45,0.08);
+}
+
+.section-dark .stat-card,
+.section-mahogany .stat-card {
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(255,255,255,0.08);
+}
+
+.stat-card .stat-value {
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--kiln);
+  line-height: 1.1;
+}
+
+.section-dark .stat-card .stat-value,
+.section-mahogany .stat-card .stat-value {
+  color: var(--india-yellow);
+}
+
+.stat-card .stat-value.green { color: var(--jobsite-green); }
+
+.stat-card .stat-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--mahogany);
+  opacity: 0.7;
+  margin-top: 6px;
+  font-weight: 500;
+}
+
+.section-dark .stat-card .stat-label,
+.section-mahogany .stat-card .stat-label {
+  color: var(--plaster);
+}
+
+/* ---- Tables ---- */
+.table-wrap {
+  overflow-x: auto;
+  margin: 24px 0;
+  border-radius: 8px;
+  border: 1px solid rgba(148,74,45,0.12);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+}
+
+thead th {
+  background: var(--mahogany);
+  color: var(--white);
+  padding: 12px 16px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+tbody td {
+  padding: 10px 16px;
+  border-bottom: 1px solid rgba(148,74,45,0.06);
+}
+
+tbody tr:nth-child(even) { background: var(--off-white); }
+tbody tr:nth-child(odd) { background: var(--white); }
+
+tbody tr:hover { background: var(--fired-clay-10); }
+
+tbody tr.row-highlight {
+  background: var(--jobsite-green-10);
+  font-weight: 700;
+}
+
+tbody tr.row-total {
+  background: var(--mahogany);
+  color: var(--white);
+  font-weight: 700;
+}
+
+tbody tr.row-total td { border-bottom-color: transparent; }
+
+/* ---- Callout Boxes ---- */
+.callout {
+  background: var(--plaster);
+  border-left: 4px solid var(--kiln);
+  border-radius: 0 8px 8px 0;
+  padding: 24px 28px;
+  margin: 24px 0;
+  font-size: 14px;
+}
+
+.callout-green {
+  border-left-color: var(--jobsite-green);
+  background: var(--jobsite-green-10);
+}
+
+.callout-gold {
+  border-left-color: var(--india-yellow);
+  background: var(--india-yellow-10);
+}
+
+.callout-fire {
+  border-left-color: var(--fired-clay);
+  background: var(--fired-clay-10);
+}
+
+.callout strong {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.section-dark .callout,
+.section-mahogany .callout {
+  background: rgba(255,255,255,0.06);
+}
+
+/* ---- Persona Cards ---- */
+.persona-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  margin: 24px 0;
+}
+
+.persona-card {
+  background: var(--white);
+  border: 1px solid rgba(148,74,45,0.1);
+  border-radius: 8px;
+  padding: 24px;
+  position: relative;
+}
+
+.persona-card .role {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--kiln);
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.persona-card .quote {
+  font-style: italic;
+  color: var(--mahogany);
+  font-size: 14px;
+  line-height: 1.6;
+  border-left: 3px solid var(--fired-clay);
+  padding-left: 16px;
+}
+
+/* ---- Float Cards ---- */
+.float-card {
+  background: var(--white);
+  border: 1px solid rgba(148,74,45,0.1);
+  border-radius: 12px;
+  padding: 32px;
+  margin: 24px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.float-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+}
+
+.float-card.float-1::before { background: var(--india-yellow); }
+.float-card.float-2::before { background: var(--jobsite-green); }
+.float-card.float-3::before { background: var(--fired-clay); }
+.float-card.float-4::before { background: var(--kiln); }
+
+.float-card .float-num {
+  font-size: 48px;
+  font-weight: 900;
+  color: var(--plaster);
+  position: absolute;
+  top: 16px;
+  right: 24px;
+  line-height: 1;
+}
+
+.float-card h4 {
+  margin-top: 0;
+}
+
+.float-card .kpi-row {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 16px;
+}
+
+.kpi-tag {
+  font-size: 11px;
+  background: var(--off-white);
+  border: 1px solid rgba(148,74,45,0.08);
+  border-radius: 4px;
+  padding: 4px 10px;
+  color: var(--mahogany);
+  font-weight: 500;
+}
+
+/* ---- 2x2 Matrix ---- */
+.matrix-2x2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 2px;
+  margin: 24px 0;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid rgba(148,74,45,0.12);
+}
+
+.matrix-cell {
+  padding: 24px;
+  font-size: 13px;
+}
+
+.matrix-cell.tl { background: var(--off-white); }
+.matrix-cell.tr { background: var(--jobsite-green-10); }
+.matrix-cell.bl { background: var(--white); }
+.matrix-cell.br { background: var(--fired-clay-10); }
+
+.matrix-cell h5 {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.matrix-label-x, .matrix-label-y {
+  text-align: center;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 700;
+  color: var(--kiln);
+  padding: 8px;
+}
+
+/* ---- Sources / Footnotes ---- */
+.sources {
+  margin-top: 32px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(148,74,45,0.1);
+  font-size: 11px;
+  color: var(--mahogany);
+  opacity: 0.55;
+  line-height: 1.6;
+}
+
+.section-dark .sources,
+.section-mahogany .sources {
+  border-top-color: rgba(255,255,255,0.1);
+  color: var(--plaster);
+}
+
+.sources strong {
+  font-weight: 600;
+  opacity: 1;
+}
+
+/* ---- Timeline ---- */
+.timeline {
+  position: relative;
+  margin: 32px 0;
+  padding-left: 32px;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 12px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--kiln-25);
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 32px;
+  padding-left: 24px;
+}
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -26px;
+  top: 6px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--kiln);
+  border: 3px solid var(--off-white);
+}
+
+.timeline-item h4 {
+  margin-top: 0;
+}
+
+/* ---- Funnel ---- */
+.funnel {
+  margin: 24px 0;
+}
+
+.funnel-step {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 4px;
+}
+
+.funnel-bar {
+  height: 36px;
+  background: var(--kiln);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  color: white;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  min-width: 60px;
+}
+
+.funnel-label {
+  font-size: 12px;
+  color: var(--mahogany);
+  font-weight: 500;
+  min-width: 140px;
+}
+
+/* ---- Risk Cards ---- */
+.risk-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 24px 0;
+}
+
+.risk-card {
+  border: 1px solid rgba(148,74,45,0.1);
+  border-radius: 8px;
+  padding: 20px;
+  background: var(--white);
+}
+
+.risk-card .risk-title {
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--kiln);
+  margin-bottom: 6px;
+}
+
+.risk-card .risk-level {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 3px;
+  display: inline-block;
+  margin-bottom: 8px;
+}
+
+.risk-high { background: var(--fired-clay-10); color: var(--fired-clay); }
+.risk-med { background: var(--india-yellow-10); color: var(--india-yellow); }
+.risk-low { background: var(--jobsite-green-10); color: var(--jobsite-green); }
+
+.risk-card .mitigation {
+  font-size: 12px;
+  color: var(--mahogany);
+  opacity: 0.75;
+  margin-top: 6px;
+  padding-top: 6px;
+  border-top: 1px solid rgba(148,74,45,0.08);
+}
+
+.risk-card .mitigation strong {
+  color: var(--jobsite-green);
+}
+
+/* ---- Pricing Block ---- */
+.pricing-hero {
+  text-align: center;
+  padding: 40px;
+  background: linear-gradient(135deg, var(--mahogany) 0%, var(--pitch) 100%);
+  border-radius: 12px;
+  color: var(--white);
+  margin: 24px 0;
+}
+
+.pricing-hero .price-headline {
+  font-size: 36px;
+  font-weight: 900;
+  color: var(--india-yellow);
+  margin-bottom: 8px;
+}
+
+.pricing-hero .price-sub {
+  font-size: 16px;
+  color: var(--plaster);
+  opacity: 0.8;
+}
+
+.pricing-tiers {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin: 24px 0;
+}
+
+.pricing-tier {
+  border: 1px solid rgba(148,74,45,0.12);
+  border-radius: 12px;
+  padding: 28px;
+  background: var(--white);
+  text-align: center;
+}
+
+.pricing-tier.featured {
+  border-color: var(--kiln);
+  border-width: 2px;
+  position: relative;
+}
+
+.pricing-tier.featured::after {
+  content: 'MOST POPULAR';
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--kiln);
+  color: white;
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  padding: 3px 12px;
+  border-radius: 3px;
+  font-weight: 700;
+}
+
+.pricing-tier .tier-name {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--kiln);
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.pricing-tier .tier-price {
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--mahogany);
+}
+
+.pricing-tier .tier-period {
+  font-size: 12px;
+  color: var(--mahogany);
+  opacity: 0.6;
+  margin-bottom: 16px;
+}
+
+.pricing-tier .tier-desc {
+  font-size: 13px;
+  color: var(--mahogany);
+  opacity: 0.8;
+  line-height: 1.5;
+}
+
+.pricing-tier ul {
+  list-style: none;
+  margin: 16px 0 0;
+  padding: 0;
+  text-align: left;
+}
+
+.pricing-tier li {
+  font-size: 12px;
+  padding: 4px 0;
+  border-bottom: 1px solid rgba(148,74,45,0.05);
+}
+
+.pricing-tier li::before {
+  content: '\2713';
+  color: var(--jobsite-green);
+  font-weight: 700;
+  margin-right: 8px;
+}
+
+/* ---- Comparison Bar ---- */
+.compare-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.compare-label {
+  width: 140px;
+  font-size: 12px;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.compare-bar {
+  flex: 1;
+  height: 24px;
+  background: var(--off-white);
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+}
+
+.compare-bar .bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  font-size: 11px;
+  font-weight: 600;
+  color: white;
+}
+
+.bar-up { background: var(--kiln); }
+.bar-comp { background: var(--plaster); color: var(--mahogany) !important; }
+
+/* ================================================================
+   PRINT STYLES
+   ================================================================ */
+@media print {
+  .sidebar { display: none; }
+  .content { margin-left: 0; }
+  .section { padding: 36px 48px; break-inside: avoid; }
+  .cover { min-height: auto; padding: 48px; }
+  html { font-size: 11px; }
+  .stat-grid { grid-template-columns: repeat(3, 1fr); }
+  .pricing-tiers { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* ================================================================
+   RESPONSIVE
+   ================================================================ */
+@media (max-width: 1024px) {
+  .sidebar { display: none; }
+  .content { margin-left: 0; }
+  .section { padding: 48px 32px; }
+  .pricing-tiers { grid-template-columns: 1fr; }
+  .risk-grid { grid-template-columns: 1fr; }
+}
+
+/* ---- Scrollbar ---- */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--off-white); }
+::-webkit-scrollbar-thumb { background: var(--kiln-25); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--kiln); }
+
+/* ---- Selection ---- */
+::selection { background: var(--fired-clay); color: white; }
+
+/* ---- smooth anchor offset ---- */
+[id] { scroll-margin-top: 20px; }
+</style>
+</head>
+<body>
+
+<!-- ================================================================
+     SIDEBAR / TABLE OF CONTENTS
+     ================================================================ -->
+<div class="layout">
+<aside class="sidebar">
+  <div class="sidebar-brand">
+    <h1>UP</h1>
+    <p>Business Case</p>
+  </div>
+
+  <div class="sidebar-label">Overview</div>
+  <nav>
+    <a href="#executive-summary"><span class="toc-num">01</span> Executive Summary</a>
+    <a href="#industry-overview"><span class="toc-num">02</span> Industry Overview</a>
+    <a href="#how-construction-works"><span class="toc-num">03</span> How Construction Works</a>
+    <a href="#the-problem"><span class="toc-num">04</span> The Problem</a>
+  </nav>
+
+  <div class="sidebar-label">Product</div>
+  <nav>
+    <a href="#what-up-does"><span class="toc-num">05</span> What UP Does</a>
+    <a href="#the-4-floats"><span class="toc-num">06</span> The 4 Floats</a>
+    <a href="#technology"><span class="toc-num">07</span> Technology Infrastructure</a>
+  </nav>
+
+  <div class="sidebar-label">Market</div>
+  <nav>
+    <a href="#target-market"><span class="toc-num">08</span> Target Market</a>
+    <a href="#competitive-landscape"><span class="toc-num">09</span> Competitive Landscape</a>
+  </nav>
+
+  <div class="sidebar-label">Business</div>
+  <nav>
+    <a href="#pricing"><span class="toc-num">10</span> Pricing Strategy</a>
+    <a href="#go-to-market"><span class="toc-num">11</span> Go-to-Market</a>
+    <a href="#unit-economics"><span class="toc-num">12</span> Unit Economics</a>
+    <a href="#financial-model"><span class="toc-num">13</span> Financial Model</a>
+    <a href="#operating-model"><span class="toc-num">14</span> Operating Model</a>
+  </nav>
+
+  <div class="sidebar-label">Strategy</div>
+  <nav>
+    <a href="#defensibility"><span class="toc-num">15</span> Defensibility / Moats</a>
+    <a href="#risk-analysis"><span class="toc-num">16</span> Risk Analysis</a>
+    <a href="#execution-plan"><span class="toc-num">17</span> 12-Month Execution Plan</a>
+  </nav>
+</aside>
+
+<!-- ================================================================
+     MAIN CONTENT
+     ================================================================ -->
+<main class="content">
+
+<!-- ============================================================
+     COVER PAGE
+     ============================================================ -->
+<div class="cover" id="cover">
+  <div class="cover-badge">Confidential Business Case</div>
+  <h1>UP</h1>
+  <div class="cover-divider"></div>
+  <h2>The Operating System for Construction.<br>AI-Native. Free for General Contractors. Cash Flow Positive Day 1.</h2>
+  <div class="cover-stats">
+    <div>
+      <div class="cover-stat-num">$2.17T</div>
+      <div class="cover-stat-label">US Construction Market</div>
+    </div>
+    <div>
+      <div class="cover-stat-num">89%</div>
+      <div class="cover-stat-label">Gross Margin</div>
+    </div>
+    <div>
+      <div class="cover-stat-num">$18.4M</div>
+      <div class="cover-stat-label">Year 1 ARR Target</div>
+    </div>
+    <div>
+      <div class="cover-stat-num">10</div>
+      <div class="cover-stat-label">Headcount at Scale</div>
+    </div>
+  </div>
+  <div class="cover-meta" style="margin-top:48px;">March 2026 &nbsp;&middot;&nbsp; Internal Use Only</div>
+</div>
+
+
+<!-- ============================================================
+     SECTION 01: EXECUTIVE SUMMARY
+     ============================================================ -->
+<div class="section section-light" id="executive-summary">
+  <div class="section-inner">
+    <div class="section-num">Section 01</div>
+    <h2>Executive Summary</h2>
+    <div class="section-subtitle">The construction industry's first AI-native operating system.</div>
+
+    <p>UP is a construction super app&mdash;the operating system for AEC (architecture, engineering, and construction) companies doing $10M&ndash;$100M in annual revenue. It replaces the six or more disconnected point solutions that every general contractor currently manages&mdash;estimating, bidding, project management, accounting, compliance, field operations, and document management&mdash;with a single AI-native platform where users communicate in natural language and the system handles the rest. The product is <strong>free for general contractors</strong>. Projects fund the platform at $5,000 each. The result is a business that is <strong>cash flow positive from day one</strong>, with an 89% gross margin per project and a path to $18.4M ARR within twelve months with a team of ten people.</p>
+
+    <p>The U.S. construction market generates $2.17 trillion in annual output, yet remains the second-least digitized major industry on earth. The 920,000 construction establishments in the United States share a common pain: fragmented tools, manual data entry, and communication chaos. UP solves this with a messaging-first interface, eight proprietary regulatory databases maintained by autonomous AI agents, embedded vision models that understand construction documents and photos, and a hash-chained event ledger (every action recorded and linked with a cryptographic fingerprint that makes it tamper-proof) that creates triple-entry accounting as a natural byproduct. Every general contractor project becomes a distribution event, exposing 15&ndash;60 companies to UP and driving a viral coefficient (the number of new users each existing user brings in) of 2.5&ndash;4.0x. The business model compounds through four distinct profit centers&mdash;software subscriptions, embedded finance, regulatory data, and AI document intelligence&mdash;each building defensibility independently while reinforcing the whole.</p>
+
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="stat-value">$2.17T</div>
+        <div class="stat-label">US Construction Output</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value green">89%</div>
+        <div class="stat-label">Gross Margin / Project</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">13.5x</div>
+        <div class="stat-label">LTV:CAC Ratio</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value green">$18.4M</div>
+        <div class="stat-label">Year 1 ARR Target</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">4 mo</div>
+        <div class="stat-label">CAC Payback</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">10</div>
+        <div class="stat-label">Headcount at Scale</div>
+      </div>
+    </div>
+
+    <div class="sources">
+      <strong>Sources:</strong> U.S. Census Bureau, Construction Spending (C30), February 2025; McKinsey Global Institute, "Reinventing Construction," 2017; Bureau of Labor Statistics, Current Employment Statistics, January 2026; JBKnowledge, Construction Technology Report, 2024; Internal financial model.
+    </div>
+  </div>
+</div>
+
+
+<!-- ============================================================
+     SECTION 02: INDUSTRY OVERVIEW
+     ============================================================ -->
+<div class="section section-alt" id="industry-overview">
+  <div class="section-inner">
+    <div class="section-num">Section 02</div>
+    <h2>Industry Overview</h2>
+    <div class="section-subtitle">A $2.17 trillion market that still runs on paper, spreadsheets, and text messages.</div>
+
+    <h3>Market Size and Structure</h3>
+    <p>The U.S. construction industry generated <strong>$2.17 trillion</strong> in total spending in 2025, making it one of the largest sectors of the American economy. This figure encompasses residential, commercial, industrial, and infrastructure projects across every state. The industry is composed of approximately <strong>920,000 construction establishments</strong> employing <strong>8.31 million workers</strong>, making it the nation's largest employer of field-based labor. Despite its scale, the industry is remarkably fragmented: the vast majority of firms employ fewer than 20 people, and even the largest general contractors rarely control more than 1&ndash;2% of their local markets.</p>
+
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="stat-value">$2.17T</div>
+        <div class="stat-label">Annual Construction Spending</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">920K</div>
+        <div class="stat-label">Establishments</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">8.31M</div>
+        <div class="stat-label">Workers</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">2nd</div>
+        <div class="stat-label">Least Digitized Sector</div>
+      </div>
+    </div>
+
+    <h3>The Digitization Gap</h3>
+    <p>Construction is the <strong>second-least digitized major sector</strong> in the global economy, trailing only mining and agriculture, according to McKinsey's industry digitization index. While manufacturing productivity has grown roughly <strong>5x over the past 20 years</strong>, construction labor productivity grew at just <strong>0.4% per year</strong> over the same period&mdash;essentially flat. This productivity stagnation is directly attributable to the industry's resistance to technology adoption and the absence of integrated software tools suited to how construction companies actually operate.</p>
+
+    <p>The consequences of this gap are measured in the hundreds of billions. An estimated <strong>$177 billion</strong> is lost annually in the United States alone due to manual process inefficiency&mdash;data entered multiple times across disconnected systems, miscommunication between field and office, rework caused by outdated drawings, and payment delays driven by paperwork bottlenecks.</p>
+
+    <h3>The ConTech Market</h3>
+    <p>Construction technology (ConTech) is a recognized and growing category. The market was valued at approximately <strong>$7 billion in 2025</strong> and is projected to reach <strong>$30 billion by 2034</strong>, representing a compound annual growth rate (CAGR) of roughly 17%. This growth is being driven by three converging forces: (1) generational turnover bringing digitally native operators into leadership, (2) labor shortages making efficiency gains non-optional, and (3) the maturation of AI/ML tools capable of processing the unstructured data (photos, drawings, emails, texts) that define construction workflows.</p>
+
+    <div class="callout callout-gold">
+      <strong>Key Insight</strong>
+      Despite $7B in annual ConTech spending, 85% of construction projects still have no integrated project management software. The market is large, growing, and radically underserved.
+    </div>
+
+    <h3>Productivity Comparison</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Metric</th><th>Construction</th><th>Manufacturing</th><th>Gap</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>20-Year Productivity Growth</td><td>0.4%/year</td><td>~3.6%/year</td><td>9x</td></tr>
+          <tr><td>IT Spend as % of Revenue</td><td>1.5%</td><td>3.3%</td><td>2.2x</td></tr>
+          <tr><td>R&D Spend as % of Revenue</td><td>~0%</td><td>3.5%</td><td>N/A</td></tr>
+          <tr><td>Workers with Integrated Software</td><td>15%</td><td>72%</td><td>4.8x</td></tr>
+          <tr><td>Annual Waste from Inefficiency</td><td>$177B</td><td>$52B</td><td>3.4x</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="sources">
+      <strong>Sources:</strong> U.S. Census Bureau, Value of Construction Put in Place (C30), 2025; McKinsey Global Institute, "Reinventing Construction: A Route to Higher Productivity," 2017; Bureau of Labor Statistics, Occupational Employment and Wage Statistics, January 2026; IBISWorld, Construction in the US, 2025; Grand View Research, Construction Technology Market Report, 2024; Deloitte, "Engineering and Construction Industry Outlook," 2025.
+    </div>
+  </div>
+</div>
+
+
+<!-- ============================================================
+     SECTION 03: HOW CONSTRUCTION PROJECTS WORK
+     ============================================================ -->
+<div class="section section-light" id="how-construction-works">
+  <div class="section-inner">
+    <div class="section-num">Section 03</div>
+    <h2>How Construction Projects Work</h2>
+    <div class="section-subtitle">A primer for anyone unfamiliar with the industry's workflows, stakeholders, and financial structures.</div>
+
+    <h3>The Phases of a Construction Project</h3>
+    <p>Every construction project, from a $500K tenant improvement (a buildout of leased space) to a $500M hospital, follows a similar lifecycle composed of four major phases:</p>
+
+    <ol>
+      <li><strong>Pre-Construction:</strong> The project is conceived, designed, estimated, and bid. This is where architects produce drawings, engineers design the structural and mechanical systems, estimators calculate costs, and the owner selects a general contractor (GC). This phase can last 3&ndash;18 months.</li>
+      <li><strong>Procurement:</strong> The GC hires subcontractors (subs), orders materials, secures permits, and establishes the project schedule. Subcontractor agreements, purchase orders, and insurance certificates are generated and exchanged. A $20M project may involve 40&ndash;60 separate subcontractor agreements.</li>
+      <li><strong>Construction:</strong> Physical building occurs. The superintendent manages the jobsite day to day. The project manager tracks budget, schedule, submittals (documents showing what will be installed before it's installed), RFIs (Requests for Information&mdash;formal questions to the architect when drawings are unclear), change orders (modifications to the original scope and price), and pay applications (monthly invoices from subs to the GC, and from the GC to the owner).</li>
+      <li><strong>Closeout:</strong> The project is completed, inspected, and handed over. This involves punch lists (lists of incomplete items), as-built drawings, warranties, operations manuals, and final payment. Closeout is consistently the most neglected phase and the one where money is most frequently left on the table.</li>
+    </ol>
+
+    <h3>The Stakeholders</h3>
+    <p>A typical commercial construction project involves a web of interconnected parties, each with distinct roles, contracts, and financial interests:</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Stakeholder</th><th>Role</th><th>Primary Concern</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Developer / Owner</strong></td><td>Funds the project, hires the design team and GC</td><td>Budget, schedule, ROI</td></tr>
+          <tr><td><strong>Architect</strong></td><td>Designs the building, produces drawings and specs</td><td>Design intent, code compliance</td></tr>
+          <tr><td><strong>Engineer(s)</strong></td><td>Designs structural, MEP (mechanical, electrical, plumbing) systems</td><td>Technical performance, safety</td></tr>
+          <tr><td><strong>General Contractor (GC)</strong></td><td>Manages the entire construction process, hires and coordinates subs</td><td>Profit margin, schedule, quality</td></tr>
+          <tr><td><strong>Subcontractors</strong></td><td>Perform the actual trade work (electrical, plumbing, framing, etc.)</td><td>Getting paid, scope clarity</td></tr>
+          <tr><td><strong>Suppliers</strong></td><td>Provide materials (lumber, steel, fixtures, equipment)</td><td>Delivery schedule, payment</td></tr>
+          <tr><td><strong>Inspectors</strong></td><td>Government officials who verify code compliance at each phase</td><td>Safety, code adherence</td></tr>
+          <tr><td><strong>Surety / Bonding</strong></td><td>Insurance companies that guarantee the GC can complete the project</td><td>Financial health of the GC</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>The Documents</h3>
+    <p>Construction generates an enormous volume of documents. A typical $10M commercial project produces 3,000&ndash;5,000 individual documents over its lifecycle. The critical document types include:</p>
+    <ul>
+      <li><strong>Drawings and Specifications:</strong> The architectural and engineering plans that define what gets built. Hundreds of pages.</li>
+      <li><strong>Submittals:</strong> Product data sheets, shop drawings, and samples sent by subs to the architect for approval before installation.</li>
+      <li><strong>RFIs (Requests for Information):</strong> Formal written questions when the drawings are unclear or conflicting.</li>
+      <li><strong>Change Orders:</strong> Modifications to the original contract scope and price. The average commercial project has 35&ndash;50 change orders.</li>
+      <li><strong>Pay Applications:</strong> Monthly billing documents (typically using AIA G702/G703 forms) showing work completed and money owed. These flow from sub to GC to owner.</li>
+      <li><strong>Lien Waivers:</strong> Legal documents where a party waives their right to place a lien (a legal claim) on the property in exchange for payment. Required before every payment.</li>
+      <li><strong>Daily Logs:</strong> Records of weather, manpower, equipment, work performed, and safety incidents. Created every day on every project.</li>
+    </ul>
+
+    <h3>How Money Flows</h3>
+    <p>Construction has a unique financial structure that differs from nearly every other industry:</p>
+    <div class="callout">
+      <strong>The Payment Chain</strong>
+      Developer/Owner &rarr; General Contractor &rarr; Subcontractors &rarr; Suppliers<br><br>
+      Money flows down the chain through <strong>progress billing</strong>: each month, subs submit pay applications to the GC showing work completed; the GC bundles them, adds its own charges, and submits to the owner. The owner pays the GC, who then pays the subs. This cycle typically takes <strong>45&ndash;90 days</strong> from work performed to payment received.<br><br>
+      <strong>Retention</strong> (also called retainage) adds another layer: the owner withholds 5&ndash;10% of every payment as security until the project is complete. On a $20M project, that's $1&ndash;2M sitting in retention.
+    </div>
+
+    <h3>Delivery Methods</h3>
+    <p>Projects are structured under one of three primary delivery methods, each with different risk allocations and contract structures:</p>
+
+    <div class="stat-grid" style="grid-template-columns: repeat(3, 1fr);">
+      <div class="stat-card">
+        <div class="stat-value" style="font-size:24px;">Design-Build</div>
+        <div class="stat-label" style="font-size:24px; color:var(--kiln); font-weight:800;">44%</div>
+        <div class="stat-label">of market</div>
+        <p style="font-size:12px; margin-top:12px; text-align:left;">One firm handles both design and construction. The owner has a single point of responsibility. Faster delivery, less adversarial. Growing rapidly because it reduces change orders and finger-pointing between architect and contractor.</p>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" style="font-size:24px;">CMAR</div>
+        <div class="stat-label" style="font-size:24px; color:var(--kiln); font-weight:800;">37%</div>
+        <div class="stat-label">of market</div>
+        <p style="font-size:12px; margin-top:12px; text-align:left;">Construction Manager at Risk. The GC is hired during design to advise on cost and constructability, then takes on the construction risk with a Guaranteed Maximum Price (GMP). Collaborative but requires trust.</p>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" style="font-size:24px;">Hard Bid</div>
+        <div class="stat-label" style="font-size:24px; color:var(--kiln); font-weight:800;">19%</div>
+        <div class="stat-label">of market</div>
+        <p style="font-size:12px; margin-top:12px; text-align:left;">Traditional low-price-wins bidding. Design is complete before GCs bid. Most adversarial, highest change order rates. Declining in private sector but still dominant in public/government work.</p>
+      </div>
+    </div>
+
+    <h3>Job Costing, WIP, and the Surety Relationship</h3>
+    <p><strong>Job costing</strong> is the accounting method where every expense and revenue item is tracked against a specific project. Unlike a retail business that tracks costs by product, a construction company tracks costs by job. This means every labor hour, material purchase, equipment rental, and subcontractor payment is coded to a specific project and cost code.</p>
+
+    <p>The <strong>WIP schedule</strong> (Work in Progress) is the single most important financial document a GC produces. It compares the percentage of work completed on each project against the percentage of contract value billed. If you've completed 60% of the work but only billed 50%, you're "underbilled"&mdash;meaning you've invested more cash than you've collected. The opposite is "overbilling." Both have major implications for financial reporting and cash flow management.</p>
+
+    <p>The <strong>surety relationship</strong> is critical and often misunderstood. Before a GC can bid most projects over $500K, they need a <strong>performance bond</strong>&mdash;essentially insurance that guarantees the GC will complete the work. The surety company (think: CNA, Travelers, Liberty Mutual) underwrites the GC based on their financial statements, WIP schedule, and track record. The surety reviews the GC's financials annually and sets a <strong>bonding capacity</strong>&mdash;the maximum total value of bonded projects the GC can carry at once. This is why the WIP schedule and accurate job costing are existential requirements, not nice-to-haves: lose your bonding and you cannot bid work.</p>
+
+    <div class="callout callout-fire">
+      <strong>Why This Matters for UP</strong>
+      The surety/WIP requirement is both the biggest barrier to switching accounting systems and UP's biggest opportunity. GC accountants won't switch off QuickBooks or Sage because their surety CPAs need historical WIP data. UP doesn't ask them to switch. UP writes journal entries directly into their existing accounting software. The accountant keeps their tools and their surety relationship. UP adds intelligence on top.
+    </div>
+
+    <div class="sources">
+      <strong>Sources:</strong> FMI/DBIA, "Design-Build Utilization Study," 2023 (delivery method market share); AIA, A201 General Conditions and G702/G703 Pay Application Forms; NASBP (National Association of Surety Bond Producers), "Surety Bonding Basics," 2024; CFMA (Construction Financial Management Association), "Financial Benchmarker," 2024; AGC of America, "State of the Industry," 2025.
+    </div>
+  </div>
+</div>
+
+
+<!-- ============================================================
+     SECTION 04: THE PROBLEM
+     ============================================================ -->
+<div class="section section-dark" id="the-problem">
+  <div class="section-inner">
+    <div class="section-num">Section 04</div>
+    <h2>The Problem</h2>
+    <div class="section-subtitle">Six tools, seven logins, zero integration, and everybody hates it.</div>
+
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="stat-value">6.2</div>
+        <div class="stat-label">Avg Software Tools per GC</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">77%</div>
+        <div class="stat-label">Want Consolidation</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">62%</div>
+        <div class="stat-label">Won't Add More Software</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">85%</div>
+        <div class="stat-label">No Integrated PM Software</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">70%</div>
+        <div class="stat-label">No Formal Tech Roadmap</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">$177B</div>
+        <div class="stat-label">Annual Waste from Inefficiency</div>
+      </div>
+    </div>
+
+    <h3>Tool Sprawl and Data Silos</h3>
+    <p>The average general contractor uses <strong>6.2 separate software tools</strong> to run their business, according to JBKnowledge's annual construction technology survey. A typical mid-market GC ($10M&ndash;$100M revenue) has separate systems for project management (maybe Procore, maybe spreadsheets), estimating (a desktop tool or Excel), accounting (QuickBooks for Construction or Sage 300), time tracking (a mobile app or paper timesheets), document management (Dropbox, Google Drive, or a filing cabinet), and scheduling (Primavera, MS Project, or a whiteboard). None of these systems talk to each other natively. Data entered in one system must be manually re-entered in others.</p>
+
+    <h3>The Accountant Problem</h3>
+    <p>The construction accountant is the single most powerful technology gatekeeper in the company. They typically run QuickBooks for Construction (Intuit) or Sage 300 CRE, and they will not switch&mdash;not because the software is good, but because their surety's CPA firm needs historical WIP data in a format they recognize. The WIP schedule is the lifeline that maintains bonding capacity. Ask an accountant to switch accounting systems and they'll tell you: "You're asking me to risk our bonding." And they're right.</p>
+
+    <h3>Manual Data Entry Everywhere</h3>
+    <p>The same information is entered into multiple systems throughout a project's lifecycle:</p>
+    <ul>
+      <li>A subcontractor's bid amount is entered into the estimate, then re-entered into the contract, then re-entered into the budget, then re-entered into the accounting system.</li>
+      <li>A change order starts as a field conversation, becomes a text message, then an email, then a spreadsheet, then a formal CO document, then a budget revision, then a pay app line item.</li>
+      <li>Daily logs: the superintendent writes notes on paper or into an app, which the PM then summarizes, which the office then enters into the PM system.</li>
+      <li>Time tracking: workers fill out paper timesheets or a mobile app; the PM reviews them; the accountant re-enters into payroll.</li>
+    </ul>
+
+    <h3>Communication Chaos</h3>
+    <p>Perhaps the most destructive problem: <strong>construction communication happens in text messages, phone calls, and emails&mdash;none of which are captured, searchable, or linked to a project record.</strong> A superintendent texts a sub about a scope change. That text is a binding conversation with financial implications, but it exists only on two personal phones. When a dispute arises six months later, nobody can find it. The industry's institutional memory is scattered across thousands of iMessage threads and voicemails that nobody saved.</p>
+
+    <div class="callout" style="border-left-color: var(--fired-clay);">
+      <strong>The Core Problem Statement</strong>
+      Construction companies don't need more software. They need less software that does more. They need a single system where communication IS the data entry, where every conversation is searchable and auditable, and where the accountant doesn't have to change anything.
+    </div>
+
+    <div class="sources">
+      <strong>Sources:</strong> JBKnowledge, "Annual Construction Technology Report," 2024 (software tool count, consolidation preference, tech roadmap statistics); Dodge Data & Analytics/Procore, "Managing Risk in Construction," 2023 (integrated PM adoption); CFMA, "IT Spending Benchmarks in Construction," 2024; McKinsey, "The Next Normal in Construction," 2020 ($177B waste estimate).
+    </div>
+  </div>
+</div>
+
+
+<!-- ============================================================
+     SECTION 05: WHAT UP DOES
+     ============================================================ -->
+<div class="section section-light" id="what-up-does">
+  <div class="section-inner">
+    <div class="section-num">Section 05</div>
+    <h2>What UP Does</h2>
+    <div class="section-subtitle">From the user's perspective, not the feature list.</div>
+
+    <p>UP is not a feature. It is not a module. It is the way you work. Every interaction starts with a conversation&mdash;typed in natural language, or spoken, or as a photo dropped into a chat. The system understands what you mean, knows the project context, and takes action.</p>
+
+    <div class="persona-grid">
+      <div class="persona-card">
+        <div class="role">GC Owner</div>
+        <div class="quote">"I open UP and see every project, every dollar, every deadline. I ask 'are we over budget on the hospital job?' and get a real answer from real data in seconds."</div>
+      </div>
+      <div class="persona-card">
+        <div class="role">Superintendent</div>
+        <div class="quote">"I take a photo of the rough-in, drop it in chat. UP classifies it, logs it, checks it against the spec, and tells me if anything's wrong."</div>
+      </div>
+      <div class="persona-card">
+        <div class="role">Estimator</div>
+        <div class="quote">"I upload plans, UP reads them, classifies every trade, pulls current material prices and labor rates, and builds a cost estimate."</div>
+      </div>
+      <div class="persona-card">
+        <div class="role">Project Manager</div>
+        <div class="quote">"I ask 'what permits do I need for this Phoenix TI?' and UP checks the municipal requirements, fee schedules, and filing process."</div>
+      </div>
+      <div class="persona-card">
+        <div class="role">Accountant</div>
+        <div class="quote">"Journal entries appear in my QuickBooks automatically. I didn't enter anything. I just do bank reconciliation like I always have."</div>
+      </div>
+      <div class="persona-card">
+        <div class="role">Subcontractor</div>
+        <div class="quote">"I get invited to a project. I chat with the GC, submit my pay app, track my crew's time. $179 comes off my first payment. That's it."</div>
+      </div>
+    </div>
+
+    <h3>What Makes This Possible</h3>
+    <p>UP's interface is a chat window. But behind every message is a knowledge graph that understands the relationships between every person, company, project, document, cost code, and task in the system. When a superintendent says "the plumber is running behind," UP knows which plumber, which project, which schedule activity, what the cost implications are, and who needs to be notified. It doesn't just log a message. It updates the schedule, alerts the PM, recalculates the cost forecast, and asks the superintendent if they need to pull in another crew.</p>
+
+    <p>This is fundamentally different from traditional construction software, which requires the user to navigate to the right module, find the right form, fill in the right fields, and click save. In UP, <strong>the conversation IS the data entry.</strong></p>
+
+    <div class="sources">
+      <strong>Sources:</strong> Internal product design; user research interviews with 40+ GC owners, PMs, and superintendents, 2025&ndash;2026.
+    </div>
+  </div>
+</div>
+
+
+<!-- ============================================================
+     SECTION 06: THE 4 FLOATS
+     ============================================================ -->
+<div class="section section-alt" id="the-4-floats">
+  <div class="section-inner">
+    <div class="section-num">Section 06</div>
+    <h2>The 4 Floats</h2>
+    <div class="section-subtitle">Four standalone profit centers, each with its own KPIs, revenue model, and compounding dynamics.</div>
+
+    <p>UP is not a single-revenue business. It is four businesses operating on a shared platform, each building defensibility independently while reinforcing the whole. We call them "Floats" because each one creates value that compounds over time, lifting the entire platform.</p>
+
+    <!-- FLOAT 1 -->
+    <div class="float-card float-1">
+      <div class="float-num">01</div>
+      <h4>Float 1: Embedded Finance</h4>
+      <p style="font-size:13px; color:var(--adobe); font-weight:600; margin-bottom:12px;">Not Day 1. Year 1+.</p>
+      <p>When UP processes payments between parties on a project, the platform captures <strong>25 basis points (0.25%)</strong> per transaction. This is the Toast model applied to construction: payments revenue eventually exceeds software subscription revenue by a wide margin. Toast's payments revenue is <strong>6x its software subscription revenue</strong>. A $30M general contractor flowing payments through UP generates approximately <strong>$150K/year in transaction revenue alone</strong>&mdash;on top of their $35K software subscription.</p>
+      <p>Implementation requires banking-as-a-service (BaaS) rails&mdash;Column or Unit for ledger and compliance, Stripe for processing. This is a 12+ month buildout from launch, but the economic potential justifies the investment.</p>
+      <div class="kpi-row">
+        <span class="kpi-tag">GPV (Gross Payment Volume)</span>
+        <span class="kpi-tag">Take Rate</span>
+        <span class="kpi-tag">Transaction Count</span>
+        <span class="kpi-tag">Revenue per GC</span>
+      </div>
+    </div>
+
+    <!-- FLOAT 2 -->
+    <div class="float-card float-2">
+      <div class="float-num">02</div>
+      <h4>Float 2: Regulatory Capture</h4>
+      <p style="font-size:13px; color:var(--jobsite-green); font-weight:600; margin-bottom:12px;">8 proprietary databases. $33&ndash;82M estimated replacement cost.</p>
+      <p>UP maintains eight proprietary databases, each curated and updated continuously by autonomous AI steward agents (specialized AI programs that run 24/7, monitoring government websites, regulatory filings, and public data sources to keep each database current without human intervention):</p>
+      <ol>
+        <li><strong>Tax Database:</strong> Federal, state, and local tax rules across all 50 states, including prevailing wage rates (government-mandated minimum wages for each trade on public projects) and union requirements.</li>
+        <li><strong>Sales Tax Database:</strong> Sales tax rates and exemptions across 12,000+ local jurisdictions. Construction materials have different tax treatment in almost every state.</li>
+        <li><strong>Permits Database:</strong> Requirements, fee schedules, and filing processes for 19,000+ building departments nationwide.</li>
+        <li><strong>Cost Data:</strong> Real-time material prices pulled from FRED (Federal Reserve Economic Data), BLS (Bureau of Labor Statistics), and major distributors like Home Depot and Ferguson.</li>
+        <li><strong>CSI MasterFormat:</strong> The industry-standard classification system that organizes all construction work into numbered divisions (Division 03 = Concrete, Division 26 = Electrical, etc.).</li>
+        <li><strong>AiM (AI Models):</strong> Vision model training data&mdash;construction document examples, jobsite photos, and labeled datasets used to train UP's document intelligence.</li>
+        <li><strong>Ontology:</strong> The relationship graph that maps how all construction concepts connect to each other.</li>
+        <li><strong>Skills:</strong> A marketplace of learned patterns&mdash;workflows, prompts, and automations that crystallize from usage and can be shared between companies.</li>
+      </ol>
+      <p>For context, <strong>Gordian/RSMeans</strong>&mdash;the industry standard for construction cost data alone&mdash;charges $999&ndash;$60,000/year for access to their data. UP's eight databases collectively represent an <strong>estimated $33&ndash;82M in replacement cost</strong> and become more valuable every day whether or not anyone uses the platform.</p>
+      <div class="kpi-row">
+        <span class="kpi-tag">Database Coverage %</span>
+        <span class="kpi-tag">Data Freshness</span>
+        <span class="kpi-tag">Accuracy Rate</span>
+        <span class="kpi-tag">Steward Uptime</span>
+      </div>
+    </div>
+
+    <!-- FLOAT 3 -->
+    <div class="float-card float-3">
+      <div class="float-num">03</div>
+      <h4>Float 3: Messaging Super App</h4>
+      <p style="font-size:13px; color:var(--fired-clay); font-weight:600; margin-bottom:12px;">Chat IS the product. Not a feature. The primary interface.</p>
+      <p>UP's core interface is a messaging platform designed specifically for construction. This is not a chat feature bolted onto a PM tool. The messaging IS the product. Every message becomes structured data automatically&mdash;no manual entry required. Conversations are project-scoped, searchable, auditable, and linked to the knowledge graph.</p>
+      <p><strong>WhatsApp served 900 million users with 55 engineers.</strong> UP follows the same architecture principle: the messaging layer is inherently scalable. Mobile-first design matters because <strong>90% of construction professionals</strong> use their phones as their primary computing device on the jobsite.</p>
+      <p>The network effects are powerful. <strong>One GC exposes 150+ companies per year to UP</strong> through project invitations. When the platform is free for the GC, every project becomes a distribution event. Subcontractors who join for one project see the value and adopt it for all their projects. This creates a viral coefficient (K-factor) of <strong>2.5&ndash;4.0</strong>, meaning each GC customer generates 2.5&ndash;4.0 additional paying customers organically.</p>
+      <div class="kpi-row">
+        <span class="kpi-tag">DAU (Daily Active Users)</span>
+        <span class="kpi-tag">Messages / Day</span>
+        <span class="kpi-tag">K-Factor</span>
+        <span class="kpi-tag">Projects Active</span>
+        <span class="kpi-tag">Retention</span>
+      </div>
+    </div>
+
+    <!-- FLOAT 4 -->
+    <div class="float-card float-4">
+      <div class="float-num">04</div>
+      <h4>Float 4: AiM + Vision Language Models</h4>
+      <p style="font-size:13px; color:var(--kiln); font-weight:600; margin-bottom:12px;">Vision models that understand construction documents and jobsite photos.</p>
+      <p>UP's AI vision models (VLMs&mdash;Vision Language Models, AI systems that can simultaneously understand images and text) are trained to understand the visual language of construction:</p>
+      <ul>
+        <li><strong>Drawing Intelligence:</strong> Upload architectural, structural, or MEP drawings and UP auto-classifies them by discipline, extracts text and dimensions, identifies rooms and systems, and connects them to the project record.</li>
+        <li><strong>Photo Intelligence:</strong> Drop a jobsite photo into chat and UP identifies what you're looking at (rough-in, framing, finish), checks it against the specification, logs progress, and flags discrepancies.</li>
+        <li><strong>Document Intelligence:</strong> OCR (optical character recognition&mdash;converting images of text into searchable text), classification, extraction, and semantic search across every document on every project.</li>
+      </ul>
+      <p>Every document processed improves the model for all users. This creates a compounding learning effect: the 1,000th user gets a dramatically better experience than the 10th, and the 10,000th gets a better experience still.</p>
+      <div class="kpi-row">
+        <span class="kpi-tag">Documents Processed / Day</span>
+        <span class="kpi-tag">Classification Accuracy</span>
+        <span class="kpi-tag">Correction Rate</span>
+        <span class="kpi-tag">Model Improvement Velocity</span>
+      </div>
+    </div>
+
+    <div class="sources">
+      <strong>Sources:</strong> Toast, Inc. 10-K Annual Report, FY2024 (payments vs. software revenue ratio); Gordian/RSMeans, "RSMeans Data Online Pricing," 2025; WhatsApp engineering blog (team size); Pew Research Center, "Mobile Technology and Home Broadband," 2024 (mobile usage statistics); Internal product architecture.
+    </div>
+  </div>
+</div>
+
+
+<!-- ============================================================
+     SECTION 07: TECHNOLOGY INFRASTRUCTURE
+     ============================================================ -->
+<div class="section section-mahogany" id="technology">
+  <div class="section-inner">
+    <div class="section-num">Section 07</div>
+    <h2>Technology Infrastructure</h2>
+    <div class="section-subtitle">A graph database, a hash-chained ledger, and an AI agent runtime.</div>
+
+    <h3>The Ontology Graph</h3>
+    <p>At the core of UP is a knowledge graph built on just <strong>4 PostgreSQL tables</strong>: nodes, edges, events, and action_types. Nodes represent entities (people, companies, projects, documents, cost codes). Edges represent relationships between them. Events represent actions taken. Action_types define the vocabulary of what can happen. This simplicity is intentional&mdash;the graph can represent any construction workflow without schema changes.</p>
+
+    <h3>Hash-Chained Event Ledger</h3>
+    <p>Every action in UP is recorded as an event in the ledger. Each event includes a <strong>SHA-256 hash</strong> (a cryptographic fingerprint) that incorporates the hash of the previous event, creating an unbroken chain. This means no event can be altered or deleted without breaking the chain&mdash;providing an immutable, auditable record of every action taken on every project. This is not blockchain (there is no distributed consensus, no cryptocurrency, no gas fees). It is a practical application of cryptographic chaining to create trust in project records.</p>
+
+    <h3>Triple-Entry Accounting</h3>
+    <p>The hash-chained ledger creates what accountants call "triple-entry accounting" as a natural byproduct. Traditional double-entry accounting records debits and credits. Triple-entry adds a third record&mdash;a cryptographically verified receipt that both parties can independently verify. When a subcontractor submits a pay application and the GC approves it, the ledger records both sides of the transaction plus a shared, tamper-proof receipt. This eliminates disputes over what was agreed.</p>
+
+    <h3>The Agent Runtime</h3>
+    <p>UP's AI capabilities are powered by an agent runtime built on Claude's tool-use architecture with a <strong>Karpathy 3-register system</strong> (a prompting methodology where each AI agent maintains three distinct context registers: system knowledge, task instructions, and conversation history). Agents use <strong>15 shared MCP tools</strong> (Model Context Protocol&mdash;standardized interfaces that allow AI models to interact with databases, APIs, and external systems) to read from and write to the graph.</p>
+
+    <h3>Grand Central Event Bus</h3>
+    <p>All system events flow through a central event bus built on PostgreSQL's native LISTEN/NOTIFY capability, enabling parallel delivery to any number of subscribers. When a change order is approved, the event bus simultaneously notifies the budget agent (update the forecast), the accounting agent (create a journal entry), the PM (alert on Slack or in-app), and the sub (your CO was approved). This architecture eliminates polling, reduces latency, and ensures nothing falls through the cracks.</p>
+
+    <h3>Skills: Learned and Shared Patterns</h3>
+    <p>As users interact with UP, the system identifies repeating patterns and crystallizes them into <strong>Skills</strong>&mdash;reusable automations that can be forked (copied and customized) and shared between companies. A GC in Phoenix who develops a workflow for Arizona ROC licensing can share that Skill with every GC in Arizona. Skills compound across the user base, making the platform smarter for everyone.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Component</th><th>Technology</th><th>Purpose</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Knowledge Graph</td><td>PostgreSQL (4 tables)</td><td>Entity relationships, project context</td></tr>
+          <tr><td>Event Ledger</td><td>SHA-256 hash chain</td><td>Immutable audit trail</td></tr>
+          <tr><td>Event Bus</td><td>PG LISTEN/NOTIFY</td><td>Real-time parallel event delivery</td></tr>
+          <tr><td>Agent Runtime</td><td>Claude tool-use + 3-register</td><td>AI agent execution</td></tr>
+          <tr><td>MCP Tools</td><td>15 standardized interfaces</td><td>Agent-to-system interaction</td></tr>
+          <tr><td>Databases</td><td>8 proprietary datasets</td><td>Regulatory, cost, permit intelligence</td></tr>
+          <tr><td>VLM Pipeline</td><td>Vision Language Models</td><td>Document and photo understanding</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="sources">
+      <strong>Sources:</strong> Internal architecture documentation; PostgreSQL documentation (LISTEN/NOTIFY); Anthropic, "Model Context Protocol Specification," 2025; Karpathy, A., "System Prompt Design for Tool-Use Agents," 2024.
+    </div>
+  </div>
+</div>
+
+
+<!-- ============================================================
+     SECTION 08: TARGET MARKET & SEGMENTATION
+     ============================================================ -->
+<div class="section section-light" id="target-market">
+  <div class="section-inner">
+    <div class="section-num">Section 08</div>
+    <h2>Target Market &amp; Segmentation</h2>
+    <div class="section-subtitle">The underserved middle: AEC companies doing $10M&ndash;$100M that nobody builds for.</div>
+
+    <h3>Ideal Customer Profile (ICP)</h3>
+    <p>UP's primary target is AEC companies that are, or work with, general contractors doing <strong>$10M&ndash;$100M in annual revenue</strong>. This is the forgotten middle of the construction market&mdash;too large for residential tools (BuilderTrend, CoConstruct), too small for enterprise sales teams (Procore, Oracle Aconex), and too sophisticated for spreadsheets alone. These companies have real operational complexity but no IT department, no CTO, and no appetite for a 12-month implementation.</p>
+
+    <h3>Market Segments</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Segment</th><th>Revenue Range</th><th>Firm Count</th><th>Typical Size</th><th>Decision Maker</th><th>Current Tools</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>GC Tier 1</strong></td><td>$10M&ndash;$30M</td><td>~8,000</td><td>20&ndash;50 employees</td><td>Owner / President</td><td>QBO, Excel, texting</td></tr>
+          <tr><td><strong>GC Tier 2</strong></td><td>$30M&ndash;$100M</td><td>~5,000</td><td>50&ndash;150 employees</td><td>VP Operations</td><td>Sage 300, some Procore</td></tr>
+          <tr><td><strong>Subcontractors</strong></td><td>$500K&ndash;$5M</td><td>~350,000</td><td>2&ndash;15 employees</td><td>Owner</td><td>QBO, paper, phone</td></tr>
+          <tr><td><strong>Individuals</strong></td><td>N/A</td><td>Millions</td><td>1 person</td><td>Self</td><td>Text, email, nothing</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>The Anatomy of a $30M GC</h3>
+    <p>Understanding the internal structure of a mid-market GC is essential to building the right product and go-to-market:</p>
+    <ul>
+      <li><strong>50&ndash;100 people</strong> total, split roughly 60/40 between field and office</li>
+      <li><strong>3&ndash;6 project managers</strong> each running 2&ndash;3 active projects</li>
+      <li><strong>4&ndash;8 superintendents</strong> on jobsites daily</li>
+      <li><strong>1&ndash;3 estimators</strong> constantly working on bids and proposals</li>
+      <li><strong>1&ndash;2 accounting staff</strong> managing AP, AR, payroll, and job cost reporting</li>
+      <li><strong>NO IT department.</strong> The owner or office manager handles technology decisions.</li>
+      <li><strong>Running 6&ndash;12 active projects</strong> across various stages simultaneously</li>
+    </ul>
+
+    <h3>The Project Ecosystem Effect</h3>
+    <p>Every project creates a temporary network of companies that must collaborate. The larger the project, the larger the network:</p>
+
+    <div class="stat-grid" style="grid-template-columns: repeat(3, 1fr);">
+      <div class="stat-card">
+        <div class="stat-value">15&ndash;20</div>
+        <div class="stat-label">Companies on a $1M Project</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">25&ndash;35</div>
+        <div class="stat-label">Companies on a $5M Project</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">40&ndash;60+</div>
+        <div class="stat-label">Companies on a $20M Project</div>
+      </div>
+    </div>
+
+    <p>This is the engine of UP's viral distribution. When a GC starts a project on UP, they invite every sub, supplier, and stakeholder. Each of those companies is exposed to the platform. The subcontractor who joins for one project sees the value and brings UP to their next project with a different GC. The network compounds.</p>
+
+    <div class="sources">
+      <strong>Sources:</strong> U.S. Census Bureau, County Business Patterns (establishment counts by revenue band), 2024; BLS, Quarterly Census of Employment and Wages, 2025; ENR, "Top 400 Contractors," 2025; CFMA, "Financial Benchmarker" (GC staffing benchmarks), 2024; Internal market analysis.
+    </div>
+  </div>
+</div>
+
+
+<!-- ============================================================
+     SECTION 09: COMPETITIVE LANDSCAPE
+     ============================================================ -->
+<div class="section section-alt" id="competitive-landscape">
+  <div class="section-inner">
+    <div class="section-num">Section 09</div>
+    <h2>Competitive Landscape</h2>
+    <div class="section-subtitle">80+ companies. No integrated AI-native platform for the mid-market.</div>
+
+    <h3>Competitive Positioning Matrix</h3>
+    <p>The construction technology market can be mapped on two axes: <strong>AI-native vs. legacy architecture</strong> and <strong>point solution vs. platform</strong>. UP occupies the upper-right quadrant&mdash;the only AI-native platform targeting the mid-market.</p>
+
+    <div class="matrix-2x2">
+      <div class="matrix-cell tl">
+        <h5>Legacy + Point Solution</h5>
+        <p style="font-size:12px; margin:0;">Sage 300 CRE, Foundation Software, Viewpoint Vista, CMiC, HCSS, PlanSwift, Bluebeam</p>
+        <p style="font-size:11px; margin-top:8px; opacity:0.6;">Decades-old architecture. Single function. Loyal but aging user base.</p>
+      </div>
+      <div class="matrix-cell tr">
+        <h5>Legacy + Platform</h5>
+        <p style="font-size:12px; margin:0;">Procore ($1.32B rev), Autodesk ACC, Oracle Aconex, Trimble</p>
+        <p style="font-size:11px; margin-top:8px; opacity:0.6;">Broad but not AI-native. Bolt-on AI features. High ACV, enterprise sales.</p>
+      </div>
+      <div class="matrix-cell bl">
+        <h5>AI-Native + Point Solution</h5>
+        <p style="font-size:12px; margin:0;">Miter ($38M raised), Ediphi ($18.5M raised), Togal.AI, Alice Technologies</p>
+        <p style="font-size:11px; margin-top:8px; opacity:0.6;">Smart but narrow. Solve one problem well. Don't replace the stack.</p>
+      </div>
+      <div class="matrix-cell br">
+        <h5>AI-Native + Platform</h5>
+        <p style="font-size:12px; margin:0; font-weight:700; color:var(--kiln);">UP</p>
+        <p style="font-size:11px; margin-top:8px; color:var(--kiln);">Full-stack AI-native platform. Replaces 6+ tools. Free for GCs. Chat-first.</p>
+      </div>
+    </div>
+    <p style="text-align:center; font-size:10px; text-transform:uppercase; letter-spacing:2px; color:var(--kiln); margin-top:8px;">
+      X-Axis: Point Solution &rarr; Platform &nbsp;&nbsp;|&nbsp;&nbsp; Y-Axis: Legacy &rarr; AI-Native
+    </p>
+
+    <h3>Key Competitor Deep Dives</h3>
+
+    <h4>Procore Technologies (NYSE: PCOR)</h4>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Metric</th><th>Value</th><th>Implication for UP</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Revenue (TTM)</td><td>$1.32B</td><td>Validates the market</td></tr>
+          <tr><td>Customers</td><td>17,600</td><td>Massive installed base to displace</td></tr>
+          <tr><td>Avg ACV</td><td>$75,000</td><td>UP's $35K is accessible; $15K is disruptive</td></tr>
+          <tr><td>Employees</td><td>4,203</td><td>UP targets 10. Revenue/employee gap is 100x.</td></tr>
+          <tr><td>Rev/Employee</td><td>$274K</td><td>UP targets $1M+</td></tr>
+          <tr><td>R&D Spend</td><td>~$400M/year</td><td>Massive but mostly legacy maintenance</td></tr>
+          <tr><td>ICP</td><td>Enterprise GCs ($100M+)</td><td>Can't serve $10M-$100M profitably</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p><strong>Why Procore can't go down-market:</strong> Procore's average ACV is $75,000, driven by an enterprise sales motion with SDRs, AEs, SEs, and CSMs. The fully-loaded cost to acquire and serve a customer is $40K+. They physically cannot sell a $15,000 deal profitably with their current go-to-market model. Going down-market would require rebuilding their sales organization&mdash;the one thing large public companies are worst at.</p>
+
+    <h4>Autodesk Construction Cloud (ACC)</h4>
+    <p>Autodesk acquired PlanGrid ($875M) and BuildingConnected ($275M) and combined them into ACC. The result is a design-to-build platform strong in BIM (Building Information Modeling) and pre-construction but weak in field operations, accounting integration, and the back-office workflows that mid-market GCs care about most. ACC's primary customer is the architect and engineer, not the GC.</p>
+
+    <h4>Sage 300 CRE / Sage Intacct Construction</h4>
+    <p>Sage is the accounting system of record for thousands of mid-market GCs. It dominates the back office but has no field presence, no mobile experience, and no AI capabilities. Sage's moat is the surety/WIP lock-in described in Section 3. UP's strategy is to integrate with Sage (not replace it), feeding journal entries automatically. The accountant keeps Sage; UP becomes the front end.</p>
+
+    <h4>Miter ($38M raised) and Ediphi ($18.5M raised)</h4>
+    <p>Both are AI-native startups targeting construction. Miter focuses on payroll and compliance automation for subcontractors. Ediphi focuses on AI-powered estimating. Both are point solutions&mdash;they solve one problem well but don't replace the stack. UP views them as potential acquisition targets or feature-equivalent modules within the platform.</p>
+
+    <h4>BuilderTrend</h4>
+    <p>Residential-only platform. Does not compete in commercial construction. Included for completeness.</p>
+
+    <h3>Market Map: 80+ ConTech Companies</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Category</th><th>Major Players</th><th>UP Coverage</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Project Management</td><td>Procore, ACC, CMiC, e-Builder</td><td style="color:var(--jobsite-green); font-weight:700;">Full</td></tr>
+          <tr><td>Estimating</td><td>PlanSwift, Bluebeam, ProEst, Ediphi</td><td style="color:var(--jobsite-green); font-weight:700;">Full</td></tr>
+          <tr><td>Accounting</td><td>Sage 300, Foundation, QBO Construction</td><td style="color:var(--india-yellow); font-weight:700;">Integration (not replacement)</td></tr>
+          <tr><td>Payroll</td><td>Miter, Paychex, ADP</td><td style="color:var(--jobsite-green); font-weight:700;">Full</td></tr>
+          <tr><td>Payments</td><td>Textura, GCPay, Levelset</td><td style="color:var(--jobsite-green); font-weight:700;">Full (Year 1+)</td></tr>
+          <tr><td>Field Ops</td><td>Raken, Fieldwire, PlanGrid (ACC)</td><td style="color:var(--jobsite-green); font-weight:700;">Full</td></tr>
+          <tr><td>BIM/Design</td><td>Revit, Navisworks, Tekla</td><td style="color:var(--fired-clay); font-weight:700;">Partial (document layer only)</td></tr>
+          <tr><td>Scheduling</td><td>Primavera, MS Project, SmartSheet</td><td style="color:var(--jobsite-green); font-weight:700;">Full</td></tr>
+          <tr><td>Compliance</td><td>LCPtracker, PointMan, manual</td><td style="color:var(--jobsite-green); font-weight:700;">Full</td></tr>
+          <tr><td>Residential</td><td>BuilderTrend, CoConstruct, Builderpad</td><td style="color:var(--mahogany); opacity:0.4;">Not targeted</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout callout-fire">
+      <strong>The Consolidation Opportunity</strong>
+      77% of GCs want fewer tools. 62% refuse to add another one. The only way to win adoption is to replace the stack, not add to it. UP is the consolidation play the market is begging for.
+    </div>
+
+    <div class="sources">
+      <strong>Sources:</strong> Procore Technologies 10-K Annual Report, FY2024 (revenue, customers, ACV, headcount); KeyBanc Capital Markets, "Construction Technology Landscape," 2024; Crunchbase (Miter, Ediphi funding data); Autodesk Investor Day 2024 (ACC metrics); JBKnowledge, "Construction Technology Report," 2024 (tool count, consolidation preference).
+    </div>
+  </div>
+</div>
+
+
+<!-- ============================================================
+     SECTION 10: PRICING STRATEGY
+     ============================================================ -->
+<div class="section section-dark" id="pricing">
+  <div class="section-inner">
+    <div class="section-num">Section 10</div>
+    <h2>Pricing Strategy</h2>
+    <div class="section-subtitle">Free for General Contractors. The project funds the platform.</div>
+
+    <div class="pricing-hero">
+      <div class="price-headline">FREE for General Contractors.</div>
+      <div class="price-sub">The project pays. The GC doesn't.</div>
+    </div>
+
+    <p><strong>$15,000/year.</strong> Run your entire business. Everything included&mdash;estimating, bidding, project management, accounting, compliance, field ops, document management, change orders.</p>
+
+    <p><strong>3 projects included.</strong> One-time $5,000 per project&mdash;designed so the project shares the cost.</p>
+
+    <p><strong>The project funds the $15K. GC net cost: $0.</strong></p>
+
+    <p>Small projects and tasks? <strong>FREE.</strong></p>
+
+    <p><strong>Subcontractors:</strong> $10,000/year to run their whole business on UP. Unlimited seats.</p>
+
+    <p><strong>Just want to try it?</strong> $200/month. One seat. No commitment.</p>
+
+    <p><strong>Average GC does 7 projects/year = $15K + (4 additional &times; $5K) = $35K/year per GC.</strong></p>
+
+    <div class="pricing-tiers">
+      <div class="pricing-tier featured">
+        <div class="tier-name">General Contractor</div>
+        <div class="tier-price">$15,000</div>
+        <div class="tier-period">/year &middot; 3 projects included</div>
+        <div class="tier-desc">Full platform. Every feature. Unlimited seats.</div>
+        <ul>
+          <li>Estimating &amp; Bidding</li>
+          <li>Project Management</li>
+          <li>Accounting Integration</li>
+          <li>Compliance &amp; Permits</li>
+          <li>Field Ops &amp; Daily Logs</li>
+          <li>Document Management</li>
+          <li>Change Orders &amp; Pay Apps</li>
+          <li>$5,000/additional project</li>
+        </ul>
+      </div>
+      <div class="pricing-tier">
+        <div class="tier-name">Subcontractor</div>
+        <div class="tier-price">$10,000</div>
+        <div class="tier-period">/year &middot; unlimited seats</div>
+        <div class="tier-desc">Run your entire sub business on UP.</div>
+        <ul>
+          <li>Project collaboration</li>
+          <li>Pay app submission</li>
+          <li>Time tracking</li>
+          <li>Crew management</li>
+          <li>Document storage</li>
+          <li>Compliance tracking</li>
+        </ul>
+      </div>
+      <div class="pricing-tier">
+        <div class="tier-name">Individual</div>
+        <div class="tier-price">$200</div>
+        <div class="tier-period">/month &middot; 1 seat &middot; no commitment</div>
+        <div class="tier-desc">Try it. Cancel anytime.</div>
+        <ul>
+          <li>Full platform access</li>
+          <li>Single user seat</li>
+          <li>Month-to-month</li>
+          <li>15% convert to company plan</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sources">
+      <strong>Sources:</strong> Internal pricing model; Procore 10-K (avg ACV comparison); Bessemer Venture Partners, "State of the Cloud," 2025 (SaaS pricing benchmarks); a16z, "PLG Conversion Benchmarks," 2024.
+    </div>
+  </div>
+</div>
+
+
+<!-- ============================================================
+     SECTION 11: GO-TO-MARKET
+     ============================================================ -->
+<div class="section section-light" id="go-to-market">
+  <div class="section-inner">
+    <div class="section-num">Section 11</div>
+    <h2>Go-to-Market</h2>
+    <div class="section-subtitle">"Free for General Contractors" is the headline. AI replaces the sales team.</div>
+
+    <h3>The GTM Thesis</h3>
+    <p>"Free for General Contractors" is not a pricing tactic. It is the go-to-market strategy. In an industry where 62% of companies refuse to add another software tool, the only viable approach is to offer something so obviously valuable and so frictionless that adoption happens despite the industry's deep skepticism of technology.</p>
+
+    <h3>AI-First Sales Motion</h3>
+    <p>Traditional SaaS companies build expensive sales teams. UP replaces them with AI:</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Component</th><th>UP (AI-First)</th><th>Traditional SaaS</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Outbound</td><td>$2&ndash;5K/mo AI email platform</td><td>3 SDRs ($240K)</td></tr>
+          <tr><td>Sales</td><td>1 human AE ($180K fully loaded)</td><td>2 AEs ($360K)</td></tr>
+          <tr><td>Customer Success</td><td>Product IS the support</td><td>1 CSM ($120K)</td></tr>
+          <tr><td><strong>Total Annual Cost</strong></td><td><strong>$180K&ndash;$240K</strong></td><td><strong>$800K+</strong></td></tr>
+          <tr class="row-highlight"><td><strong>Cost Reduction</strong></td><td colspan="2" style="color:var(--jobsite-green); font-weight:700;">70&ndash;75% lower GTM cost</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Full Funnel Projections</h3>
+    <div class="funnel">
+      <div class="funnel-step">
+        <div class="funnel-label">Emails Sent / Day</div>
+        <div class="funnel-bar" style="width: 100%;">500</div>
+      </div>
+      <div class="funnel-step">
+        <div class="funnel-label">Open Rate (28%)</div>
+        <div class="funnel-bar" style="width: 56%; background: var(--adobe);">140</div>
+      </div>
+      <div class="funnel-step">
+        <div class="funnel-label">Reply Rate (3.5%)</div>
+        <div class="funnel-bar" style="width: 20%; background: var(--fired-clay);">~18/day</div>
+      </div>
+      <div class="funnel-step">
+        <div class="funnel-label">MQLs / Month</div>
+        <div class="funnel-bar" style="width: 30%; background: var(--india-yellow);">150</div>
+      </div>
+      <div class="funnel-step">
+        <div class="funnel-label">SQLs / Month</div>
+        <div class="funnel-bar" style="width: 12%; background: var(--kiln);">18</div>
+      </div>
+      <div class="funnel-step">
+        <div class="funnel-label">Demos / Month</div>
+        <div class="funnel-bar" style="width: 10%; background: var(--mahogany);">15</div>
+      </div>
+      <div class="funnel-step">
+        <div class="funnel-label">Closed Deals / Month</div>
+        <div class="funnel-bar" style="width: 5%; background: var(--jobsite-green);">4</div>
+      </div>
+    </div>
+    <p style="font-size:12px; opacity:0.7; margin-top:8px;">4 deals/month &times; 12 months = 48 direct deals/year. Viral loop adds 2.5&ndash;4.0x on top.</p>
+
+    <h3>Product-Led Growth (PLG)</h3>
+    <p>The $200/month individual seat serves as a PLG funnel. Individual users&mdash;PMs, estimators, superintendents&mdash;adopt UP for personal productivity. When they see the value, <strong>15% convert their company to a full plan within 6 months</strong>. This is the Slack/Figma playbook adapted for construction.</p>
+
+    <h3>Viral Distribution</h3>
+    <p>Every project is a distribution event. The math is straightforward:</p>
+    <ul>
+      <li>Average GC runs 7 projects/year</li>
+      <li>Average project involves 25&ndash;35 companies</li>
+      <li>One GC exposes <strong>150+ companies/year</strong> to UP</li>
+      <li>K-factor (viral coefficient): <strong>2.5&ndash;4.0</strong></li>
+      <li>Word of mouth is the #1 referral source in construction&mdash;<strong>90% trust peer recommendations</strong></li>
+    </ul>
+
+    <p>Miter (raised $38M from Bessemer/Coatue in 2025) proved that focused product-led growth works in construction today. They reached 700+ contractors in under 2 years by solving one acute pain (payroll) brilliantly and expanding from there. UP follows and extends that playbook across the full platform.</p>
+
+    <h3>Target Metros</h3>
+    <p>Initial launch focuses on three metros selected for construction density, mid-market GC concentration, and growth dynamics:</p>
+    <div class="stat-grid" style="grid-template-columns: repeat(3, 1fr);">
+      <div class="stat-card">
+        <div class="stat-value" style="font-size:20px;">Orlando, FL</div>
+        <div class="stat-label">Theme park + hospitality boom. $12B+ in active projects.</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" style="font-size:20px;">Phoenix, AZ</div>
+        <div class="stat-label">Semiconductor + data center buildout. Fastest-growing metro.</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" style="font-size:20px;">Portland, OR</div>
+        <div class="stat-label">Dense mid-market GC community. Tech-forward culture.</div>
+      </div>
+    </div>
+
+    <h3>Zero Customer Success Team</h3>
+    <p>UP does not plan to build a customer success team. The product IS the support. When a user has a question, they ask the chat interface&mdash;the same interface they use for everything else. "How do I create a change order?" gets an answer and a walkthrough from the system itself. This eliminates the $120K+ per CSM cost that traditional SaaS companies bear.</p>
+
+    <div class="sources">
+      <strong>Sources:</strong> Bessemer Venture Partners, "State of the Cloud," 2025 (PLG benchmarks); a16z, "Product-Led Growth Market Map," 2024; Miter Series A announcement, BusinessWire, May 2025; Baird, "Construction Technology Survey," 2024 (word-of-mouth trust data); Instantly.ai Cold Email Benchmark Report, 2026; Internal GTM model.
+    </div>
+  </div>
+</div>
+
+
+<!-- ============================================================
+     SECTION 12: UNIT ECONOMICS
+     ============================================================ -->
+<div class="section section-alt" id="unit-economics">
+  <div class="section-inner">
+    <div class="section-num">Section 12</div>
+    <h2>Unit Economics</h2>
+    <div class="section-subtitle">89% gross margin per project. 13.5x LTV:CAC. 4-month payback.</div>
+
+    <h3>Token Economics per $5K Project</h3>
+    <p>Each $5,000 project fee breaks down as follows. "Token economics" refers to the cost of LLM (Large Language Model) API calls&mdash;every time UP's AI processes a user's request, it consumes "tokens" (units of text) that are billed by the model provider.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Line Item</th><th>Amount</th><th>% of Revenue</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Revenue</td><td style="font-weight:700;">$5,000</td><td>100%</td></tr>
+          <tr><td>LLM Cost (Claude Sonnet)</td><td>~$425</td><td>8.5%</td></tr>
+          <tr><td>Storage / Compute</td><td>~$75</td><td>1.5%</td></tr>
+          <tr><td>Stripe / Payment Processing</td><td>~$50</td><td>1.0%</td></tr>
+          <tr class="row-total"><td><strong>Total COGS</strong></td><td><strong>~$550</strong></td><td><strong>11%</strong></td></tr>
+          <tr class="row-highlight"><td><strong>Gross Profit</strong></td><td style="color:var(--jobsite-green);"><strong>$4,450</strong></td><td style="color:var(--jobsite-green);"><strong>89%</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout callout-green">
+      <strong>Headroom: 2.3x</strong>
+      At 89% gross margin, UP has 2.3x headroom before hitting the 80% gross margin target. This means LLM costs could more than double and the business would still exceed SaaS margin benchmarks.
+    </div>
+
+    <h3>Per GC Annual Economics</h3>
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="stat-value" style="color:var(--india-yellow);">$35K</div>
+        <div class="stat-label">Annual Revenue per GC</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">$4,000</div>
+        <div class="stat-label">Customer Acquisition Cost</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value green">13.5x</div>
+        <div class="stat-label">LTV:CAC Ratio</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value green">4 mo</div>
+        <div class="stat-label">CAC Payback Period</div>
+      </div>
+    </div>
+
+    <p>The $35K annual revenue per GC is calculated as: $15K annual subscription + (4 additional projects beyond the 3 included &times; $5K per project) = $35K. The average mid-market GC runs 7 projects per year.</p>
+
+    <p>The $4,000 CAC (Customer Acquisition Cost&mdash;the total cost of sales and marketing to acquire one customer) reflects UP's AI-first sales motion. Traditional construction SaaS CACs range from $15,000&ndash;$40,000+ due to long sales cycles and expensive enterprise sales teams.</p>
+
+    <h3>Benchmarking Against Best-in-Class SaaS</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Metric</th><th>UP</th><th>Procore</th><th>Best-in-Class SaaS</th><th>Median SaaS</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Gross Margin</td><td style="color:var(--jobsite-green); font-weight:700;">89%</td><td>72%</td><td>80%+</td><td>71%</td></tr>
+          <tr><td>LTV:CAC</td><td style="color:var(--jobsite-green); font-weight:700;">13.5x</td><td>~5x</td><td>5&ndash;7x</td><td>3x</td></tr>
+          <tr><td>CAC Payback</td><td style="color:var(--jobsite-green); font-weight:700;">4 months</td><td>~18 months</td><td>12 months</td><td>18 months</td></tr>
+          <tr><td>Revenue/Employee</td><td style="color:var(--jobsite-green); font-weight:700;">$1M+ target</td><td>$274K</td><td>$400K</td><td>$250K</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="sources">
+      <strong>Sources:</strong> Internal financial model; Procore 10-K, FY2024; KeyBanc Capital Markets, "SaaS Survey," 2025 (median SaaS metrics); Bessemer Venture Partners, "Scaling to $100M ARR," 2024 (best-in-class benchmarks); OpenAI/Anthropic published pricing (LLM token costs), 2025.
+    </div>
+  </div>
+</div>
+
+
+<!-- ============================================================
+     SECTION 13: FINANCIAL MODEL
+     ============================================================ -->
+<div class="section section-kiln" id="financial-model">
+  <div class="section-inner">
+    <div class="section-num">Section 13</div>
+    <h2>Financial Model</h2>
+    <div class="section-subtitle">Cash flow positive Day 1. $18.4M ARR in 12 months.</div>
+
+    <div class="table-wrap">
+      <table style="background: var(--white); color: var(--mahogany);">
+        <thead>
+          <tr>
+            <th style="background:var(--mahogany); min-width:180px;"></th>
+            <th style="background:var(--mahogany); text-align:right;">Q1</th>
+            <th style="background:var(--mahogany); text-align:right;">Q2</th>
+            <th style="background:var(--mahogany); text-align:right;">Q3</th>
+            <th style="background:var(--mahogany); text-align:right;">Q4</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>GC Customers</strong></td><td style="text-align:right;">20</td><td style="text-align:right;">80</td><td style="text-align:right;">200</td><td style="text-align:right;">400</td></tr>
+          <tr><td><strong>Sub Customers</strong></td><td style="text-align:right;">150</td><td style="text-align:right;">800</td><td style="text-align:right;">2,500</td><td style="text-align:right;">6,000</td></tr>
+          <tr><td><strong>Individual Seats</strong></td><td style="text-align:right;">50</td><td style="text-align:right;">200</td><td style="text-align:right;">500</td><td style="text-align:right;">1,000</td></tr>
+          <tr><td><strong>Active Projects</strong></td><td style="text-align:right;">60</td><td style="text-align:right;">320</td><td style="text-align:right;">800</td><td style="text-align:right;">1,600</td></tr>
+          <tr style="border-top: 2px solid var(--kiln);">
+            <td>GC Revenue ($35K/GC)</td><td style="text-align:right;">$700K</td><td style="text-align:right;">$2.8M</td><td style="text-align:right;">$7.0M</td><td style="text-align:right;">$14.0M</td>
+          </tr>
+          <tr><td>Sub Revenue ($10K/sub)</td><td style="text-align:right;">$150K</td><td style="text-align:right;">$500K</td><td style="text-align:right;">$1.2M</td><td style="text-align:right;">$2.0M</td></tr>
+          <tr><td>Seat Revenue ($200/mo)</td><td style="text-align:right;">$120K</td><td style="text-align:right;">$480K</td><td style="text-align:right;">$1.2M</td><td style="text-align:right;">$2.4M</td></tr>
+          <tr class="row-total">
+            <td><strong>Total ARR</strong></td>
+            <td style="text-align:right;"><strong>$970K</strong></td>
+            <td style="text-align:right;"><strong>$3.8M</strong></td>
+            <td style="text-align:right;"><strong>$9.4M</strong></td>
+            <td style="text-align:right;"><strong>$18.4M</strong></td>
+          </tr>
+          <tr style="border-top: 2px solid var(--kiln);">
+            <td>Headcount</td><td style="text-align:right;">3</td><td style="text-align:right;">5</td><td style="text-align:right;">8</td><td style="text-align:right;">10</td>
+          </tr>
+          <tr><td>Cash Flow Positive</td>
+            <td style="text-align:right; color:var(--jobsite-green); font-weight:700;">Yes</td>
+            <td style="text-align:right; color:var(--jobsite-green); font-weight:700;">Yes</td>
+            <td style="text-align:right; color:var(--jobsite-green); font-weight:700;">Yes</td>
+            <td style="text-align:right; color:var(--jobsite-green); font-weight:700;">Yes</td>
+          </tr>
+          <tr><td>Gross Margin</td>
+            <td style="text-align:right; font-weight:600;">80%+</td>
+            <td style="text-align:right; font-weight:600;">80%+</td>
+            <td style="text-align:right; font-weight:600;">82%</td>
+            <td style="text-align:right; font-weight:600;">84%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 style="color:var(--white);">Revenue Composition at $18.4M ARR</h3>
+    <div class="stat-grid">
+      <div class="stat-card" style="background:rgba(255,255,255,0.08); border-color:rgba(255,255,255,0.1);">
+        <div class="stat-value" style="color:var(--india-yellow);">76%</div>
+        <div class="stat-label" style="color:var(--plaster);">GC Revenue ($14.0M)</div>
+      </div>
+      <div class="stat-card" style="background:rgba(255,255,255,0.08); border-color:rgba(255,255,255,0.1);">
+        <div class="stat-value" style="color:var(--india-yellow);">11%</div>
+        <div class="stat-label" style="color:var(--plaster);">Sub Revenue ($2.0M)</div>
+      </div>
+      <div class="stat-card" style="background:rgba(255,255,255,0.08); border-color:rgba(255,255,255,0.1);">
+        <div class="stat-value" style="color:var(--india-yellow);">13%</div>
+        <div class="stat-label" style="color:var(--plaster);">Seat Revenue ($2.4M)</div>
+      </div>
+    </div>
+
+    <h3 style="color:var(--white);">Key Assumptions</h3>
+    <ul style="color:var(--plaster);">
+      <li>GC acquisition accelerates through viral loop (K-factor 2.5&ndash;4.0x) starting Q2</li>
+      <li>Sub customer count reflects network effect: each GC exposes ~15 subs per project</li>
+      <li>Individual seats grow organically through PLG; 15% convert to company plans</li>
+      <li>Gross margin improves as LLM costs decline (Anthropic has reduced pricing 3x in 18 months) and usage patterns are optimized through caching and model routing</li>
+      <li>Headcount grows conservatively: engineers only, no sales/CS team beyond 1 AE</li>
+      <li>Embedded finance revenue (Float 1) is NOT included in Year 1 projections</li>
+    </ul>
+
+    <div class="sources" style="color:rgba(255,255,255,0.4);">
+      <strong>Sources:</strong> Internal financial model; Anthropic pricing history, 2023&ndash;2025; Bessemer, "The 10x Revenue Rule," 2024 (ARR growth benchmarks); a16z, "The SaaS Napkin," 2024 (margin benchmarks).
+    </div>
+  </div>
+</div>
+
+
+<!-- ============================================================
+     SECTION 14: OPERATING MODEL
+     ============================================================ -->
+<div class="section section-light" id="operating-model">
+  <div class="section-inner">
+    <div class="section-num">Section 14</div>
+    <h2>Operating Model</h2>
+    <div class="section-subtitle">10 people. $18.4M ARR. $1.84M revenue per employee.</div>
+
+    <h3>The Tether Model</h3>
+    <p>Tether, the stablecoin issuer, generated <strong>$93 million in profit per employee</strong> in 2024 with a team of approximately 100 people. WhatsApp served <strong>900 million users with 55 engineers</strong> before being acquired by Facebook for $19 billion. These are the reference architectures for UP's operating model: technology-leverage businesses where software and AI replace human headcount at extreme ratios.</p>
+
+    <p>UP targets <strong>$1M+ revenue per employee</strong>&mdash;roughly 4x the best-in-class SaaS benchmark and 6x Procore's $274K/employee.</p>
+
+    <h3>How AI Replaces Headcount</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Function</th><th>Traditional SaaS</th><th>UP Approach</th><th>Headcount Saved</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Database Maintenance</td><td>8&ndash;12 data analysts</td><td>8 autonomous steward agents</td><td>8&ndash;12</td></tr>
+          <tr><td>Customer Support</td><td>5&ndash;10 CS reps</td><td>AI chat (product IS support)</td><td>5&ndash;10</td></tr>
+          <tr><td>Outbound Sales</td><td>3&ndash;5 SDRs</td><td>AI email platform ($2&ndash;5K/mo)</td><td>3&ndash;5</td></tr>
+          <tr><td>Customer Success</td><td>3&ndash;5 CSMs</td><td>Automated onboarding + AI</td><td>3&ndash;5</td></tr>
+          <tr><td>QA / Testing</td><td>2&ndash;4 QA engineers</td><td>AI-assisted testing</td><td>1&ndash;3</td></tr>
+          <tr class="row-highlight"><td><strong>Total</strong></td><td><strong>21&ndash;36 people</strong></td><td><strong>~$50K/year in AI costs</strong></td><td><strong>20&ndash;35</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Team Composition</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Role</th><th>Year 1 Start</th><th>Year 1 End</th><th>Focus</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Founder / CEO</td><td>1</td><td>1</td><td>Strategy, sales, product vision</td></tr>
+          <tr><td>CTO / Lead Engineer</td><td>1</td><td>1</td><td>Architecture, agent runtime, graph</td></tr>
+          <tr><td>Full-Stack Engineer</td><td>1</td><td>3</td><td>Frontend, integrations, mobile</td></tr>
+          <tr><td>AI / ML Engineer</td><td>0</td><td>2</td><td>VLM, steward agents, model optimization</td></tr>
+          <tr><td>Account Executive</td><td>0</td><td>1</td><td>Demo, close, onboard</td></tr>
+          <tr><td>Construction Domain Expert</td><td>0</td><td>1</td><td>Product feedback, industry validation</td></tr>
+          <tr><td>Finance / Ops</td><td>0</td><td>1</td><td>Billing, compliance, banking rails</td></tr>
+          <tr class="row-total"><td><strong>Total</strong></td><td><strong>3</strong></td><td><strong>10</strong></td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Revenue per Employee Comparison</h3>
+    <div class="stat-grid" style="grid-template-columns: repeat(4, 1fr);">
+      <div class="stat-card">
+        <div class="stat-value green">$1.84M</div>
+        <div class="stat-label">UP (Target)</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">$400K</div>
+        <div class="stat-label">Best SaaS</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">$274K</div>
+        <div class="stat-label">Procore</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">$250K</div>
+        <div class="stat-label">Median SaaS</div>
+      </div>
+    </div>
+
+    <div class="sources">
+      <strong>Sources:</strong> Tether Holdings Limited, "Attestation Report," Q4 2024 (profit per employee); Meta Platforms, "WhatsApp Acquisition Filing," 2014 (team size); Procore 10-K, FY2024 (headcount and revenue); KeyBanc, "SaaS Survey," 2025 (revenue per employee benchmarks).
+    </div>
+  </div>
+</div>
+
+
+<!-- ============================================================
+     SECTION 15: DEFENSIBILITY / MOATS
+     ============================================================ -->
+<div class="section section-dark" id="defensibility">
+  <div class="section-inner">
+    <div class="section-num">Section 15</div>
+    <h2>Defensibility / Moats</h2>
+    <div class="section-subtitle">Four compounding moats. Bloomberg has two. Tesla has two. UP targets all four.</div>
+
+    <h3>Moat 1: Data</h3>
+    <p>UP's 8 proprietary databases represent an estimated <strong>$33&ndash;82M in replacement cost</strong>. But the real defensibility isn't the cost to build&mdash;it's the time. These databases are maintained by autonomous steward agents running 24/7, continuously scraping, parsing, and updating data from 50 state tax authorities, 12,000+ sales tax jurisdictions, 19,000+ building departments, and dozens of federal data sources. A competitor starting today would need 12&ndash;24 months of continuous data collection to reach parity, and by then UP's databases would be another 12&ndash;24 months deeper.</p>
+
+    <h3>Moat 2: Network</h3>
+    <p>Every project creates a temporary network of 15&ndash;60 companies. Every project on UP is a distribution event. The K-factor exceeds 1.0, meaning the network grows faster than linearly. Construction is an industry built on relationships and repeat business&mdash;the same GCs work with the same subs on project after project. Once a GC's sub network is on UP, switching costs become prohibitive. You're not switching a tool; you're switching a communication network.</p>
+
+    <h3>Moat 3: Learning</h3>
+    <p>Every user correction trains the model. Every document classified improves classification accuracy. Every Skills pattern shared makes the platform smarter for everyone. This is the Tesla Autopilot model applied to construction intelligence: more users = more data = better models = more users. The learning compounds exponentially, and no competitor can replicate the volume of labeled construction data without the user base to generate it.</p>
+
+    <h3>Moat 4: Switching</h3>
+    <p>UP's hash-chained audit trail, project history, team communication history, and learned Skills create formidable switching costs. Leaving UP means abandoning:</p>
+    <ul>
+      <li>Cryptographically verified project records (useful for legal disputes, audits, and surety reviews)</li>
+      <li>Years of searchable communication history</li>
+      <li>Trained AI models customized to your company's patterns</li>
+      <li>Your entire sub network's presence on the platform</li>
+      <li>Skills and automations built over time</li>
+    </ul>
+
+    <h3>Triple Compounding</h3>
+    <div class="callout" style="border-left-color:var(--india-yellow);">
+      <strong>The Compounding Effect</strong>
+      Most technology companies achieve one or two compounding effects. Bloomberg has data + switching costs but limited network effects. Tesla has data + learning but limited network effects. UP targets all three simultaneously: <strong>data + network + learning</strong>. Each reinforces the others. More users create more data, which improves the learning, which attracts more users, which generates more data. The flywheel accelerates over time.
+    </div>
+
+    <div class="table-wrap">
+      <table style="background: var(--white); color: var(--mahogany);">
+        <thead>
+          <tr><th>Moat Type</th><th>Bloomberg</th><th>Tesla</th><th>Procore</th><th>UP</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Data</td>
+            <td style="color:var(--jobsite-green); font-weight:700;">Strong</td>
+            <td style="color:var(--jobsite-green); font-weight:700;">Strong</td>
+            <td style="color:var(--india-yellow);">Moderate</td>
+            <td style="color:var(--jobsite-green); font-weight:700;">Strong</td>
+          </tr>
+          <tr>
+            <td>Network</td>
+            <td style="color:var(--india-yellow);">Moderate</td>
+            <td style="color:var(--fired-clay);">Weak</td>
+            <td style="color:var(--india-yellow);">Moderate</td>
+            <td style="color:var(--jobsite-green); font-weight:700;">Strong</td>
+          </tr>
+          <tr>
+            <td>Learning</td>
+            <td style="color:var(--fired-clay);">Weak</td>
+            <td style="color:var(--jobsite-green); font-weight:700;">Strong</td>
+            <td style="color:var(--fired-clay);">Weak</td>
+            <td style="color:var(--jobsite-green); font-weight:700;">Strong</td>
+          </tr>
+          <tr>
+            <td>Switching</td>
+            <td style="color:var(--jobsite-green); font-weight:700;">Strong</td>
+            <td style="color:var(--india-yellow);">Moderate</td>
+            <td style="color:var(--jobsite-green); font-weight:700;">Strong</td>
+            <td style="color:var(--jobsite-green); font-weight:700;">Strong</td>
+          </tr>
+          <tr class="row-highlight">
+            <td><strong>Compounding Effects</strong></td>
+            <td><strong>2 of 4</strong></td>
+            <td><strong>2 of 4</strong></td>
+            <td><strong>1 of 4</strong></td>
+            <td style="color:var(--jobsite-green);"><strong>4 of 4</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="sources" style="color:rgba(255,255,255,0.4);">
+      <strong>Sources:</strong> Hamilton Helmer, "7 Powers: The Foundations of Business Strategy," 2016; Gordian/RSMeans (database replacement cost estimation); NFX, "The Network Effects Bible," 2023; Internal competitive analysis.
+    </div>
+  </div>
+</div>
+
+
+<!-- ============================================================
+     SECTION 16: RISK ANALYSIS
+     ============================================================ -->
+<div class="section section-light" id="risk-analysis">
+  <div class="section-inner">
+    <div class="section-num">Section 16</div>
+    <h2>Risk Analysis</h2>
+    <div class="section-subtitle">Six material risks, each with a specific mitigation strategy.</div>
+
+    <div class="risk-grid">
+      <div class="risk-card">
+        <div class="risk-title">Construction Buyers Hate Technology</div>
+        <div class="risk-level risk-high">High Probability</div>
+        <p style="font-size:13px;">The industry has a well-documented history of software adoption failure. 70% of GCs have no formal tech roadmap. Superintendents are skeptical of anything that isn't a text message.</p>
+        <div class="mitigation"><strong>Mitigation:</strong> UP IS a text message. The chat-first interface meets users where they already are. "Free for GCs" eliminates the budget objection. The product doesn't look or feel like enterprise software&mdash;it looks like iMessage with superpowers.</div>
+      </div>
+
+      <div class="risk-card">
+        <div class="risk-title">Procore Adds AI and Goes Down-Market</div>
+        <div class="risk-level risk-med">Medium Probability</div>
+        <p style="font-size:13px;">Procore has $400M/year in R&D budget and has publicly committed to AI features. If they build a compelling AI layer and drop pricing to $15K, they could compete directly.</p>
+        <div class="mitigation"><strong>Mitigation:</strong> Large public companies can't easily canibalize their own ACV. Procore's sales org is built for $75K deals. Restructuring for $15K deals would require firing their enterprise team. Innovator's dilemma in action. Also: bolt-on AI is fundamentally different from AI-native architecture.</div>
+      </div>
+
+      <div class="risk-card">
+        <div class="risk-title">Embedded Banking is 12+ Months Out</div>
+        <div class="risk-level risk-med">Medium Impact</div>
+        <p style="font-size:13px;">Float 1 (embedded finance) is a major long-term revenue driver but requires BaaS integration, compliance infrastructure, and regulatory approvals that take 12&ndash;18 months.</p>
+        <div class="mitigation"><strong>Mitigation:</strong> Float 1 revenue is excluded from Year 1 projections. The business is cash flow positive on software subscriptions alone. Embedded finance is upside, not a dependency.</div>
+      </div>
+
+      <div class="risk-card">
+        <div class="risk-title">Long Sales Cycles</div>
+        <div class="risk-level risk-high">High Probability</div>
+        <p style="font-size:13px;">Construction sales cycles are typically 90&ndash;180 days. GC owners are cautious, relationship-driven, and suspicious of cold outreach.</p>
+        <div class="mitigation"><strong>Mitigation:</strong> PLG motion bypasses the sales cycle entirely. Individual $200/mo seats require no approval. Viral adoption through project invitations means subs join without a sales conversation. The direct sales pipeline is one channel, not the only channel.</div>
+      </div>
+
+      <div class="risk-card">
+        <div class="risk-title">Surety/WIP Integration Complexity</div>
+        <div class="risk-level risk-med">Medium Probability</div>
+        <p style="font-size:13px;">Every GC's surety relationship depends on accurate WIP schedules generated from their accounting system. Any integration that disrupts WIP reporting risks the GC's bonding capacity.</p>
+        <div class="mitigation"><strong>Mitigation:</strong> UP does not replace the accounting system. It writes journal entries into the existing system (QBO, Sage). The accountant keeps their workflow. The surety sees no change. This is the key architectural decision that unlocks adoption.</div>
+      </div>
+
+      <div class="risk-card">
+        <div class="risk-title">LLM Cost Volatility</div>
+        <div class="risk-level risk-low">Low Probability</div>
+        <p style="font-size:13px;">AI model costs could increase if providers change pricing, or usage per customer could exceed projections.</p>
+        <div class="mitigation"><strong>Mitigation:</strong> 2.3x headroom at current margins. LLM costs have declined 3x in 18 months and the trend is accelerating. Model routing (using cheaper models for simple tasks) and response caching further reduce costs. UP has architectural optionality to switch providers.</div>
+      </div>
+    </div>
+
+    <div class="sources">
+      <strong>Sources:</strong> JBKnowledge, "Construction Technology Report," 2024 (adoption statistics); Procore 10-K, FY2024 (R&D spend); Clayton Christensen, "The Innovator's Dilemma," 1997 (theoretical framework); Anthropic pricing history, 2023&ndash;2025; NASBP, "Surety Bonding Requirements," 2024.
+    </div>
+  </div>
+</div>
+
+
+<!-- ============================================================
+     SECTION 17: 12-MONTH EXECUTION PLAN
+     ============================================================ -->
+<div class="section section-alt" id="execution-plan">
+  <div class="section-inner">
+    <div class="section-num">Section 17</div>
+    <h2>12-Month Execution Plan</h2>
+    <div class="section-subtitle">From first customer to $18.4M ARR in four quarters.</div>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <h4 style="color:var(--kiln);">Months 1&ndash;3: Launch &amp; Prove</h4>
+        <p><strong>Objective:</strong> Launch in 2 target metros. Acquire first 20 GC customers. Prove the demo converts.</p>
+        <ul>
+          <li>Deploy production platform in Orlando and Phoenix</li>
+          <li>Onboard 20 GC customers through direct outreach and warm introductions</li>
+          <li>Activate 150 subcontractor accounts through project invitations</li>
+          <li>Launch $200/mo individual seats for PLG funnel</li>
+          <li>Begin steward agent deployment for regulatory databases</li>
+          <li>Measure: conversion rate, time to first value, NPS, daily active usage</li>
+        </ul>
+        <div class="stat-grid" style="grid-template-columns: repeat(4,1fr); margin-top:16px;">
+          <div class="stat-card"><div class="stat-value" style="font-size:20px;">20</div><div class="stat-label">GCs</div></div>
+          <div class="stat-card"><div class="stat-value" style="font-size:20px;">150</div><div class="stat-label">Subs</div></div>
+          <div class="stat-card"><div class="stat-value" style="font-size:20px;">$970K</div><div class="stat-label">ARR</div></div>
+          <div class="stat-card"><div class="stat-value" style="font-size:20px;">3</div><div class="stat-label">Team</div></div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <h4 style="color:var(--kiln);">Months 4&ndash;6: Scale &amp; Activate</h4>
+        <p><strong>Objective:</strong> Scale to 80 GCs. Viral loop activating. PLG pipeline growing.</p>
+        <ul>
+          <li>Expand to Portland (3rd metro)</li>
+          <li>80 GC customers with accelerating organic growth</li>
+          <li>800 subcontractor accounts; viral loop measurably contributing to growth</li>
+          <li>200 individual seats; first company conversions from PLG</li>
+          <li>Hire 2 engineers, begin VLM pipeline development</li>
+          <li>AI email platform generating 150+ MQLs/month</li>
+          <li>Measure: K-factor, viral loop velocity, sub-to-GC conversion</li>
+        </ul>
+        <div class="stat-grid" style="grid-template-columns: repeat(4,1fr); margin-top:16px;">
+          <div class="stat-card"><div class="stat-value" style="font-size:20px;">80</div><div class="stat-label">GCs</div></div>
+          <div class="stat-card"><div class="stat-value" style="font-size:20px;">800</div><div class="stat-label">Subs</div></div>
+          <div class="stat-card"><div class="stat-value" style="font-size:20px;">$3.8M</div><div class="stat-label">ARR</div></div>
+          <div class="stat-card"><div class="stat-value" style="font-size:20px;">5</div><div class="stat-label">Team</div></div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <h4 style="color:var(--kiln);">Months 7&ndash;9: Compound &amp; Expand</h4>
+        <p><strong>Objective:</strong> 200 GCs. Network effects compounding. Approaching $10M ARR run rate.</p>
+        <ul>
+          <li>200 GC customers across 5+ metros (organic expansion beyond launch cities)</li>
+          <li>2,500 subcontractor accounts; network effects creating self-sustaining growth</li>
+          <li>500 individual seats; PLG driving 15%+ company conversion rate</li>
+          <li>VLM pipeline live: drawing classification, photo intelligence operational</li>
+          <li>Skills marketplace beginning to show cross-company sharing</li>
+          <li>Begin embedded finance infrastructure (Column/Unit integration)</li>
+          <li>Hire AE, domain expert, 1 additional engineer</li>
+        </ul>
+        <div class="stat-grid" style="grid-template-columns: repeat(4,1fr); margin-top:16px;">
+          <div class="stat-card"><div class="stat-value" style="font-size:20px;">200</div><div class="stat-label">GCs</div></div>
+          <div class="stat-card"><div class="stat-value" style="font-size:20px;">2,500</div><div class="stat-label">Subs</div></div>
+          <div class="stat-card"><div class="stat-value" style="font-size:20px;">$9.4M</div><div class="stat-label">ARR</div></div>
+          <div class="stat-card"><div class="stat-value" style="font-size:20px;">8</div><div class="stat-label">Team</div></div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <h4 style="color:var(--kiln);">Months 10&ndash;12: Dominance Position</h4>
+        <p><strong>Objective:</strong> 400 GCs. $18.4M ARR. Cash flow positive. 10 people. Dominant mid-market position.</p>
+        <ul>
+          <li>400 GC customers; growth increasingly driven by inbound and referral</li>
+          <li>6,000 subcontractor accounts; network density creating strong lock-in</li>
+          <li>1,000 individual seats; brand recognition in target metros</li>
+          <li>All 8 proprietary databases live and maintained by steward agents</li>
+          <li>Embedded finance pilot (payments processing live with select customers)</li>
+          <li>Cash flow positive with strong gross margin expansion</li>
+          <li>Hire finance/ops lead and final engineer</li>
+        </ul>
+        <div class="stat-grid" style="grid-template-columns: repeat(4,1fr); margin-top:16px;">
+          <div class="stat-card"><div class="stat-value" style="font-size:20px;">400</div><div class="stat-label">GCs</div></div>
+          <div class="stat-card"><div class="stat-value" style="font-size:20px;">6,000</div><div class="stat-label">Subs</div></div>
+          <div class="stat-card"><div class="stat-value" style="font-size:20px; color:var(--jobsite-green);">$18.4M</div><div class="stat-label">ARR</div></div>
+          <div class="stat-card"><div class="stat-value" style="font-size:20px;">10</div><div class="stat-label">Team</div></div>
+        </div>
+      </div>
+    </div>
+
+    <h3>Key Milestones Summary</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Milestone</th><th>Target Date</th><th>Metric</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>First paying GC customer</td><td>Month 1</td><td>Revenue: $35K ACV</td></tr>
+          <tr><td>20 GC customers</td><td>Month 3</td><td>ARR: $970K</td></tr>
+          <tr><td>K-factor > 1.0 validated</td><td>Month 4</td><td>Viral growth measurable</td></tr>
+          <tr><td>$1M ARR milestone</td><td>Month 4</td><td>Cash flow: positive</td></tr>
+          <tr><td>100 GC customers</td><td>Month 6</td><td>ARR: $3.8M</td></tr>
+          <tr><td>VLM pipeline live</td><td>Month 7</td><td>Drawing classification operational</td></tr>
+          <tr><td>$10M ARR run rate</td><td>Month 9</td><td>Gross margin: 82%+</td></tr>
+          <tr><td>Embedded finance pilot</td><td>Month 11</td><td>First transactions processed</td></tr>
+          <tr class="row-highlight"><td><strong>$18.4M ARR</strong></td><td><strong>Month 12</strong></td><td><strong>400 GCs, 10 people, cash flow positive</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="sources">
+      <strong>Sources:</strong> Internal execution plan; Bessemer Venture Partners, "The Path to $100M ARR," 2024 (milestone benchmarks); Y Combinator, "The Only Metric That Matters," 2023 (growth rate benchmarks).
+    </div>
+  </div>
+</div>
+
+
+<!-- ============================================================
+     CLOSING / DISCLAIMER
+     ============================================================ -->
+<div class="section section-mahogany" style="text-align:center; padding:60px 80px;">
+  <div class="section-inner">
+    <p style="font-size:10px; text-transform:uppercase; letter-spacing:3px; color:var(--india-yellow); font-weight:600; margin-bottom:24px;">End of Document</p>
+    <h2 style="font-size:48px; font-weight:900; color:var(--white); margin-bottom:16px;">UP</h2>
+    <p style="color:var(--plaster); opacity:0.7; font-size:14px; max-width:500px; margin:0 auto;">The Operating System for Construction.</p>
+    <div style="width:60px; height:2px; background:var(--fired-clay); margin:32px auto;"></div>
+    <p style="font-size:10px; color:var(--plaster); opacity:0.35; max-width:600px; margin:0 auto; line-height:1.8;">
+      CONFIDENTIAL. This document contains proprietary information and forward-looking statements. Financial projections are based on management estimates and assumptions that may not be realized. Past performance of comparable companies does not guarantee future results. All market data is sourced from publicly available reports and may be subject to revision. This document does not constitute an offer to sell or a solicitation of an offer to buy any securities.<br><br>
+      March 2026
+    </p>
+  </div>
+</div>
+
+</main>
+</div>
+
+<!-- ================================================================
+     SIDEBAR ACTIVE STATE SCRIPT
+     ================================================================ -->
+<script>
+(function() {
+  const links = document.querySelectorAll('.sidebar nav a');
+  const sections = [];
+
+  links.forEach(link => {
+    const id = link.getAttribute('href').slice(1);
+    const el = document.getElementById(id);
+    if (el) sections.push({ id, el, link });
+  });
+
+  function onScroll() {
+    const scrollY = window.scrollY + 120;
+    let current = sections[0];
+
+    for (const s of sections) {
+      if (s.el.offsetTop <= scrollY) current = s;
+    }
+
+    links.forEach(l => l.classList.remove('active'));
+    if (current) current.link.classList.add('active');
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+})();
+</script>
+
+</body>
+</html>
