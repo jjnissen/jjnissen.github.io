@@ -1381,7 +1381,7 @@ tbody tr.row-total td { border-bottom-color: transparent; }
     <p>The average general contractor uses <strong>6.2 separate software tools</strong> to run their business, according to JBKnowledge's annual construction technology survey. A typical mid-market GC ($10M&ndash;$100M revenue) has separate systems for project management (maybe Procore, maybe spreadsheets), estimating (a desktop tool or Excel), accounting (QuickBooks for Construction or Sage 300), time tracking (a mobile app or paper timesheets), document management (Dropbox, Google Drive, or a filing cabinet), and scheduling (Primavera, MS Project, or a whiteboard). None of these systems talk to each other natively. Data entered in one system must be manually re-entered in others.</p>
 
     <h3>The Accountant Problem</h3>
-    <p>The construction accountant is the single most powerful technology gatekeeper in the company. They typically run QuickBooks for Construction (Intuit) or Sage 300 CRE, and they will not switch&mdash;not because the software is good, but because their surety's CPA firm needs historical WIP data in a format they recognize. The WIP schedule is the lifeline that maintains bonding capacity. Ask an accountant to switch accounting systems and they'll tell you: "You're asking me to risk our bonding." And they're right.</p>
+    <p>The construction accountant is the single most powerful technology gatekeeper in the company. They typically run industry-standard accounting software like QuickBooks for Construction or Sage 300, and they will not switch&mdash;not because the software is good, but because their surety's CPA firm needs historical WIP data in a format they recognize. The WIP schedule is the lifeline that maintains bonding capacity. Ask an accountant to switch accounting systems and they'll tell you: "You're asking me to risk our bonding." And they're right.</p>
 
     <h3>Manual Data Entry Everywhere</h3>
     <p>The same information is entered into multiple systems throughout a project's lifecycle:</p>
@@ -1746,102 +1746,88 @@ tbody tr.row-total td { border-bottom-color: transparent; }
 
 
 <!-- ============================================================
-     SECTION 08b: INTEGRATIONS & EMBEDDED FINANCE
+     SECTION 08b: INTEGRATIONS & AUTOMATION
      ============================================================ -->
 <div class="section section-dark" id="integrations">
   <div class="section-inner">
     <div class="section-num">Section 08b</div>
-    <h2>Integrations &amp; Embedded Finance</h2>
-    <div class="section-subtitle">Not API connectors. An embedded financial infrastructure built for construction money movement.</div>
+    <h2>Integrations &amp; Automation</h2>
+    <div class="section-subtitle">We don&rsquo;t replace your tools. We make them talk to each other.</div>
 
     <h3>The Integration Philosophy</h3>
-    <p>Most construction platforms offer "integrations" that sync data between disconnected systems. UP takes a different approach: <strong>embed the financial infrastructure directly into the platform</strong>. Instead of connecting to a bank, become the bank. Instead of syncing with payroll, run the payroll. Instead of exporting to accounting, write the journal entries.</p>
+    <p>Every construction company has an accounting system they won&rsquo;t switch. Their surety company requires historical WIP (work-in-progress) data. Their CPA knows the system. Asking a GC to replace their accounting software is asking them to risk their bonding capacity. <strong>UP doesn&rsquo;t ask.</strong></p>
+    <p>UP sits on top of existing systems. It reads from them, writes to them, and eliminates the manual data entry in between. The accountant keeps their tools. The surety keeps their data. UP becomes the intelligent layer that connects everything.</p>
 
-    <h3>The Embedded Finance Stack</h3>
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr><th>Layer</th><th>Partner</th><th>What It Does</th></tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>Banking</strong></td>
-            <td>Column (BaaS)</td>
-            <td>Construction-native bank accounts, ACH disbursement, loans, corporate cards. Captures 100% of construction float and interchange.</td>
-          </tr>
-          <tr>
-            <td><strong>Spend Management</strong></td>
-            <td>Ramp</td>
-            <td>Corporate spend cards with real-time controls, per-project spend limits, automatic receipt matching. Full API: create/update/suspend cards.</td>
-          </tr>
-          <tr>
-            <td><strong>Account Linking</strong></td>
-            <td>Plaid</td>
-            <td>Bank account verification for GCs, subs, and vendors. Secure token exchange, balance fetching, webhook-driven updates.</td>
-          </tr>
-          <tr>
-            <td><strong>Payroll</strong></td>
-            <td>Check</td>
-            <td>Embedded payroll with ACH disbursement, automated tax deposits, W-2 generation, paystubs. Dual-path: Column or Check for disbursement.</td>
-          </tr>
-          <tr>
-            <td><strong>SaaS Billing</strong></td>
-            <td>Stripe</td>
-            <td>Platform subscriptions and usage metering only. Not used for construction money movement.</td>
-          </tr>
-          <tr>
-            <td><strong>Physical Payments</strong></td>
-            <td>Lob</td>
-            <td>Check printing and USPS mailing for unbanked workers (~$2/check). Certified mail for lien notices and payment demands (~$7.30/letter).</td>
-          </tr>
-          <tr>
-            <td><strong>Signatures</strong></td>
-            <td>DocuSign</td>
-            <td>E-signatures on draw requests, contracts, and change orders. Webhook-driven status updates.</td>
-          </tr>
-        </tbody>
-      </table>
+    <div class="callout callout-green">
+      <strong>The Sit-On-Top Strategy</strong>
+      Journal entries flow automatically from UP into the contractor&rsquo;s existing accounting system. No re-keying. No CSV exports. No switching costs. The accountant opens their system and the data is already there.
     </div>
 
-    <h3>Why Embedded Finance Is the Moat</h3>
-    <p>When a platform processes your payments, runs your payroll, and issues your corporate cards, switching costs become structural. You don't switch banks because a new PM tool launched. This is how Toast built a $30B company in restaurants&mdash;not by being the best POS, but by being the financial infrastructure.</p>
+    <h3>Accounting Integration</h3>
+    <p>UP integrates with the accounting platforms that mid-market GCs actually use. When a pay application is approved, a change order is signed, or a subcontractor payment is processed, UP automatically generates the corresponding journal entries and pushes them into the contractor&rsquo;s accounting system.</p>
+    <ul>
+      <li><strong>Automatic journal entry generation</strong> for every financial event&mdash;pay apps, change orders, retainage, subcontractor payments</li>
+      <li><strong>WIP schedule maintenance</strong> preserved for surety bonding requirements</li>
+      <li><strong>Bank reconciliation data</strong> flows without manual entry</li>
+      <li><strong>Job costing</strong> synced in real time&mdash;the PM enters a cost in UP, the accountant sees it in their system</li>
+    </ul>
 
-    <div class="callout">
-      <strong>The Competitive Advantage</strong>
-      Procore connects to QuickBooks. UP <em>replaces</em> the need for QuickBooks. Procore sends you an invoice. UP processes the payment, takes a basis point, and writes the journal entry. Same data, fundamentally different business model.
+    <h3>Lien Waiver Management &amp; Automation</h3>
+    <p>Lien waivers are the most hated paperwork in construction. Every payment cycle on every project requires conditional and unconditional waivers from every sub and supplier. A single missing waiver can hold up a $500K draw. Most GCs manage this with email, PDF attachments, and spreadsheets. <strong>UP automates the entire process.</strong></p>
+
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="stat-value" style="color:var(--india-yellow);">30+</div>
+        <div class="stat-label">Waivers Per Draw Cycle</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" style="color:var(--india-yellow);">4</div>
+        <div class="stat-label">Waiver Types Per Sub</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" style="color:var(--india-yellow);">50</div>
+        <div class="stat-label">States, 50 Sets of Rules</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" style="color:var(--india-yellow);">100%</div>
+        <div class="stat-label">Automated by UP</div>
+      </div>
     </div>
 
-    <h3>AI Infrastructure</h3>
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr><th>Provider</th><th>Role</th><th>Use Case</th></tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>Anthropic (Claude)</strong></td>
-            <td>Primary LLM</td>
-            <td>Concierge agent, AI takeoff, submittal analysis, document understanding</td>
-          </tr>
-          <tr>
-            <td><strong>OpenAI</strong></td>
-            <td>Secondary + Embeddings</td>
-            <td>Fallback inference, vector embeddings for semantic search</td>
-          </tr>
-          <tr>
-            <td><strong>AWS SageMaker</strong></td>
-            <td>Computer Vision</td>
-            <td>Drawing symbol detection, plan sheet classification, photo analysis</td>
-          </tr>
-        </tbody>
-      </table>
+    <h4>What UP Automates</h4>
+    <ul>
+      <li><strong>State-specific form generation:</strong> Lien waiver requirements vary by state. UP knows the rules for all 50 states and generates the correct form automatically.</li>
+      <li><strong>Automatic distribution:</strong> When a pay app is submitted, UP sends the appropriate waiver requests to every sub and supplier on the project. No chasing.</li>
+      <li><strong>E-signature collection:</strong> Subs sign digitally. No printing, scanning, or mailing. Status tracked in real time.</li>
+      <li><strong>Payment gating:</strong> Payments don&rsquo;t release until all required waivers are collected. No more missing waivers discovered at draw time.</li>
+      <li><strong>Certified mail for notices:</strong> Preliminary notices and payment demands sent via USPS certified mail automatically when deadlines approach.</li>
+      <li><strong>Lien risk prediction:</strong> AI monitors payment patterns and flags projects where lien risk is elevated before it becomes a problem.</li>
+    </ul>
+
+    <div class="callout callout-fire">
+      <strong>Why This Matters</strong>
+      A GC with 7 active projects and 30 subs per project manages <strong>840+ lien waivers per year</strong> manually. Each one requires the right form for the right state, sent to the right party, signed, returned, and tracked before payment releases. One missed waiver can delay a draw by weeks. UP eliminates this entire workflow.
     </div>
 
-    <h3>Communications</h3>
-    <p><strong>Email:</strong> AWS SES + Resend for transactional email. <strong>SMS:</strong> Twilio inbound + AWS SNS outbound for the Messenger SMS bridge. <strong>In-app:</strong> Real-time via PostgreSQL LISTEN/NOTIFY event bus.</p>
+    <div class="callout callout-gold">
+      <strong>Lien Waivers as a Profit Center</strong>
+      Lien waiver automation isn&rsquo;t just a feature&mdash;it&rsquo;s a revenue stream. Every waiver processed, every certified notice mailed, every compliance check run generates transaction revenue. At scale, a platform processing thousands of waivers per month across hundreds of projects creates a recurring, usage-based revenue layer on top of SaaS subscriptions. The more projects on the platform, the more waivers flow through it, the more revenue compounds.
+    </div>
+
+    <h3>Payroll &amp; Payments</h3>
+    <p>UP embeds payroll and payment processing directly into the platform. When a timesheet is approved, payroll runs. When a pay app is approved, the sub gets paid. No separate payroll provider login. No separate banking app. No manual ACH initiation.</p>
+    <ul>
+      <li><strong>Embedded payroll:</strong> ACH disbursement, automated tax deposits, W-2 generation, paystubs&mdash;all inside UP</li>
+      <li><strong>Sub payments:</strong> Approved pay apps trigger automatic payment. Subs see funds in days, not months.</li>
+      <li><strong>Physical checks:</strong> For unbanked workers, UP prints and mails checks automatically</li>
+      <li><strong>Corporate spend cards:</strong> Per-project spend limits, real-time controls, automatic receipt matching</li>
+    </ul>
+
+    <h3>Document Intelligence</h3>
+    <p>UP&rsquo;s AI reads and classifies every document that flows through a project&mdash;submittals, RFIs, change orders, insurance certificates, safety plans. Documents are automatically tagged, routed to the right person, and linked to the correct project and cost code. No filing. No searching. No lost documents.</p>
 
     <div class="sources">
-      <strong>Sources:</strong> Internal architecture documentation; Column, "Banking-as-a-Service for Platforms," 2025; Ramp, "Spend Management API Documentation," 2025; Check, "Embedded Payroll API," 2025.
+      <strong>Sources:</strong> CFMA, "Construction Financial Management Survey," 2024 (accounting system usage); Levelset/Procore, "2024 Construction Lien Waiver Report" (waiver management statistics); Internal architecture documentation.
     </div>
   </div>
 </div>
