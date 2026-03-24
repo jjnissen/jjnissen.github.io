@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How UP Makes Money</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { height: 100%; overflow: hidden; }
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: #F5EDE3;
+    color: #1A1A1A;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 24px 32px 16px;
+  }
+
+  h1 {
+    text-align: center;
+    font-size: 28px;
+    font-weight: 800;
+    color: #3B2518;
+    margin-bottom: 16px;
+    letter-spacing: -0.5px;
+  }
+
+  /* --- Top 3 pricing boxes --- */
+  .pricing-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+  .price-box {
+    background: #fff;
+    border-radius: 10px;
+    padding: 16px 18px;
+    border-top: 4px solid;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  }
+  .price-box.individual { border-color: #CE923C; }
+  .price-box.company    { border-color: #944A2D; }
+  .price-box.project    { border-color: #4A7C59; }
+
+  .price-box .label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    margin-bottom: 4px;
+  }
+  .price-box.individual .label { color: #CE923C; }
+  .price-box.company .label    { color: #944A2D; }
+  .price-box.project .label    { color: #4A7C59; }
+
+  .price-box .price {
+    font-size: 22px;
+    font-weight: 800;
+    color: #3B2518;
+    margin-bottom: 6px;
+  }
+  .price-box .desc {
+    font-size: 12px;
+    color: #555;
+    line-height: 1.45;
+  }
+
+  /* --- Flow diagram --- */
+  .flow-section {
+    background: #3B2518;
+    border-radius: 10px;
+    padding: 14px 24px;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 0;
+    color: #F5EDE3;
+    overflow: hidden;
+  }
+  .flow-step {
+    flex: 1;
+    text-align: center;
+    padding: 0 6px;
+    position: relative;
+  }
+  .flow-step:not(:last-child)::after {
+    content: "\2192";
+    position: absolute;
+    right: -8px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+    color: #E8713A;
+    font-weight: 700;
+  }
+  .flow-step .fl-num {
+    font-size: 18px;
+    font-weight: 800;
+    color: #E8713A;
+  }
+  .flow-step .fl-text {
+    font-size: 11px;
+    line-height: 1.35;
+    color: #E8DDD0;
+    margin-top: 2px;
+  }
+  .flow-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: #CE923C;
+    margin-bottom: 2px;
+    white-space: nowrap;
+  }
+  .flow-header {
+    min-width: 140px;
+    padding-right: 16px;
+    border-right: 2px solid #944A2D;
+    margin-right: 12px;
+    text-align: left;
+  }
+  .flow-header .fl-num {
+    font-size: 20px;
+  }
+  .flow-header .fl-text {
+    font-size: 12px;
+    color: #E8DDD0;
+  }
+
+  /* --- Results row inside flow --- */
+  .flow-results {
+    display: flex;
+    gap: 20px;
+    margin-top: 0;
+    flex: 1;
+    justify-content: center;
+  }
+  .flow-result {
+    text-align: center;
+  }
+  .flow-result .fr-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: #E8DDD0;
+    opacity: 0.7;
+  }
+  .flow-result .fr-val {
+    font-size: 16px;
+    font-weight: 800;
+    color: #E8713A;
+  }
+
+  /* --- Bottom section: revenue streams + margin --- */
+  .bottom-section {
+    display: flex;
+    align-items: stretch;
+    gap: 14px;
+    margin-bottom: 10px;
+  }
+
+  .revenue-streams {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+    flex: 1;
+  }
+  .rev-box {
+    background: #fff;
+    border-radius: 8px;
+    padding: 12px 14px;
+    border-left: 3px solid #944A2D;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  }
+  .rev-box .rev-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: #944A2D;
+    margin-bottom: 4px;
+  }
+  .rev-box .rev-detail {
+    font-size: 11px;
+    color: #555;
+    line-height: 1.4;
+  }
+
+  .sub-note {
+    background: #4A7C59;
+    color: #F5EDE3;
+    border-radius: 8px;
+    padding: 14px 18px;
+    min-width: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .sub-note .sn-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #E8DDD0;
+    margin-bottom: 4px;
+  }
+  .sub-note .sn-price {
+    font-size: 20px;
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 4px;
+  }
+  .sub-note .sn-text {
+    font-size: 11px;
+    color: #E8DDD0;
+    line-height: 1.35;
+  }
+
+  .margin-bar {
+    text-align: center;
+    font-size: 13px;
+    font-weight: 700;
+    color: #3B2518;
+    padding: 8px 0 0;
+    letter-spacing: 0.3px;
+  }
+  .margin-bar span {
+    color: #4A7C59;
+    font-weight: 800;
+  }
+</style>
+</head>
+<body>
+
+<h1>How UP Makes Money</h1>
+
+<!-- Top 3 pricing boxes -->
+<div class="pricing-row">
+  <div class="price-box individual">
+    <div class="label">For You</div>
+    <div class="price">$200/mo</div>
+    <div class="desc">Your personal AI construction assistant. Estimating, takeoffs, cost lookups. Just you. Cancel anytime.</div>
+  </div>
+  <div class="price-box company">
+    <div class="label">For Your Company</div>
+    <div class="price">$15,000/yr</div>
+    <div class="desc">Run your whole business. Estimating, PM, accounting, compliance, field ops. Unlimited users. 3 projects included.</div>
+  </div>
+  <div class="price-box project">
+    <div class="label">For the Project</div>
+    <div class="price">$5,000/project</div>
+    <div class="desc">Every sub splits the cost equally. One-time fee for the life of the project. Small projects are free.</div>
+  </div>
+</div>
+
+<!-- Flow diagram -->
+<div class="flow-section">
+  <div class="flow-header">
+    <div class="flow-title">Real Example</div>
+    <div class="fl-num">$2M Hospital</div>
+    <div class="fl-text">Renovation</div>
+  </div>
+
+  <div class="flow-step">
+    <div class="fl-num">1</div>
+    <div class="fl-text">GC creates project in UP</div>
+  </div>
+  <div class="flow-step">
+    <div class="fl-num">28</div>
+    <div class="fl-text">subs bid &amp; get selected</div>
+  </div>
+  <div class="flow-step">
+    <div class="fl-num">$5,000</div>
+    <div class="fl-text">&divide; 28 subs</div>
+  </div>
+  <div class="flow-step">
+    <div class="fl-num">$179</div>
+    <div class="fl-text">each sub. Once. Done.</div>
+  </div>
+  <div class="flow-step" style="border-left: 2px solid #944A2D; padding-left: 14px; margin-left: 6px;">
+    <div class="flow-results">
+      <div class="flow-result">
+        <div class="fr-label">UP collects</div>
+        <div class="fr-val">$5,000</div>
+      </div>
+      <div class="flow-result">
+        <div class="fr-label">GC pays</div>
+        <div class="fr-val">$0</div>
+      </div>
+      <div class="flow-result">
+        <div class="fr-label">Each sub</div>
+        <div class="fr-val">$179</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Revenue streams + sub note -->
+<div class="bottom-section">
+  <div class="revenue-streams">
+    <div class="rev-box">
+      <div class="rev-title">Software</div>
+      <div class="rev-detail">$15K/yr (GC) + $5K/project (subs) + $200/mo (individuals)</div>
+    </div>
+    <div class="rev-box">
+      <div class="rev-title">Overage</div>
+      <div class="rev-detail">Heavy AI users pay for what they use beyond their allocation (Stripe metered)</div>
+    </div>
+    <div class="rev-box">
+      <div class="rev-title">Payments</div>
+      <div class="rev-detail">25 bps on every transaction that flows through UP</div>
+    </div>
+  </div>
+  <div class="sub-note">
+    <div class="sn-label">Subs: want UP for everything?</div>
+    <div class="sn-price">$10,000/yr</div>
+    <div class="sn-text">Run your whole business on UP. Unlimited seats. Not just one project.</div>
+  </div>
+</div>
+
+<div class="margin-bar">Target: <span>80%+ gross margins</span> across all revenue streams</div>
+
+</body>
+</html>
