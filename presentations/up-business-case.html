@@ -1059,11 +1059,13 @@ tbody tr.row-total td { border-bottom-color: transparent; }
     <a href="#the-4-floats"><span class="toc-num">06</span> The 4 Floats</a>
     <a href="#takeoff-estimating"><span class="toc-num">07</span> Takeoff &amp; Estimating</a>
     <a href="#technology"><span class="toc-num">08</span> Technology Infrastructure</a>
+    <a href="#integrations"><span class="toc-num">08b</span> Integrations</a>
   </nav>
 
   <div class="sidebar-label">Market</div>
   <nav>
     <a href="#target-market"><span class="toc-num">09</span> Target Market</a>
+    <a href="#subs-skilled-trades"><span class="toc-num">10</span> Subs &amp; Skilled Trades</a>
     <a href="#competitive-landscape"><span class="toc-num">10</span> Competitive Landscape</a>
   </nav>
 
@@ -1744,6 +1746,108 @@ tbody tr.row-total td { border-bottom-color: transparent; }
 
 
 <!-- ============================================================
+     SECTION 08b: INTEGRATIONS & EMBEDDED FINANCE
+     ============================================================ -->
+<div class="section section-dark" id="integrations">
+  <div class="section-inner">
+    <div class="section-num">Section 08b</div>
+    <h2>Integrations &amp; Embedded Finance</h2>
+    <div class="section-subtitle">Not API connectors. An embedded financial infrastructure built for construction money movement.</div>
+
+    <h3>The Integration Philosophy</h3>
+    <p>Most construction platforms offer "integrations" that sync data between disconnected systems. UP takes a different approach: <strong>embed the financial infrastructure directly into the platform</strong>. Instead of connecting to a bank, become the bank. Instead of syncing with payroll, run the payroll. Instead of exporting to accounting, write the journal entries.</p>
+
+    <h3>The Embedded Finance Stack</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Layer</th><th>Partner</th><th>What It Does</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Banking</strong></td>
+            <td>Column (BaaS)</td>
+            <td>Construction-native bank accounts, ACH disbursement, loans, corporate cards. Captures 100% of construction float and interchange.</td>
+          </tr>
+          <tr>
+            <td><strong>Spend Management</strong></td>
+            <td>Ramp</td>
+            <td>Corporate spend cards with real-time controls, per-project spend limits, automatic receipt matching. Full API: create/update/suspend cards.</td>
+          </tr>
+          <tr>
+            <td><strong>Account Linking</strong></td>
+            <td>Plaid</td>
+            <td>Bank account verification for GCs, subs, and vendors. Secure token exchange, balance fetching, webhook-driven updates.</td>
+          </tr>
+          <tr>
+            <td><strong>Payroll</strong></td>
+            <td>Check</td>
+            <td>Embedded payroll with ACH disbursement, automated tax deposits, W-2 generation, paystubs. Dual-path: Column or Check for disbursement.</td>
+          </tr>
+          <tr>
+            <td><strong>SaaS Billing</strong></td>
+            <td>Stripe</td>
+            <td>Platform subscriptions and usage metering only. Not used for construction money movement.</td>
+          </tr>
+          <tr>
+            <td><strong>Physical Payments</strong></td>
+            <td>Lob</td>
+            <td>Check printing and USPS mailing for unbanked workers (~$2/check). Certified mail for lien notices and payment demands (~$7.30/letter).</td>
+          </tr>
+          <tr>
+            <td><strong>Signatures</strong></td>
+            <td>DocuSign</td>
+            <td>E-signatures on draw requests, contracts, and change orders. Webhook-driven status updates.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Why Embedded Finance Is the Moat</h3>
+    <p>When a platform processes your payments, runs your payroll, and issues your corporate cards, switching costs become structural. You don't switch banks because a new PM tool launched. This is how Toast built a $30B company in restaurants&mdash;not by being the best POS, but by being the financial infrastructure.</p>
+
+    <div class="callout">
+      <strong>The Competitive Advantage</strong>
+      Procore connects to QuickBooks. UP <em>replaces</em> the need for QuickBooks. Procore sends you an invoice. UP processes the payment, takes a basis point, and writes the journal entry. Same data, fundamentally different business model.
+    </div>
+
+    <h3>AI Infrastructure</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Provider</th><th>Role</th><th>Use Case</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Anthropic (Claude)</strong></td>
+            <td>Primary LLM</td>
+            <td>Concierge agent, AI takeoff, submittal analysis, document understanding</td>
+          </tr>
+          <tr>
+            <td><strong>OpenAI</strong></td>
+            <td>Secondary + Embeddings</td>
+            <td>Fallback inference, vector embeddings for semantic search</td>
+          </tr>
+          <tr>
+            <td><strong>AWS SageMaker</strong></td>
+            <td>Computer Vision</td>
+            <td>Drawing symbol detection, plan sheet classification, photo analysis</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Communications</h3>
+    <p><strong>Email:</strong> AWS SES + Resend for transactional email. <strong>SMS:</strong> Twilio inbound + AWS SNS outbound for the Messenger SMS bridge. <strong>In-app:</strong> Real-time via PostgreSQL LISTEN/NOTIFY event bus.</p>
+
+    <div class="sources">
+      <strong>Sources:</strong> Internal architecture documentation; Column, "Banking-as-a-Service for Platforms," 2025; Ramp, "Spend Management API Documentation," 2025; Check, "Embedded Payroll API," 2025.
+    </div>
+  </div>
+</div>
+
+
+<!-- ============================================================
      SECTION 09: TARGET MARKET & SEGMENTATION
      ============================================================ -->
 <div class="section section-light" id="target-market">
@@ -1804,6 +1908,117 @@ tbody tr.row-total td { border-bottom-color: transparent; }
 
     <div class="sources">
       <strong>Sources:</strong> U.S. Census Bureau, County Business Patterns (establishment counts by revenue band), 2024; BLS, Quarterly Census of Employment and Wages, 2025; ENR, "Top 400 Contractors," 2025; CFMA, "Financial Benchmarker" (GC staffing benchmarks), 2024; Internal market analysis.
+    </div>
+  </div>
+</div>
+
+
+<!-- ============================================================
+     SECTION 10: SUBCONTRACTORS & SKILLED TRADES
+     ============================================================ -->
+<div class="section section-mahogany" id="subs-skilled-trades">
+  <div class="section-inner">
+    <div class="section-num">Section 10</div>
+    <h2>Subcontractors &amp; Skilled Trades</h2>
+    <div class="section-subtitle">A $416B market in crisis. 306,000 unfilled positions. 56-day payment delays. No integrated platform.</div>
+
+    <h3>The HVAC &amp; Electrical Opportunity</h3>
+    <p>UP's sub strategy starts with <strong>HVAC and electrical contractors</strong>&mdash;the two specialty trades with the largest addressable market, the most acute pain, and the strongest tailwinds.</p>
+
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="stat-value" style="color:var(--india-yellow);">$159B</div>
+        <div class="stat-label">HVAC Contractor Revenue</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" style="color:var(--india-yellow);">$257&ndash;347B</div>
+        <div class="stat-label">Electrical Contractor Revenue</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" style="color:var(--india-yellow);">120,461</div>
+        <div class="stat-label">HVAC Firms</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" style="color:var(--india-yellow);">~262,000</div>
+        <div class="stat-label">Electrical Firms</div>
+      </div>
+    </div>
+
+    <h3>Why These Trades, Why Now</h3>
+
+    <h4>Data Center Demand Is Unprecedented</h4>
+    <p>Data center power demand is tripling to <strong>134 GW by 2030</strong>. MEP (mechanical, electrical, plumbing) is <strong>50% of data center build cost</strong>. Every data center project needs massive HVAC cooling systems and complex electrical infrastructure. The Big 5 AI firms are expected to commit up to <strong>$500B in capex</strong> in 2026 alone. HVAC and electrical contractors are the bottleneck.</p>
+
+    <h4>Electrification Is Reshaping the Industry</h4>
+    <p>Heat pumps outsold gas furnaces by <strong>32% in 2024</strong>. EV charging infrastructure is expanding. Smart building automation is becoming standard. Every new building needs more electrical capacity, more sophisticated HVAC, and contractors who can handle the complexity.</p>
+
+    <h4>Material Volatility Demands Better Estimating</h4>
+    <p>A <strong>50% tariff</strong> on semi-finished copper hit in August 2025. Copper prices rose <strong>41% in 2025</strong>. HVAC and electrical contractors are the most exposed to copper and steel price swings. They need live pricing data, not annual cost books. UP provides it.</p>
+
+    <h3>The Skilled Labor Crisis</h3>
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="stat-value" style="color:var(--fired-clay);">499K</div>
+        <div class="stat-label">New Workers Needed (2026)</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" style="color:var(--fired-clay);">306K</div>
+        <div class="stat-label">Positions Currently Unfilled</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" style="color:var(--fired-clay);">92%</div>
+        <div class="stat-label">Firms Can&rsquo;t Find Workers</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" style="color:var(--fired-clay);">53%</div>
+        <div class="stat-label">Workforce Retiring in 10 Years</div>
+      </div>
+    </div>
+    <p>The HVAC technician shortage alone is <strong>225,000 positions</strong>. Median workforce age is 42.3. Immigration enforcement is affecting a third of construction firms. The contractors who survive will be the ones who do more with fewer people&mdash;which means better technology, better estimating, and less time on admin.</p>
+
+    <h3>Sub Pain Points That UP Solves</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Pain Point</th><th>The Problem</th><th>How UP Solves It</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Payment delays</strong></td>
+            <td>56-day average wait. 70% face delayed payments. 56% have turned down work due to cash flow risk.</td>
+            <td>Embedded payments, automated pay apps, real-time payment tracking</td>
+          </tr>
+          <tr>
+            <td><strong>Estimating complexity</strong></td>
+            <td>Copper/steel volatility, labor rate changes, code compliance across jurisdictions</td>
+            <td>AI takeoff with live pricing from 8 proprietary databases</td>
+          </tr>
+          <tr>
+            <td><strong>Fragmented tools</strong></td>
+            <td>57% use 2&ndash;3+ disconnected software tools. No single platform for specialty subs.</td>
+            <td>One platform: estimating, PM, compliance, payments, crew management</td>
+          </tr>
+          <tr>
+            <td><strong>Compliance burden</strong></td>
+            <td>Licensing, permits, prevailing wage, lien deadlines vary by jurisdiction</td>
+            <td>Automated compliance tracking with steward agents monitoring every jurisdiction</td>
+          </tr>
+          <tr>
+            <td><strong>Admin overhead</strong></td>
+            <td>With 53% of workforce retiring, every hour spent on paperwork is an hour not building</td>
+            <td>AI agents handle documentation, reporting, and regulatory filings</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout callout-gold">
+      <strong>The Addressable Market</strong>
+      An estimated <strong>150,000&ndash;190,000</strong> HVAC and electrical firms in the $1M&ndash;$50M revenue range. No dominant platform serves them. The technology stack is fragmented, adoption is low, and the pain is acute. This is UP&rsquo;s beachhead on the sub side.
+    </div>
+
+    <div class="sources">
+      <strong>Sources:</strong> IBISWorld, "HVAC Contractors in the US," 2026; IBISWorld, "Electricians in the US," 2026; AGC/NCCER, "2025 Construction Workforce Survey"; Fortune, "Construction Employment Outlook," Feb 2026; Mobilization Funding, "2025 Construction Payment Report"; NECA, "2024 Profile of the Electrical Contractor"; Grand View Research, "US HVAC Market," 2025; CME Group, "Copper Market Outlook," 2026.
     </div>
   </div>
 </div>
@@ -1941,6 +2156,11 @@ tbody tr.row-total td { border-bottom-color: transparent; }
 
     <p><strong>Average GC does 7 projects/year = $15K + (4 additional &times; $5K) = $35K/year per GC.</strong></p>
 
+    <div class="callout callout-fire">
+      <strong>AI Takeoff Is Included</strong>
+      Togal.ai charges $199&ndash;$299/user/month for AI takeoff alone&mdash;and only gives you quantities. UP includes AI takeoff, automatic cost estimating with live pricing data, and the entire platform for $15K/year with unlimited seats. One platform. One price. No per-user fees.
+    </div>
+
     <div class="pricing-tiers">
       <div class="pricing-tier featured">
         <div class="tier-name">General Contractor</div>
@@ -1948,7 +2168,7 @@ tbody tr.row-total td { border-bottom-color: transparent; }
         <div class="tier-period">/year &middot; 3 projects included</div>
         <div class="tier-desc">Full platform. Every feature. Unlimited seats.</div>
         <ul>
-          <li>Estimating &amp; Bidding</li>
+          <li><strong>AI Takeoff &amp; Estimating</strong></li>
           <li>Project Management</li>
           <li>Accounting Integration</li>
           <li>Compliance &amp; Permits</li>
@@ -2657,19 +2877,82 @@ tbody tr.row-total td { border-bottom-color: transparent; }
   <div class="section-inner">
     <div class="section-num">Section 19</div>
     <h2>12-Month Execution Plan</h2>
-    <div class="section-subtitle">From first customer to $18.4M ARR in four quarters.</div>
+    <div class="section-subtitle">AI-first digital marketing. Target the hottest verticals. Let the platform sell itself.</div>
+
+    <h3>Go-to-Market: AI-First, Not Geo-First</h3>
+    <p>UP does not scale city by city. Construction is a national market with local execution. UP scales by <strong>targeting the hottest commercial verticals and the trades most desperate for technology</strong>&mdash;wherever they are.</p>
+
+    <div class="callout callout-fire">
+      <strong>The Strategy</strong>
+      Use AI-powered outbound marketing to target active builders in the highest-growth commercial verticals. Use permit data to identify who is building right now. Use the GC-to-sub viral loop to grow organically. Let the platform sell itself.
+    </div>
+
+    <h3>Target Verticals (Where the Money Is)</h3>
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="stat-value">$77.7B</div>
+        <div class="stat-label">Data Center Starts (2025)</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">190%</div>
+        <div class="stat-label">Data Center YoY Growth</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">$202B</div>
+        <div class="stat-label">Manufacturing Construction</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">$28&ndash;31B</div>
+        <div class="stat-label">Healthcare Starts (2026)</div>
+      </div>
+    </div>
+    <p>Data centers, manufacturing (CHIPS Act reshoring), healthcare, and education are the four fastest-growing commercial verticals. The mid-market GCs building these projects are UP's primary target. They have real operational complexity, growing backlogs, and no integrated platform.</p>
+
+    <h3>Target Trades (HVAC &amp; Electrical First)</h3>
+    <p>On the sub side, UP goes hard at <strong>HVAC and electrical contractors</strong>&mdash;the two trades with the most acute pain and the largest addressable market.</p>
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="stat-value">$416B</div>
+        <div class="stat-label">HVAC + Electrical Market</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">190K</div>
+        <div class="stat-label">Firms in $1M&ndash;$50M Range</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">56 days</div>
+        <div class="stat-label">Avg Sub Payment Delay</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">57%</div>
+        <div class="stat-label">Use 2&ndash;3+ Fragmented Tools</div>
+      </div>
+    </div>
+
+    <h3>The AI Marketing Engine</h3>
+    <h4>1. Permit-Data Outbound</h4>
+    <p>Scrape public permit filings. Match to contractor companies. Use AI to send personalized emails within days of filing: <em>"Congrats on the 42-unit permit at 123 Main&mdash;here's how UP helps manage that build."</em> This targets confirmed active builders, not cold lists.</p>
+
+    <h4>2. Programmatic Local SEO</h4>
+    <p>AI-generated landing pages for 100+ metros with local data: permit trends, code requirements, prevailing wage rates, material prices. Own the search for <em>"contractor software [city]"</em> and <em>"construction estimating [state]."</em></p>
+
+    <h4>3. Free Tools as Top-of-Funnel</h4>
+    <p>Free estimating calculator, OSHA compliance checker, lien deadline tracker, permit lookup. Solve a real daily pain point without requiring login. Capture email on results delivery. Convert to platform users.</p>
+
+    <h4>4. The GC-to-Sub Viral Loop</h4>
+    <p>Every GC who buys UP invites 10&ndash;50 subs to collaborate on projects for free. Subs experience value, then convert when they start their own projects. PLG companies grow 30&ndash;40% faster than sales-led companies. Each paying customer exposes 10&ndash;50 new potential users.</p>
 
     <div class="timeline">
       <div class="timeline-item">
         <h4 style="color:var(--kiln);">Months 1&ndash;3: Launch &amp; Prove</h4>
-        <p><strong>Objective:</strong> Launch in 2 target metros. Acquire first 20 GC customers. Prove the demo converts.</p>
+        <p><strong>Objective:</strong> First 20 GC customers. Prove the AI marketing engine converts. Validate viral loop.</p>
         <ul>
-          <li>Deploy production platform in Orlando and Phoenix</li>
-          <li>Onboard 20 GC customers through direct outreach and warm introductions</li>
-          <li>Activate 150 subcontractor accounts through project invitations</li>
-          <li>Launch $200/mo individual seats for PLG funnel</li>
+          <li>Deploy AI outbound targeting data center, healthcare, and manufacturing GCs</li>
+          <li>Launch programmatic SEO across top 50 commercial construction metros</li>
+          <li>Onboard 20 GC customers; activate 150 sub accounts through project invitations</li>
+          <li>Launch $200/mo individual seats and free estimating calculator for PLG funnel</li>
           <li>Begin steward agent deployment for regulatory databases</li>
-          <li>Measure: conversion rate, time to first value, NPS, daily active usage</li>
+          <li>Measure: conversion rate, time to first value, NPS, viral loop K-factor</li>
         </ul>
         <div class="stat-grid" style="grid-template-columns: repeat(4,1fr); margin-top:16px;">
           <div class="stat-card"><div class="stat-value" style="font-size:20px;">20</div><div class="stat-label">GCs</div></div>
@@ -2680,16 +2963,15 @@ tbody tr.row-total td { border-bottom-color: transparent; }
       </div>
 
       <div class="timeline-item">
-        <h4 style="color:var(--kiln);">Months 4&ndash;6: Scale &amp; Activate</h4>
-        <p><strong>Objective:</strong> Scale to 80 GCs. Viral loop activating. PLG pipeline growing.</p>
+        <h4 style="color:var(--kiln);">Months 4&ndash;6: Scale the Engine</h4>
+        <p><strong>Objective:</strong> 80 GCs. Viral loop compounding. HVAC/electrical sub acquisition accelerating.</p>
         <ul>
-          <li>Expand to Portland (3rd metro)</li>
-          <li>80 GC customers with accelerating organic growth</li>
-          <li>800 subcontractor accounts; viral loop measurably contributing to growth</li>
+          <li>AI outbound generating 150+ MQLs/month from permit data targeting</li>
+          <li>80 GC customers with organic growth from viral loop and SEO</li>
+          <li>800 sub accounts; targeted HVAC and electrical contractor campaigns live</li>
           <li>200 individual seats; first company conversions from PLG</li>
           <li>Hire 2 engineers, begin VLM pipeline development</li>
-          <li>AI email platform generating 150+ MQLs/month</li>
-          <li>Measure: K-factor, viral loop velocity, sub-to-GC conversion</li>
+          <li>Measure: K-factor, CAC by channel, sub-to-GC conversion rate</li>
         </ul>
         <div class="stat-grid" style="grid-template-columns: repeat(4,1fr); margin-top:16px;">
           <div class="stat-card"><div class="stat-value" style="font-size:20px;">80</div><div class="stat-label">GCs</div></div>
@@ -2703,12 +2985,12 @@ tbody tr.row-total td { border-bottom-color: transparent; }
         <h4 style="color:var(--kiln);">Months 7&ndash;9: Compound &amp; Expand</h4>
         <p><strong>Objective:</strong> 200 GCs. Network effects compounding. Approaching $10M ARR run rate.</p>
         <ul>
-          <li>200 GC customers across 5+ metros (organic expansion beyond launch cities)</li>
-          <li>2,500 subcontractor accounts; network effects creating self-sustaining growth</li>
+          <li>200 GC customers; growth increasingly inbound and referral-driven</li>
+          <li>2,500 sub accounts; HVAC and electrical verticals showing strong adoption</li>
           <li>500 individual seats; PLG driving 15%+ company conversion rate</li>
-          <li>VLM pipeline live: drawing classification, photo intelligence operational</li>
-          <li>Skills marketplace beginning to show cross-company sharing</li>
-          <li>Begin embedded finance infrastructure (Column/Unit integration)</li>
+          <li>VLM pipeline live: AI takeoff and drawing classification operational</li>
+          <li>Skills marketplace showing cross-company sharing</li>
+          <li>Begin embedded finance infrastructure (Column/Plaid integration)</li>
           <li>Hire AE, domain expert, 1 additional engineer</li>
         </ul>
         <div class="stat-grid" style="grid-template-columns: repeat(4,1fr); margin-top:16px;">
@@ -2723,9 +3005,9 @@ tbody tr.row-total td { border-bottom-color: transparent; }
         <h4 style="color:var(--kiln);">Months 10&ndash;12: Dominance Position</h4>
         <p><strong>Objective:</strong> 400 GCs. $18.4M ARR. Cash flow positive. 10 people. Dominant mid-market position.</p>
         <ul>
-          <li>400 GC customers; growth increasingly driven by inbound and referral</li>
-          <li>6,000 subcontractor accounts; network density creating strong lock-in</li>
-          <li>1,000 individual seats; brand recognition in target metros</li>
+          <li>400 GC customers; growth driven by inbound, referral, and network effects</li>
+          <li>6,000 sub accounts; network density creating strong lock-in</li>
+          <li>1,000 individual seats; brand recognition across commercial construction</li>
           <li>All 8 proprietary databases live and maintained by steward agents</li>
           <li>Embedded finance pilot (payments processing live with select customers)</li>
           <li>Cash flow positive with strong gross margin expansion</li>
@@ -2748,11 +3030,13 @@ tbody tr.row-total td { border-bottom-color: transparent; }
         </thead>
         <tbody>
           <tr><td>First paying GC customer</td><td>Month 1</td><td>Revenue: $35K ACV</td></tr>
+          <tr><td>AI outbound engine live</td><td>Month 1</td><td>Permit-triggered emails sending</td></tr>
           <tr><td>20 GC customers</td><td>Month 3</td><td>ARR: $970K</td></tr>
           <tr><td>K-factor > 1.0 validated</td><td>Month 4</td><td>Viral growth measurable</td></tr>
           <tr><td>$1M ARR milestone</td><td>Month 4</td><td>Cash flow: positive</td></tr>
+          <tr><td>HVAC/electrical sub campaign live</td><td>Month 4</td><td>Targeted trade acquisition</td></tr>
           <tr><td>100 GC customers</td><td>Month 6</td><td>ARR: $3.8M</td></tr>
-          <tr><td>VLM pipeline live</td><td>Month 7</td><td>Drawing classification operational</td></tr>
+          <tr><td>VLM pipeline live</td><td>Month 7</td><td>AI takeoff operational</td></tr>
           <tr><td>$10M ARR run rate</td><td>Month 9</td><td>Gross margin: 82%+</td></tr>
           <tr><td>Embedded finance pilot</td><td>Month 11</td><td>First transactions processed</td></tr>
           <tr class="row-highlight"><td><strong>$18.4M ARR</strong></td><td><strong>Month 12</strong></td><td><strong>400 GCs, 10 people, cash flow positive</strong></td></tr>
@@ -2761,11 +3045,10 @@ tbody tr.row-total td { border-bottom-color: transparent; }
     </div>
 
     <div class="sources">
-      <strong>Sources:</strong> Internal execution plan; Bessemer Venture Partners, "The Path to $100M ARR," 2024 (milestone benchmarks); Y Combinator, "The Only Metric That Matters," 2023 (growth rate benchmarks).
+      <strong>Sources:</strong> Internal execution plan; ConstructConnect, "Data Center Report," Jan 2026 (construction starts data); AGC, "2026 Construction Industry Outlook" (workforce and backlog data); Bessemer Venture Partners, "The Path to $100M ARR," 2024 (milestone benchmarks); BuildZoom, "Permit Data for Marketing," 2025.
     </div>
   </div>
 </div>
-
 
 <!-- ============================================================
      CLOSING / DISCLAIMER
