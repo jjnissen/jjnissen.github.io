@@ -1,0 +1,1514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UP - Internal Strategy Deck</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --kiln: #944A2D;
+  --adobe: #B5623A;
+  --fired-clay: #E8713A;
+  --mahogany: #3B2518;
+  --jobsite-green: #4A7C59;
+  --plaster: #E8DDD0;
+  --off-white: #F5EDE3;
+  --india-yellow: #CE923C;
+  --pitch: #1A1A1A;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  overflow-y: scroll;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--off-white);
+  color: var(--mahogany);
+  -webkit-font-smoothing: antialiased;
+}
+
+.slide {
+  min-height: 100vh;
+  width: 100%;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+.slide-light { background: var(--off-white); color: var(--mahogany); }
+.slide-plaster { background: var(--plaster); color: var(--mahogany); }
+.slide-dark { background: var(--pitch); color: var(--off-white); }
+.slide-mahogany { background: var(--mahogany); color: var(--off-white); }
+.slide-kiln { background: var(--kiln); color: var(--off-white); }
+
+.slide-content {
+  max-width: 1200px;
+  width: 100%;
+  z-index: 1;
+}
+
+/* Navigation dots */
+.nav-dots {
+  position: fixed;
+  right: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.nav-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(148, 74, 45, 0.25);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  padding: 0;
+}
+
+.nav-dot:hover { background: var(--fired-clay); transform: scale(1.3); }
+.nav-dot.active { background: var(--fired-clay); transform: scale(1.4); }
+
+/* Slide number */
+.slide-number {
+  position: absolute;
+  bottom: 24px;
+  right: 40px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  opacity: 0.4;
+}
+
+/* Typography */
+h1 { font-weight: 900; line-height: 1.05; }
+h2 { font-weight: 800; line-height: 1.1; }
+h3 { font-weight: 700; line-height: 1.2; }
+
+.super-title { font-size: clamp(80px, 12vw, 160px); letter-spacing: -4px; }
+.section-title { font-size: clamp(36px, 5vw, 64px); letter-spacing: -1.5px; margin-bottom: 40px; }
+.subtitle { font-size: clamp(18px, 2.5vw, 28px); font-weight: 400; line-height: 1.5; opacity: 0.85; }
+.label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  display: block;
+}
+.label-kiln { color: var(--kiln); }
+.label-fired { color: var(--fired-clay); }
+.label-green { color: var(--jobsite-green); }
+.label-gold { color: var(--india-yellow); }
+
+.big-number {
+  font-size: clamp(48px, 7vw, 96px);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -2px;
+}
+
+.stat-unit {
+  font-size: 0.4em;
+  font-weight: 500;
+  opacity: 0.7;
+  margin-left: 4px;
+}
+
+/* Grid layouts */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 40px; }
+.grid-4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 30px; }
+
+.stat-card {
+  padding: 32px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.stat-card-light {
+  padding: 32px;
+  border-radius: 12px;
+  background: white;
+  border: 1px solid rgba(59,37,24,0.08);
+  box-shadow: 0 1px 3px rgba(59,37,24,0.04);
+}
+
+/* Tables */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.data-table th {
+  text-align: left;
+  padding: 12px 16px;
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border-bottom: 2px solid var(--kiln);
+}
+
+.data-table td {
+  padding: 10px 16px;
+  border-bottom: 1px solid rgba(59,37,24,0.08);
+  vertical-align: top;
+}
+
+.data-table tr:nth-child(even) td { background: rgba(232,221,208,0.3); }
+
+.check { color: var(--jobsite-green); font-weight: 700; }
+.cross { color: rgba(148,74,45,0.3); }
+.partial { color: var(--india-yellow); font-weight: 500; }
+
+/* Competitive matrix */
+.matrix-container {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  aspect-ratio: 1;
+  margin: 0 auto;
+}
+
+.matrix-bg {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.matrix-quad {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  gap: 8px;
+  position: relative;
+}
+
+.matrix-quad:nth-child(1) { background: rgba(255,255,255,0.04); }
+.matrix-quad:nth-child(2) { background: rgba(232,113,58,0.12); border: 2px dashed var(--fired-clay); }
+.matrix-quad:nth-child(3) { background: rgba(255,255,255,0.02); }
+.matrix-quad:nth-child(4) { background: rgba(255,255,255,0.06); }
+
+.matrix-label-x {
+  position: absolute;
+  bottom: -28px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  opacity: 0.5;
+  white-space: nowrap;
+}
+
+.matrix-label-y {
+  position: absolute;
+  left: -32px;
+  top: 50%;
+  transform: translateY(-50%) rotate(-90deg);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  opacity: 0.5;
+  white-space: nowrap;
+}
+
+.matrix-company {
+  font-size: 12px;
+  font-weight: 500;
+  opacity: 0.6;
+  padding: 3px 8px;
+  border-radius: 4px;
+  background: rgba(255,255,255,0.05);
+}
+
+.matrix-up {
+  font-size: 28px;
+  font-weight: 900;
+  color: var(--fired-clay);
+  letter-spacing: -1px;
+}
+
+.matrix-up-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--fired-clay);
+  opacity: 0.8;
+}
+
+/* Ecosystem visual */
+.ecosystem {
+  position: relative;
+  width: 460px;
+  height: 460px;
+  margin: 0 auto;
+}
+
+.eco-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: var(--fired-clay);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 16px;
+  color: white;
+  z-index: 2;
+  box-shadow: 0 0 0 4px rgba(232,113,58,0.2), 0 8px 32px rgba(232,113,58,0.3);
+}
+
+.eco-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: 1px dashed rgba(148,74,45,0.2);
+}
+
+.eco-ring-1 { width: 280px; height: 280px; }
+.eco-ring-2 { width: 420px; height: 420px; }
+
+.eco-node {
+  position: absolute;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+  transform: translate(-50%, -50%);
+}
+
+.eco-node-sub { background: var(--plaster); color: var(--mahogany); border: 1px solid rgba(148,74,45,0.15); }
+.eco-node-arch { background: rgba(74,124,89,0.12); color: var(--jobsite-green); border: 1px solid rgba(74,124,89,0.2); }
+.eco-node-supplier { background: rgba(206,146,60,0.12); color: #96700A; border: 1px solid rgba(206,146,60,0.2); }
+.eco-node-dev { background: rgba(148,74,45,0.08); color: var(--kiln); border: 1px solid rgba(148,74,45,0.15); }
+
+.eco-top-label {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--kiln);
+  opacity: 0.5;
+}
+
+/* Float cards */
+.float-card {
+  padding: 36px;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  transition: all 0.3s ease;
+}
+
+.float-card:hover {
+  background: rgba(255,255,255,0.07);
+  border-color: rgba(255,255,255,0.15);
+  transform: translateY(-2px);
+}
+
+.float-number {
+  font-size: 64px;
+  font-weight: 900;
+  opacity: 0.12;
+  line-height: 1;
+  margin-bottom: -20px;
+}
+
+.float-name {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.float-desc {
+  font-size: 13px;
+  opacity: 0.6;
+  line-height: 1.5;
+  margin-bottom: 16px;
+}
+
+.float-revenue {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--india-yellow);
+}
+
+/* Dock visual */
+.dock-visual {
+  position: relative;
+  margin: 40px 0;
+  padding: 40px 0;
+}
+
+.dock-line {
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--fired-clay), transparent);
+  position: relative;
+}
+
+.dock-label {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--fired-clay);
+  background: var(--pitch);
+  padding: 0 16px;
+}
+
+/* Role comparison table */
+.role-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.role-table th {
+  text-align: left;
+  padding: 14px 20px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  background: var(--kiln);
+  color: white;
+}
+
+.role-table th:first-child { border-radius: 8px 0 0 0; }
+.role-table th:last-child { border-radius: 0 8px 0 0; }
+
+.role-table td {
+  padding: 14px 20px;
+  font-size: 13px;
+  line-height: 1.5;
+  border-bottom: 1px solid rgba(59,37,24,0.06);
+  vertical-align: top;
+}
+
+.role-table tr:nth-child(even) td { background: rgba(232,221,208,0.25); }
+.role-table td:first-child { font-weight: 700; color: var(--kiln); white-space: nowrap; }
+.role-table td:nth-child(2) { color: rgba(59,37,24,0.55); }
+.role-table td:nth-child(3) { color: var(--mahogany); }
+
+/* Pricing layers */
+.pricing-layer {
+  padding: 32px;
+  border-radius: 12px;
+  border-left: 4px solid;
+  margin-bottom: 20px;
+}
+
+.pricing-layer h3 { font-size: 20px; margin-bottom: 6px; }
+.pricing-layer p { font-size: 14px; opacity: 0.7; line-height: 1.6; }
+
+.pricing-price {
+  font-size: 32px;
+  font-weight: 900;
+  margin: 8px 0;
+}
+
+/* GTM phases */
+.phase-card {
+  padding: 36px;
+  border-radius: 16px;
+  position: relative;
+  overflow: hidden;
+}
+
+.phase-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+}
+
+.phase-number {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+/* Source citations */
+.source {
+  font-size: 10px;
+  opacity: 0.35;
+  margin-top: 32px;
+  line-height: 1.6;
+}
+
+/* Divider */
+.divider {
+  width: 60px;
+  height: 3px;
+  background: var(--fired-clay);
+  border-radius: 2px;
+  margin: 24px 0;
+}
+
+.divider-light {
+  width: 60px;
+  height: 3px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 2px;
+  margin: 24px 0;
+}
+
+/* Highlight text */
+.highlight { color: var(--fired-clay); }
+.highlight-green { color: var(--jobsite-green); }
+.highlight-gold { color: var(--india-yellow); }
+
+/* Pull quote */
+.pull-quote {
+  font-size: clamp(20px, 2.5vw, 28px);
+  font-weight: 500;
+  font-style: italic;
+  line-height: 1.5;
+  padding: 32px 0;
+  border-top: 2px solid var(--fired-clay);
+  border-bottom: 2px solid var(--fired-clay);
+  margin-top: 40px;
+  opacity: 0.85;
+}
+
+.pull-quote-dark {
+  border-color: rgba(255,255,255,0.15);
+}
+
+/* Confidential footer */
+.confidential {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  opacity: 0.25;
+}
+
+/* Database grid */
+.db-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.db-card {
+  padding: 20px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  text-align: center;
+}
+
+.db-card-name {
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.db-card-stat {
+  font-size: 11px;
+  opacity: 0.5;
+  line-height: 1.4;
+}
+
+/* Metrics row */
+.metrics-row {
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.metric {
+  flex: 1;
+  min-width: 140px;
+}
+
+.metric-value {
+  font-size: 36px;
+  font-weight: 900;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.metric-label {
+  font-size: 12px;
+  opacity: 0.5;
+  font-weight: 500;
+}
+
+/* Print */
+@media print {
+  html { scroll-snap-type: none; }
+  .slide { min-height: auto; page-break-after: always; padding: 40px; }
+  .nav-dots { display: none; }
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .slide { padding: 40px 32px; }
+  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+  .nav-dots { right: 10px; }
+  .nav-dot { width: 8px; height: 8px; }
+  .ecosystem { width: 300px; height: 300px; }
+  .eco-ring-1 { width: 200px; height: 200px; }
+  .eco-ring-2 { width: 280px; height: 280px; }
+  .eco-center { width: 80px; height: 80px; font-size: 12px; }
+  .db-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* Feature comparison table on dark bg */
+.feat-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+  margin-top: 32px;
+}
+
+.feat-table th {
+  padding: 10px 12px;
+  text-align: center;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border-bottom: 1px solid rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.5);
+}
+
+.feat-table th:first-child { text-align: left; }
+
+.feat-table td {
+  padding: 8px 12px;
+  text-align: center;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  color: rgba(255,255,255,0.6);
+}
+
+.feat-table td:first-child {
+  text-align: left;
+  font-weight: 500;
+  color: rgba(255,255,255,0.8);
+}
+
+.feat-table .up-col {
+  color: var(--fired-clay);
+  font-weight: 700;
+}
+
+/* Pricing math */
+.math-box {
+  background: rgba(74,124,89,0.08);
+  border: 1px solid rgba(74,124,89,0.15);
+  border-radius: 12px;
+  padding: 28px;
+  text-align: center;
+  margin-top: 24px;
+}
+
+.math-flow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.math-flow .op {
+  font-size: 16px;
+  opacity: 0.4;
+}
+
+/* Pill tags */
+.pill {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.pill-fired { background: rgba(232,113,58,0.15); color: var(--fired-clay); }
+.pill-green { background: rgba(74,124,89,0.12); color: var(--jobsite-green); }
+.pill-gold { background: rgba(206,146,60,0.12); color: #96700A; }
+</style>
+</head>
+<body>
+
+<!-- Navigation Dots -->
+<nav class="nav-dots" id="navDots"></nav>
+
+<!-- ============================================================ -->
+<!-- SLIDE 1: TITLE -->
+<!-- ============================================================ -->
+<section class="slide slide-light" id="slide-1">
+  <div class="slide-content" style="text-align: center;">
+    <h1 class="super-title" style="color: var(--kiln);">UP</h1>
+    <div class="divider" style="margin: 24px auto;"></div>
+    <p class="subtitle" style="font-weight: 600; font-size: clamp(22px, 3vw, 36px); margin-bottom: 16px;">The Construction Super App</p>
+    <p class="subtitle" style="opacity: 0.55; font-size: clamp(16px, 2vw, 22px);">Claude's brain. Slack's virality. WhatsApp's simplicity.</p>
+    <p style="margin-top: 60px; font-size: 11px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; opacity: 0.3;">Internal Strategy &mdash; Confidential</p>
+  </div>
+  <span class="confidential">Confidential</span>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 2: THE OPPORTUNITY -->
+<!-- ============================================================ -->
+<section class="slide slide-dark" id="slide-2">
+  <div class="slide-content">
+    <span class="label label-fired">The Opportunity</span>
+    <h2 class="section-title" style="color: var(--off-white);">A $2.17 trillion market<br>stuck in 1995.</h2>
+    <div class="grid-3" style="margin-top: 40px;">
+      <div class="stat-card">
+        <div class="big-number" style="color: var(--fired-clay);">2nd</div>
+        <p style="font-size: 14px; opacity: 0.6; margin-top: 8px;">Least digitized sector globally</p>
+      </div>
+      <div class="stat-card">
+        <div class="big-number" style="color: var(--india-yellow);">0.4<span class="stat-unit">%</span></div>
+        <p style="font-size: 14px; opacity: 0.6; margin-top: 8px;">Annual productivity growth over 20 years. Manufacturing grew 5x faster.</p>
+      </div>
+      <div class="stat-card">
+        <div class="big-number" style="color: var(--fired-clay);">85<span class="stat-unit">%</span></div>
+        <p style="font-size: 14px; opacity: 0.6; margin-top: 8px;">Of projects have no integrated PM software</p>
+      </div>
+    </div>
+    <div class="grid-3" style="margin-top: 20px;">
+      <div class="stat-card">
+        <div class="big-number" style="color: var(--off-white); font-size: clamp(36px, 5vw, 64px);">$177B</div>
+        <p style="font-size: 14px; opacity: 0.6; margin-top: 8px;">Lost annually to manual process inefficiency</p>
+      </div>
+      <div class="stat-card">
+        <div class="big-number" style="color: var(--off-white); font-size: clamp(36px, 5vw, 64px);">&lt;1<span class="stat-unit">%</span></div>
+        <p style="font-size: 14px; opacity: 0.6; margin-top: 8px;">Of revenue spent on IT by 58% of construction firms</p>
+      </div>
+      <div class="stat-card">
+        <div class="big-number" style="color: var(--off-white); font-size: clamp(36px, 5vw, 64px);">$2.17T</div>
+        <p style="font-size: 14px; opacity: 0.6; margin-top: 8px;">US construction market size</p>
+      </div>
+    </div>
+    <p class="pull-quote pull-quote-dark" style="margin-top: 48px;">"The industry runs on text messages, paper, and spreadsheets."</p>
+    <p class="source">Sources: McKinsey Global Institute, "Reinventing Construction" (2017); FMI/CFMA IT Survey (2023); Dodge Data & Analytics (2024); US Census Bureau, Value of Construction Put in Place (2024)</p>
+  </div>
+  <span class="slide-number" style="color: rgba(255,255,255,0.25);">02</span>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 3: THE WHITE SPACE -->
+<!-- ============================================================ -->
+<section class="slide slide-mahogany" id="slide-3">
+  <div class="slide-content">
+    <span class="label label-fired">The White Space</span>
+    <h2 class="section-title" style="color: var(--off-white); font-size: clamp(28px, 4vw, 44px);">Nobody owns AI-native + full stack<br>for the mid-market.</h2>
+
+    <div class="grid-2" style="align-items: start;">
+      <!-- Matrix -->
+      <div>
+        <div class="matrix-container">
+          <div style="position:absolute; bottom:-36px; left:50%; transform:translateX(-50%); font-size:10px; font-weight:600; letter-spacing:2px; text-transform:uppercase; opacity:0.4; white-space:nowrap;">Point Solution &nbsp;&nbsp;&nbsp;&rarr;&nbsp;&nbsp;&nbsp; Full Platform</div>
+          <div style="position:absolute; top:50%; left:-40px; transform:translateY(-50%) rotate(-90deg); font-size:10px; font-weight:600; letter-spacing:2px; text-transform:uppercase; opacity:0.4; white-space:nowrap;">Legacy &nbsp;&nbsp;&rarr;&nbsp;&nbsp; AI-Native</div>
+          <div class="matrix-bg">
+            <!-- Top-left: AI-native point solutions -->
+            <div class="matrix-quad">
+              <span class="matrix-company">Miter</span>
+              <span class="matrix-company">Ediphi</span>
+              <span class="matrix-company">Briq</span>
+            </div>
+            <!-- Top-right: AI-native full stack = UP -->
+            <div class="matrix-quad">
+              <span class="matrix-up">UP</span>
+              <span class="matrix-up-label">Empty quadrant</span>
+            </div>
+            <!-- Bottom-left: Legacy point solutions -->
+            <div class="matrix-quad">
+              <span class="matrix-company">Sage</span>
+              <span class="matrix-company">Foundation</span>
+              <span class="matrix-company">Viewpoint</span>
+            </div>
+            <!-- Bottom-right: Legacy full platform -->
+            <div class="matrix-quad">
+              <span class="matrix-company">Procore</span>
+              <span class="matrix-company">Autodesk ACC</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Feature table -->
+      <div style="overflow-x: auto;">
+        <table class="feat-table">
+          <thead>
+            <tr>
+              <th style="min-width:140px;">Feature</th>
+              <th class="up-col">UP</th>
+              <th>Procore</th>
+              <th>Sage</th>
+              <th>Miter</th>
+              <th>Builder-<br>Trend</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Project Mgmt</td><td class="up-col">&#10003;</td><td>&#10003;</td><td>&mdash;</td><td>&mdash;</td><td>&#10003;</td></tr>
+            <tr><td>Financial Mgmt</td><td class="up-col">&#10003;</td><td style="color:var(--india-yellow);">Partial</td><td>&#10003;</td><td>&mdash;</td><td>&mdash;</td></tr>
+            <tr><td>Payroll + Tax</td><td class="up-col">&#10003;</td><td>&mdash;</td><td>&#10003;</td><td>&#10003;</td><td>&mdash;</td></tr>
+            <tr><td>Estimating</td><td class="up-col">&#10003;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
+            <tr><td>Doc Intelligence</td><td class="up-col">&#10003;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
+            <tr><td>Embedded Pay</td><td class="up-col">&#10003;</td><td style="color:var(--india-yellow);">Procore Pay</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
+            <tr><td>AI Agents</td><td class="up-col">&#10003;</td><td style="color:var(--india-yellow);">Basic</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
+            <tr><td>Mobile-First</td><td class="up-col">&#10003;</td><td>&#10003;</td><td>&mdash;</td><td>&#10003;</td><td>&#10003;</td></tr>
+            <tr><td>Constr. Messaging</td><td class="up-col">&#10003;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <p style="margin-top: 48px; font-size: 18px; font-weight: 600; color: var(--fired-clay); text-align: center;">That's UP.</p>
+  </div>
+  <span class="slide-number" style="color: rgba(255,255,255,0.2);">03</span>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 4: WHO WE SERVE -->
+<!-- ============================================================ -->
+<section class="slide slide-light" id="slide-4">
+  <div class="slide-content">
+    <span class="label label-kiln">Who We Serve</span>
+    <h2 class="section-title">Each project is its own business.<br><span class="highlight">UP is the operating system.</span></h2>
+
+    <div class="grid-2">
+      <!-- Ecosystem visual -->
+      <div style="display:flex; justify-content:center;">
+        <div class="ecosystem">
+          <div class="eco-ring eco-ring-2"></div>
+          <div class="eco-ring eco-ring-1"></div>
+          <div class="eco-center">GC<br><span style="font-size:9px;font-weight:500;opacity:0.7;">The Conductor</span></div>
+
+          <!-- Inner ring: key participants -->
+          <div class="eco-node eco-node-sub" style="top:15%; left:30%;">Electrical Sub</div>
+          <div class="eco-node eco-node-sub" style="top:15%; left:72%;">Mechanical Sub</div>
+          <div class="eco-node eco-node-arch" style="top:42%; left:2%;">Architect</div>
+          <div class="eco-node eco-node-arch" style="top:60%; left:2%;">Engineer</div>
+          <div class="eco-node eco-node-sub" style="top:80%; left:25%;">Plumbing Sub</div>
+          <div class="eco-node eco-node-sub" style="top:80%; left:72%;">Concrete Sub</div>
+          <div class="eco-node eco-node-supplier" style="top:42%; left:98%;">Supplier</div>
+          <div class="eco-node eco-node-supplier" style="top:60%; left:96%;">Materials</div>
+
+          <!-- Outer ring -->
+          <div class="eco-node eco-node-dev" style="top:-2%; left:50%;">Developer / Owner</div>
+          <div class="eco-node eco-node-sub" style="top:5%; left:10%;">Framing</div>
+          <div class="eco-node eco-node-sub" style="top:5%; left:92%;">Roofing</div>
+          <div class="eco-node eco-node-sub" style="top:95%; left:50%;">Drywall</div>
+          <div class="eco-node eco-node-sub" style="top:92%; left:8%;">Painting</div>
+          <div class="eco-node eco-node-sub" style="top:92%; left:92%;">Flooring</div>
+
+          <div class="eco-top-label" style="top: -38px; font-size:9px; opacity:0.35;">15-60 companies per project</div>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div>
+        <p style="font-size: 13px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--adobe); margin-bottom: 24px;">ICP: AEC firms working with GCs doing $10M&ndash;$100M</p>
+
+        <div style="display:flex; flex-direction:column; gap:20px;">
+          <div class="stat-card-light">
+            <div style="font-size:28px; font-weight:900; color:var(--kiln);">~20,000</div>
+            <div style="font-size:13px; opacity:0.6;">GCs in the $10M&ndash;$100M range</div>
+          </div>
+          <div class="stat-card-light">
+            <div style="font-size:28px; font-weight:900; color:var(--kiln);">350K&ndash;400K</div>
+            <div style="font-size:13px; opacity:0.6;">Subs under $2M</div>
+          </div>
+          <div class="stat-card-light">
+            <div style="font-size:16px; font-weight:600; color:var(--mahogany); line-height:1.6;">
+              Average $30M GC: 50&ndash;100 employees, 3&ndash;6 PMs, 4&ndash;8 supers, 1&ndash;2 accounting<br>
+              Average sub: 2&ndash;15 people, owner does everything, spouse does QuickBooks
+            </div>
+          </div>
+          <div style="display:flex; gap:12px;">
+            <span class="pill pill-fired">No IT dept below $100M</span>
+            <span class="pill pill-fired">90% mobile-first</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <span class="slide-number">04</span>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 5: HOW THEY USE IT -->
+<!-- ============================================================ -->
+<section class="slide slide-plaster" id="slide-5">
+  <div class="slide-content">
+    <span class="label label-kiln">How They Use It</span>
+    <h2 class="section-title" style="font-size: clamp(28px, 4vw, 44px);">Everyone does 10x their job.<br><span class="highlight">Nobody changes their routine.</span></h2>
+
+    <table class="role-table">
+      <thead>
+        <tr>
+          <th style="width:12%;">Role</th>
+          <th style="width:44%;">Today</th>
+          <th style="width:44%;">With UP</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Owner</td>
+          <td>Checks 5 systems, calls PM for updates</td>
+          <td>Opens UP, sees all projects, cash flow, WIP</td>
+        </tr>
+        <tr>
+          <td>PM</td>
+          <td>Enters data in Procore AND Sage, emails subs</td>
+          <td>Talks to UP, everything happens</td>
+        </tr>
+        <tr>
+          <td>Super</td>
+          <td>Texts photos to PM, paper daily logs</td>
+          <td>Takes photo in UP, auto-classified, auto-logged</td>
+        </tr>
+        <tr>
+          <td>Estimator</td>
+          <td>RSMeans + Excel + manual takeoff</td>
+          <td>UP pulls live costs, does takeoff from drawings</td>
+        </tr>
+        <tr>
+          <td>Accountant</td>
+          <td>Re-enters everything in QuickBooks</td>
+          <td>Journal entries appear automatically. Nothing changes for Karen.</td>
+        </tr>
+        <tr>
+          <td>Sub</td>
+          <td>Submits pay app on paper, waits 83 days to get paid</td>
+          <td>Submits in UP, gets paid faster</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <span class="slide-number">05</span>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 6: THE 4 PROFIT CENTERS -->
+<!-- ============================================================ -->
+<section class="slide slide-dark" id="slide-6">
+  <div class="slide-content">
+    <span class="label label-fired">The Business Model</span>
+    <h2 class="section-title" style="color: var(--off-white); font-size: clamp(28px, 4vw, 48px);">4 Floats. 4 Profit Centers.</h2>
+
+    <!-- Dock visual -->
+    <div class="dock-visual">
+      <div class="dock-line">
+        <span class="dock-label">The Universal Graph</span>
+      </div>
+    </div>
+
+    <div class="grid-4" style="margin-top: 20px;">
+      <div class="float-card">
+        <div class="float-number">01</div>
+        <div class="float-name" style="color: var(--jobsite-green);">Embedded Finance</div>
+        <div class="float-desc">Control the money flow. Every payment through UP earns revenue.</div>
+        <div class="float-revenue">Transaction fees + float</div>
+      </div>
+      <div class="float-card">
+        <div class="float-number">02</div>
+        <div class="float-name" style="color: var(--india-yellow);">Regulatory Capture</div>
+        <div class="float-desc">8 databases of construction intelligence. Gets smarter every day.</div>
+        <div class="float-revenue">Data as a service</div>
+      </div>
+      <div class="float-card">
+        <div class="float-number">03</div>
+        <div class="float-name" style="color: var(--fired-clay);">Messaging Super App</div>
+        <div class="float-desc">Chat IS the product. Every project pulls 15&ndash;60 companies in.</div>
+        <div class="float-revenue">Seats + project-based</div>
+      </div>
+      <div class="float-card">
+        <div class="float-number">04</div>
+        <div class="float-name" style="color: var(--adobe);">AiM + VLM</div>
+        <div class="float-desc">Vision models that understand construction documents and photos.</div>
+        <div class="float-revenue">Premium AI + per-doc fees</div>
+      </div>
+    </div>
+
+    <p style="text-align: center; margin-top: 48px; font-size: 16px; opacity: 0.5;">Each float is an independent profit center. Together, they compound.</p>
+  </div>
+  <span class="slide-number" style="color: rgba(255,255,255,0.2);">06</span>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 7: FLOAT 1 — EMBEDDED FINANCE -->
+<!-- ============================================================ -->
+<section class="slide slide-light" id="slide-7">
+  <div class="slide-content">
+    <div style="display:flex; align-items:center; gap:12px; margin-bottom:12px;">
+      <span style="background:var(--jobsite-green); color:white; font-size:11px; font-weight:800; padding:4px 10px; border-radius:4px; letter-spacing:1px;">FLOAT 1</span>
+      <span class="label label-green" style="margin:0;">Embedded Finance</span>
+    </div>
+    <h2 class="section-title" style="font-size: clamp(28px, 4vw, 44px);">Control the money flow.<br><span class="highlight-green">Accounting systems just receive bank feeds.</span></h2>
+
+    <div class="grid-2">
+      <div>
+        <p style="font-size: 15px; line-height: 1.7; opacity: 0.75; margin-bottom: 32px;">Not just payments. The full financial stack for construction.</p>
+
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <div class="stat-card-light" style="border-left: 3px solid var(--jobsite-green);">
+            <div style="font-weight:700; font-size:14px; margin-bottom:4px;">Transaction Fees</div>
+            <div style="font-size:13px; opacity:0.6;">Every payment that flows through UP</div>
+          </div>
+          <div class="stat-card-light" style="border-left: 3px solid var(--jobsite-green);">
+            <div style="font-weight:700; font-size:14px; margin-bottom:4px;">Earned Wage Access</div>
+            <div style="font-size:13px; opacity:0.6;">Workers get paid early, UP earns the float</div>
+          </div>
+          <div class="stat-card-light" style="border-left: 3px solid var(--jobsite-green);">
+            <div style="font-weight:700; font-size:14px; margin-bottom:4px;">Materials Financing</div>
+            <div style="font-size:13px; opacity:0.6;">Buy now, pay on draw schedule</div>
+          </div>
+          <div class="stat-card-light" style="border-left: 3px solid var(--jobsite-green);">
+            <div style="font-weight:700; font-size:14px; margin-bottom:4px;">Lien Waiver Automation</div>
+            <div style="font-size:13px; opacity:0.6;">Fee-based conditional/unconditional waivers</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center;">
+        <div style="background: linear-gradient(135deg, var(--jobsite-green), #3a6347); border-radius:16px; padding:48px 40px; color:white;">
+          <p style="font-size:11px; font-weight:600; letter-spacing:2px; text-transform:uppercase; opacity:0.6; margin-bottom:16px;">a16z Thesis</p>
+          <div style="font-size:48px; font-weight:900; line-height:1;">2x</div>
+          <p style="font-size:16px; font-weight:500; margin-top:8px; opacity:0.8;">LTV on top of software<br>with embedded fintech</p>
+        </div>
+        <p style="margin-top:24px; font-size:13px; opacity:0.5; max-width:300px;">Long-term: UP IS the bank for the project. Column / Unit banking infrastructure.</p>
+      </div>
+    </div>
+  </div>
+  <span class="slide-number">07</span>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 8: FLOAT 2 — REGULATORY CAPTURE -->
+<!-- ============================================================ -->
+<section class="slide slide-dark" id="slide-8">
+  <div class="slide-content">
+    <div style="display:flex; align-items:center; gap:12px; margin-bottom:12px;">
+      <span style="background:var(--india-yellow); color:var(--pitch); font-size:11px; font-weight:800; padding:4px 10px; border-radius:4px; letter-spacing:1px;">FLOAT 2</span>
+      <span class="label label-gold" style="margin:0;">Regulatory Capture</span>
+    </div>
+    <h2 class="section-title" style="color: var(--off-white); font-size: clamp(28px, 4vw, 44px);">8 databases of construction intelligence.<br><span class="highlight-gold">Gets smarter every day.</span></h2>
+
+    <div class="db-grid" style="margin-bottom: 32px;">
+      <div class="db-card">
+        <div class="db-card-name" style="color:var(--india-yellow);">Tax</div>
+        <div class="db-card-stat">50 states<br>32K prevailing wage rates</div>
+      </div>
+      <div class="db-card">
+        <div class="db-card-name" style="color:var(--india-yellow);">Sales Tax</div>
+        <div class="db-card-stat">11K jurisdictions</div>
+      </div>
+      <div class="db-card">
+        <div class="db-card-name" style="color:var(--india-yellow);">Permits</div>
+        <div class="db-card-stat">19K building depts</div>
+      </div>
+      <div class="db-card">
+        <div class="db-card-name" style="color:var(--india-yellow);">Cost Data</div>
+        <div class="db-card-stat">FRED / BLS / DOT<br>Live pricing</div>
+      </div>
+      <div class="db-card">
+        <div class="db-card-name" style="color:var(--india-yellow);">CSI MasterFormat</div>
+        <div class="db-card-stat">Division structure</div>
+      </div>
+      <div class="db-card">
+        <div class="db-card-name" style="color:var(--india-yellow);">AiM</div>
+        <div class="db-card-stat">Document intelligence</div>
+      </div>
+      <div class="db-card">
+        <div class="db-card-name" style="color:var(--india-yellow);">Skills</div>
+        <div class="db-card-stat">Trade + cert mapping</div>
+      </div>
+      <div class="db-card">
+        <div class="db-card-name" style="color:var(--india-yellow);">Core</div>
+        <div class="db-card-stat">Entity + relationship graph</div>
+      </div>
+    </div>
+
+    <div style="display:flex; gap:32px; align-items:center;">
+      <div style="flex:1;">
+        <p style="font-size: 15px; line-height: 1.7; opacity: 0.65;">Maintained by autonomous steward agents running 24/7. The system gets smarter whether anyone uses it or not.</p>
+        <div style="margin-top:24px; display:flex; gap:20px;">
+          <div>
+            <div style="font-size:36px; font-weight:900; color:var(--india-yellow);">100K+</div>
+            <div style="font-size:12px; opacity:0.4;">Records loaded</div>
+          </div>
+          <div>
+            <div style="font-size:36px; font-weight:900; color:var(--india-yellow);">24/7</div>
+            <div style="font-size:12px; opacity:0.4;">Stewards running</div>
+          </div>
+        </div>
+      </div>
+      <div style="flex:1;">
+        <div style="background:rgba(206,146,60,0.08); border:1px solid rgba(206,146,60,0.15); border-radius:12px; padding:28px;">
+          <p style="font-size:11px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:var(--india-yellow); margin-bottom:12px;">Revenue Model</p>
+          <p style="font-size:14px; opacity:0.7; line-height:1.6;">Data as a service via MCP servers any agent can connect to. Premium data access tiers. Every AI tool in construction needs this data &mdash; UP owns it.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <span class="slide-number" style="color:rgba(255,255,255,0.2);">08</span>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 9: FLOAT 3 — MESSAGING SUPER APP -->
+<!-- ============================================================ -->
+<section class="slide slide-light" id="slide-9">
+  <div class="slide-content">
+    <div style="display:flex; align-items:center; gap:12px; margin-bottom:12px;">
+      <span style="background:var(--fired-clay); color:white; font-size:11px; font-weight:800; padding:4px 10px; border-radius:4px; letter-spacing:1px;">FLOAT 3</span>
+      <span class="label label-fired" style="margin:0;">Messaging Super App</span>
+    </div>
+    <h2 class="section-title" style="font-size: clamp(28px, 4vw, 44px);">Chat IS the product.<br><span class="highlight">The sub is the viral vector.</span></h2>
+
+    <div class="grid-2">
+      <div>
+        <p style="font-size: 15px; line-height: 1.7; opacity: 0.75; margin-bottom: 32px;">UP replaces texting + email + Procore for construction communication. Anyone on a project joins. Everyone else gets pulled in.</p>
+
+        <div style="background:white; border-radius:12px; padding:28px; border:1px solid rgba(59,37,24,0.08);">
+          <p style="font-size:11px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:var(--fired-clay); margin-bottom:16px;">Network Effect</p>
+          <div style="display:flex; align-items:center; gap:12px; margin-bottom:12px;">
+            <span style="background:var(--fired-clay); color:white; width:28px; height:28px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:800; flex-shrink:0;">1</span>
+            <span style="font-size:14px;">GC joins UP for project management</span>
+          </div>
+          <div style="display:flex; align-items:center; gap:12px; margin-bottom:12px;">
+            <span style="background:var(--fired-clay); color:white; width:28px; height:28px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:800; flex-shrink:0;">2</span>
+            <span style="font-size:14px;">Subs join to submit pay apps and get paid</span>
+          </div>
+          <div style="display:flex; align-items:center; gap:12px; margin-bottom:12px;">
+            <span style="background:var(--fired-clay); color:white; width:28px; height:28px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:800; flex-shrink:0;">3</span>
+            <span style="font-size:14px;">Sub works with 5&ndash;10 other GCs per year</span>
+          </div>
+          <div style="display:flex; align-items:center; gap:12px;">
+            <span style="background:var(--fired-clay); color:white; width:28px; height:28px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:800; flex-shrink:0;">4</span>
+            <span style="font-size:14px;">Sub carries UP to every other GC</span>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:20px;">
+        <div class="stat-card-light" style="border-left:3px solid var(--fired-clay);">
+          <div style="font-size:11px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; color:var(--adobe); margin-bottom:8px;">Pricing</div>
+          <div style="font-size:28px; font-weight:900; color:var(--kiln);">$200<span style="font-size:14px; font-weight:500; opacity:0.5;">/mo</span></div>
+          <div style="font-size:13px; opacity:0.6; margin-top:4px;">Individual seat (like Claude)</div>
+        </div>
+        <div class="stat-card-light" style="border-left:3px solid var(--fired-clay);">
+          <div style="font-size:11px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; color:var(--adobe); margin-bottom:8px;">Or project-based</div>
+          <div style="font-size:16px; font-weight:600; opacity:0.7; line-height:1.5;">Cost spread across all project participants. Less than $200 per company on a 30-firm project.</div>
+        </div>
+        <div style="background: linear-gradient(135deg, var(--fired-clay), var(--adobe)); border-radius:12px; padding:28px; color:white; text-align:center;">
+          <p style="font-size:16px; font-weight:600;">Own the messaging layer.</p>
+          <p style="font-size:13px; opacity:0.7; margin-top:4px;">Not built on Slack. Not WhatsApp. Not Telegram.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <span class="slide-number">09</span>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 10: FLOAT 4 — AiM + VLM -->
+<!-- ============================================================ -->
+<section class="slide slide-mahogany" id="slide-10">
+  <div class="slide-content">
+    <div style="display:flex; align-items:center; gap:12px; margin-bottom:12px;">
+      <span style="background:var(--adobe); color:white; font-size:11px; font-weight:800; padding:4px 10px; border-radius:4px; letter-spacing:1px;">FLOAT 4</span>
+      <span class="label" style="color:var(--adobe); margin:0;">AiM + VLM</span>
+    </div>
+    <h2 class="section-title" style="color: var(--off-white); font-size: clamp(28px, 4vw, 44px);">Vision models that understand<br><span style="color:var(--fired-clay);">construction.</span></h2>
+
+    <div class="grid-2">
+      <div>
+        <div style="display:flex; flex-direction:column; gap:20px;">
+          <div class="stat-card" style="border-left:3px solid var(--fired-clay);">
+            <div style="font-weight:700; font-size:15px; color:var(--off-white); margin-bottom:6px;">Photo Intelligence</div>
+            <div style="font-size:13px; opacity:0.55; line-height:1.5;">Drop a photo &rarr; instant classification. Safety, progress, defect, material &mdash; auto-categorized and connected to project.</div>
+          </div>
+          <div class="stat-card" style="border-left:3px solid var(--fired-clay);">
+            <div style="font-weight:700; font-size:15px; color:var(--off-white); margin-bottom:6px;">Document Parsing</div>
+            <div style="font-size:13px; opacity:0.55; line-height:1.5;">Upload drawings &rarr; auto-extract, classify, connect. Plan parsing, IFC/BIM ingestion, automated takeoff.</div>
+          </div>
+          <div class="stat-card" style="border-left:3px solid var(--fired-clay);">
+            <div style="font-weight:700; font-size:15px; color:var(--off-white); margin-bottom:6px;">Revenue Model</div>
+            <div style="font-size:13px; opacity:0.55; line-height:1.5;">Premium AI features. Per-document processing fees. Heavy usage metered like Claude tokens.</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; align-items:center; justify-content:center;">
+        <div style="background:rgba(232,113,58,0.1); border:2px solid rgba(232,113,58,0.2); border-radius:20px; padding:48px 40px; text-align:center; max-width:360px;">
+          <div style="font-size:64px; margin-bottom:16px;">&#128247;</div>
+          <p style="font-size:20px; font-weight:700; color:var(--fired-clay); margin-bottom:12px;">AiM only works on mobile.</p>
+          <p style="font-size:14px; opacity:0.5; line-height:1.5;">That's why UP is mobile-first. The jobsite is the point of capture. The phone is the tool.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <span class="slide-number" style="color:rgba(255,255,255,0.2);">10</span>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 11: PRICING STRATEGY -->
+<!-- ============================================================ -->
+<section class="slide slide-light" id="slide-11">
+  <div class="slide-content">
+    <span class="label label-kiln">Pricing Strategy</span>
+    <h2 class="section-title" style="font-size: clamp(24px, 3.5vw, 40px);">Project-based utility pricing.<br><span class="highlight">Turn on the lights, everyone can use them.</span></h2>
+
+    <div class="grid-2" style="gap:40px;">
+      <div style="display:flex; flex-direction:column; gap:16px;">
+        <div class="pricing-layer" style="border-color: var(--kiln); background: rgba(148,74,45,0.04);">
+          <div style="font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--kiln);">Layer 1</div>
+          <h3 style="color:var(--kiln);">Project License</h3>
+          <div class="pricing-price" style="color:var(--kiln);">$15K<span style="font-size:14px; font-weight:500; opacity:0.5;">/year</span></div>
+          <p>Includes 3 projects. $5K each additional. Cost auto-spread across ALL project participants &mdash; GC, subs, architects, suppliers.</p>
+        </div>
+
+        <div class="pricing-layer" style="border-color: var(--fired-clay); background: rgba(232,113,58,0.04);">
+          <div style="font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--fired-clay);">Layer 2</div>
+          <h3 style="color:var(--fired-clay);">Individual Seats</h3>
+          <div class="pricing-price" style="color:var(--fired-clay);">$200<span style="font-size:14px; font-weight:500; opacity:0.5;">/mo</span></div>
+          <p>Like Claude. Try it yourself, cancel anytime. Be 10x better at your job. Upgrade to company-wide when ready.</p>
+        </div>
+
+        <div class="pricing-layer" style="border-color: var(--india-yellow); background: rgba(206,146,60,0.04);">
+          <div style="font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--india-yellow);">Layer 3</div>
+          <h3 style="color:var(--india-yellow);">Usage-Based / Tokenization</h3>
+          <p>Stripe metered billing. Base usage included in project/seat price. Heavy AI usage &rarr; overage pricing. Like Claude's token model.</p>
+        </div>
+
+        <div class="pricing-layer" style="border-color: var(--jobsite-green); background: rgba(74,124,89,0.04);">
+          <div style="font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--jobsite-green);">Layer 4</div>
+          <h3 style="color:var(--jobsite-green);">Embedded Finance</h3>
+          <p>Transaction fees on every payment. Long-tail revenue that compounds as adoption grows.</p>
+        </div>
+      </div>
+
+      <div>
+        <div class="math-box">
+          <p style="font-size:11px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:var(--jobsite-green); margin-bottom:16px;">The Math</p>
+          <div class="math-flow" style="color:var(--mahogany);">
+            <span>$5K</span>
+            <span class="op">&divide;</span>
+            <span>30 firms</span>
+            <span class="op">=</span>
+            <span style="color:var(--jobsite-green);">~$167</span>
+          </div>
+          <p style="font-size:13px; opacity:0.5; margin-top:12px;">Per participant, per project, per year.</p>
+          <p style="font-size:14px; font-weight:600; color:var(--jobsite-green); margin-top:8px;">Less than a dinner out. For 18 months of software.</p>
+        </div>
+
+        <div style="margin-top:32px; background:white; border-radius:12px; padding:28px; border:1px solid rgba(59,37,24,0.08); text-align:center;">
+          <div style="font-size:64px; font-weight:900; color:var(--jobsite-green);">80%+</div>
+          <div style="font-size:14px; font-weight:600; opacity:0.5;">Gross margin. Always.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <span class="slide-number">11</span>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 12: GO-TO-MARKET -->
+<!-- ============================================================ -->
+<section class="slide slide-dark" id="slide-12">
+  <div class="slide-content">
+    <span class="label label-fired">Go-to-Market</span>
+    <h2 class="section-title" style="color: var(--off-white); font-size: clamp(24px, 3.5vw, 40px);">We don't sell to companies.<br><span class="highlight">We sell to projects. Projects pull companies in.</span></h2>
+
+    <div class="grid-3" style="margin-top:40px;">
+      <div class="phase-card" style="background:rgba(148,74,45,0.08); border:1px solid rgba(148,74,45,0.15);">
+        <div style="position:absolute; top:0; left:0; width:4px; height:100%; background:var(--kiln); border-radius:4px 0 0 4px;"></div>
+        <div class="phase-number" style="color:var(--kiln);">Phase 1 &mdash; Legacy Base</div>
+        <h3 style="font-size:18px; color:var(--off-white); margin-bottom:12px;">Red Team: 8,000+ customers</h3>
+        <div style="font-size:13px; opacity:0.55; line-height:1.7;">
+          AI-driven SDR outreach<br>
+          Email marketing at scale<br>
+          12% MQL-to-SQL conversion<br>
+          90&ndash;180 day sales cycles
+        </div>
+      </div>
+
+      <div class="phase-card" style="background:rgba(232,113,58,0.08); border:1px solid rgba(232,113,58,0.15);">
+        <div style="position:absolute; top:0; left:0; width:4px; height:100%; background:var(--fired-clay); border-radius:4px 0 0 4px;"></div>
+        <div class="phase-number" style="color:var(--fired-clay);">Phase 2 &mdash; Product-Led Growth</div>
+        <h3 style="font-size:18px; color:var(--off-white); margin-bottom:12px;">The Claude Model</h3>
+        <div style="font-size:13px; opacity:0.55; line-height:1.7;">
+          Individual adoption: $200/mo<br>
+          Spread word-of-mouth<br>
+          PlanGrid proved it: $4M ARR, zero sales team<br>
+          The sub carries UP between GCs
+        </div>
+      </div>
+
+      <div class="phase-card" style="background:rgba(74,124,89,0.08); border:1px solid rgba(74,124,89,0.15);">
+        <div style="position:absolute; top:0; left:0; width:4px; height:100%; background:var(--jobsite-green); border-radius:4px 0 0 4px;"></div>
+        <div class="phase-number" style="color:var(--jobsite-green);">Phase 3 &mdash; Network Effect</div>
+        <h3 style="font-size:18px; color:var(--off-white); margin-bottom:12px;">The Flywheel</h3>
+        <div style="font-size:13px; opacity:0.55; line-height:1.7;">
+          Every project pulls 15&ndash;60 companies onto UP<br>
+          Subs carry UP to other GCs<br>
+          Network compounds quarterly<br>
+          Land & expand: one piece or the whole suite
+        </div>
+      </div>
+    </div>
+
+    <p class="pull-quote pull-quote-dark" style="text-align:center; font-size:18px; margin-top:48px;">"Our SDR team is AI. Our sales motion is the product itself."</p>
+  </div>
+  <span class="slide-number" style="color:rgba(255,255,255,0.2);">12</span>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 13: UNIT ECONOMICS -->
+<!-- ============================================================ -->
+<section class="slide slide-plaster" id="slide-13">
+  <div class="slide-content">
+    <span class="label label-kiln">Unit Economics</span>
+    <h2 class="section-title" style="font-size: clamp(28px, 4vw, 44px);">Every customer brings<br><span class="highlight">15&ndash;60 more through projects.</span></h2>
+
+    <div class="grid-3" style="margin-top:40px;">
+      <div class="stat-card-light" style="text-align:center;">
+        <div style="font-size:11px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; color:var(--adobe); margin-bottom:12px;">Project Deal</div>
+        <div style="font-size:42px; font-weight:900; color:var(--kiln);">$15K</div>
+        <div style="font-size:13px; opacity:0.5;">per year, 80%+ gross margin</div>
+      </div>
+      <div class="stat-card-light" style="text-align:center;">
+        <div style="font-size:11px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; color:var(--adobe); margin-bottom:12px;">Individual Seat</div>
+        <div style="font-size:42px; font-weight:900; color:var(--kiln);">$2,400</div>
+        <div style="font-size:13px; opacity:0.5;">per year ($200/mo)</div>
+      </div>
+      <div class="stat-card-light" style="text-align:center;">
+        <div style="font-size:11px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; color:var(--adobe); margin-bottom:12px;">Year 1 SOM</div>
+        <div style="font-size:42px; font-weight:900; color:var(--jobsite-green);">$500K&ndash;$2M</div>
+        <div style="font-size:13px; opacity:0.5;">ARR across 2&ndash;3 metros</div>
+      </div>
+    </div>
+
+    <div style="margin-top:40px; display:flex; gap:20px; flex-wrap:wrap; justify-content:center;">
+      <div style="background:white; border-radius:12px; padding:24px 32px; border:1px solid rgba(59,37,24,0.06); text-align:center; min-width:160px;">
+        <div style="font-size:32px; font-weight:900; color:var(--jobsite-green);">&gt;4:1</div>
+        <div style="font-size:11px; opacity:0.5; font-weight:500;">LTV:CAC Target</div>
+      </div>
+      <div style="background:white; border-radius:12px; padding:24px 32px; border:1px solid rgba(59,37,24,0.06); text-align:center; min-width:160px;">
+        <div style="font-size:32px; font-weight:900; color:var(--jobsite-green);">&lt;12</div>
+        <div style="font-size:11px; opacity:0.5; font-weight:500;">Months CAC Payback</div>
+      </div>
+      <div style="background:white; border-radius:12px; padding:24px 32px; border:1px solid rgba(59,37,24,0.06); text-align:center; min-width:160px;">
+        <div style="font-size:32px; font-weight:900; color:var(--jobsite-green);">&gt;120%</div>
+        <div style="font-size:11px; opacity:0.5; font-weight:500;">NDR Target</div>
+      </div>
+      <div style="background:white; border-radius:12px; padding:24px 32px; border:1px solid rgba(59,37,24,0.06); text-align:center; min-width:160px;">
+        <div style="font-size:32px; font-weight:900; color:var(--kiln);">50&ndash;200</div>
+        <div style="font-size:11px; opacity:0.5; font-weight:500;">Firms Year 1</div>
+      </div>
+    </div>
+
+    <p style="text-align:center; margin-top:32px; font-size:12px; opacity:0.4;">Target metros: Orlando, Phoenix, Portland</p>
+  </div>
+  <span class="slide-number">13</span>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 14: WHY NOW / WHY US -->
+<!-- ============================================================ -->
+<section class="slide slide-kiln" id="slide-14">
+  <div class="slide-content" style="text-align:center;">
+    <span class="label" style="color: rgba(255,255,255,0.5);">Why Now / Why Us</span>
+    <h2 class="section-title" style="color: var(--off-white); font-size: clamp(28px, 4vw, 48px);">The product exists.<br>The market is waiting.</h2>
+
+    <div class="grid-3" style="margin-top:40px; text-align:left;">
+      <div>
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <div style="padding:20px; background:rgba(255,255,255,0.06); border-radius:10px;">
+            <div style="font-weight:700; font-size:14px; margin-bottom:4px;">AI Convergence</div>
+            <div style="font-size:12px; opacity:0.55;">Claude/GPT can finally understand construction context</div>
+          </div>
+          <div style="padding:20px; background:rgba(255,255,255,0.06); border-radius:10px;">
+            <div style="font-weight:700; font-size:14px; margin-bottom:4px;">Mobile Workforce</div>
+            <div style="font-size:12px; opacity:0.55;">90% phone-first. Desktop software is dead for field workers.</div>
+          </div>
+          <div style="padding:20px; background:rgba(255,255,255,0.06); border-radius:10px;">
+            <div style="font-weight:700; font-size:14px; margin-bottom:4px;">Regulatory Pressure</div>
+            <div style="font-size:12px; opacity:0.55;">Prevailing wage enforcement increasing nationwide</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <div style="padding:20px; background:rgba(255,255,255,0.06); border-radius:10px;">
+            <div style="font-weight:700; font-size:14px; margin-bottom:4px;">Embedded Fintech Matures</div>
+            <div style="font-size:12px; opacity:0.55;">Column, Unit, Stripe &mdash; the infrastructure finally exists</div>
+          </div>
+          <div style="padding:20px; background:rgba(255,255,255,0.06); border-radius:10px;">
+            <div style="font-weight:700; font-size:14px; margin-bottom:4px;">Legacy Systems Aging Out</div>
+            <div style="font-size:12px; opacity:0.55;">Sage 300 is 30+ years old. The wave of replacement is now.</div>
+          </div>
+          <div style="padding:20px; background:rgba(255,255,255,0.06); border-radius:10px;">
+            <div style="font-weight:700; font-size:14px; margin-bottom:4px;">Red Team Access</div>
+            <div style="font-size:12px; opacity:0.55;">8,000+ AEC companies. Built-in distribution.</div>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:16px;">
+        <div style="padding:20px; background:rgba(255,255,255,0.06); border-radius:10px;">
+          <div style="font-weight:700; font-size:14px; margin-bottom:6px;">What we've built:</div>
+          <div style="font-size:12px; opacity:0.55; line-height:1.6;">
+            8 databases. The graph.<br>The agents. The VLM.<br>The messaging layer.<br>The financial stack.
+          </div>
+        </div>
+        <div style="padding:28px; background:rgba(232,113,58,0.15); border:1px solid rgba(232,113,58,0.25); border-radius:12px; text-align:center;">
+          <div style="font-size:14px; font-weight:700; color:var(--fired-clay);">Zero revenue today.</div>
+          <div style="font-size:14px; font-weight:700; color:var(--india-yellow); margin-top:4px;">$8M legacy base to convert.</div>
+          <div style="font-size:14px; font-weight:700; color:var(--off-white); margin-top:4px;">$2.17T market to capture.</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:60px;">
+      <p style="font-size:11px; font-weight:500; letter-spacing:2px; text-transform:uppercase; opacity:0.3;">Internal Strategy &mdash; Confidential</p>
+    </div>
+  </div>
+  <span class="slide-number" style="color:rgba(255,255,255,0.2);">14</span>
+</section>
+
+<!-- ============================================================ -->
+<!-- JAVASCRIPT -->
+<!-- ============================================================ -->
+<script>
+(function() {
+  const slides = document.querySelectorAll('.slide');
+  const navDotsContainer = document.getElementById('navDots');
+
+  // Create nav dots
+  slides.forEach((slide, i) => {
+    const dot = document.createElement('button');
+    dot.className = 'nav-dot';
+    dot.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+    dot.addEventListener('click', () => {
+      slide.scrollIntoView({ behavior: 'smooth' });
+    });
+    navDotsContainer.appendChild(dot);
+  });
+
+  const dots = document.querySelectorAll('.nav-dot');
+
+  // Update active dot on scroll
+  function updateActiveDot() {
+    let current = 0;
+    slides.forEach((slide, i) => {
+      const rect = slide.getBoundingClientRect();
+      if (rect.top <= window.innerHeight / 2 && rect.bottom >= window.innerHeight / 2) {
+        current = i;
+      }
+    });
+    dots.forEach((dot, i) => {
+      dot.classList.toggle('active', i === current);
+    });
+
+    // Update dot colors for dark slides
+    const currentSlide = slides[current];
+    const isDark = currentSlide.classList.contains('slide-dark') ||
+                   currentSlide.classList.contains('slide-mahogany') ||
+                   currentSlide.classList.contains('slide-kiln');
+    dots.forEach(dot => {
+      if (!dot.classList.contains('active')) {
+        dot.style.background = isDark ? 'rgba(255,255,255,0.25)' : 'rgba(148,74,45,0.25)';
+      } else {
+        dot.style.background = '#E8713A';
+      }
+    });
+  }
+
+  window.addEventListener('scroll', updateActiveDot);
+  updateActiveDot();
+
+  // Keyboard navigation
+  document.addEventListener('keydown', function(e) {
+    let current = 0;
+    slides.forEach((slide, i) => {
+      const rect = slide.getBoundingClientRect();
+      if (rect.top <= window.innerHeight / 2 && rect.bottom >= window.innerHeight / 2) {
+        current = i;
+      }
+    });
+
+    if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === ' ') {
+      e.preventDefault();
+      if (current < slides.length - 1) {
+        slides[current + 1].scrollIntoView({ behavior: 'smooth' });
+      }
+    } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+      e.preventDefault();
+      if (current > 0) {
+        slides[current - 1].scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  });
+})();
+</script>
+
+</body>
+</html>
