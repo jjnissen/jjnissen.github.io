@@ -3,417 +3,186 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>How UP Makes Money</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<title>UP Pricing</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  html, body { height: 100%; overflow: hidden; }
-  body {
-    font-family: 'Inter', -apple-system, sans-serif;
-    background: #F5EDE3;
-    color: #1A1A1A;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    padding: 20px 36px 14px;
-  }
+:root {
+  --kiln: #944A2D;
+  --mahogany: #3B2518;
+  --fired-clay: #E8713A;
+  --jobsite-green: #4A7C59;
+  --plaster: #E8DDD0;
+  --off-white: #F5EDE3;
+  --india-yellow: #CE923C;
+  --pitch: #1A1A1A;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; overflow: hidden; }
+body {
+  font-family: 'Inter', -apple-system, sans-serif;
+  background: var(--off-white);
+  color: var(--mahogany);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 60px;
+  -webkit-font-smoothing: antialiased;
+}
 
-  /* --- Title --- */
-  .page-title {
-    text-align: center;
-    font-size: 22px;
-    font-weight: 700;
-    color: #3B2518;
-    margin-bottom: 8px;
-    letter-spacing: -0.3px;
-  }
+.hero {
+  text-align: center;
+  margin-bottom: 36px;
+}
+.hero h1 {
+  font-size: 80px;
+  font-weight: 900;
+  color: var(--jobsite-green);
+  letter-spacing: -3px;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.hero p {
+  font-size: 22px;
+  color: var(--mahogany);
+  opacity: 0.6;
+}
 
-  /* --- Hero: FREE FOR GCs --- */
-  .hero {
-    background: #4A7C59;
-    border-radius: 12px;
-    padding: 14px 24px;
-    text-align: center;
-    margin-bottom: 12px;
-  }
-  .hero-free {
-    font-size: 42px;
-    font-weight: 900;
-    color: #fff;
-    letter-spacing: -1px;
-    line-height: 1;
-  }
-  .hero-sub {
-    font-size: 13px;
-    font-weight: 500;
-    color: #E8DDD0;
-    margin-top: 4px;
-  }
+.flow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  margin-bottom: 36px;
+  width: 100%;
+  max-width: 1100px;
+}
+.flow-step {
+  text-align: center;
+  flex: 1;
+  padding: 16px 12px;
+}
+.flow-step .num {
+  font-size: 34px;
+  font-weight: 800;
+  color: var(--kiln);
+  line-height: 1.1;
+}
+.flow-step .num.green { color: var(--jobsite-green); }
+.flow-step .num.gold { color: var(--india-yellow); }
+.flow-step .label {
+  font-size: 13px;
+  color: var(--mahogany);
+  opacity: 0.55;
+  margin-top: 4px;
+  line-height: 1.3;
+}
+.flow-arrow {
+  font-size: 28px;
+  color: var(--fired-clay);
+  flex-shrink: 0;
+}
 
-  /* --- Main content: flow + example side by side --- */
-  .main-row {
-    display: flex;
-    gap: 16px;
-    margin-bottom: 12px;
-    flex: 1;
-    min-height: 0;
-  }
+.result {
+  background: var(--mahogany);
+  color: var(--off-white);
+  border-radius: 16px;
+  padding: 28px 48px;
+  text-align: center;
+  margin-bottom: 36px;
+  max-width: 900px;
+  width: 100%;
+}
+.result .headline {
+  font-size: 26px;
+  font-weight: 800;
+  margin-bottom: 4px;
+}
+.result .headline span { color: var(--jobsite-green); }
+.result .sub { font-size: 14px; opacity: 0.5; }
 
-  /* --- Left: How it works flow --- */
-  .flow-col {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-  }
-  .flow-label {
-    font-size: 10px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1.2px;
-    color: #944A2D;
-    margin-bottom: 6px;
-  }
-  .flow-track {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-    flex: 1;
-  }
-  .flow-step {
-    background: #fff;
-    border-radius: 8px;
-    padding: 8px 14px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-  }
-  .flow-step .step-icon {
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    background: #E8DDD0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 13px;
-    font-weight: 800;
-    color: #3B2518;
-    flex-shrink: 0;
-  }
-  .flow-step .step-text {
-    font-size: 12px;
-    font-weight: 500;
-    color: #1A1A1A;
-    line-height: 1.35;
-  }
-  .flow-step .step-text strong {
-    font-weight: 800;
-    color: #3B2518;
-  }
-  .flow-step.highlight {
-    background: #3B2518;
-  }
-  .flow-step.highlight .step-icon {
-    background: #E8713A;
-    color: #fff;
-  }
-  .flow-step.highlight .step-text {
-    color: #F5EDE3;
-  }
-  .flow-step.highlight .step-text strong {
-    color: #E8713A;
-  }
-  .flow-step.green {
-    background: #4A7C59;
-  }
-  .flow-step.green .step-icon {
-    background: #fff;
-    color: #4A7C59;
-  }
-  .flow-step.green .step-text {
-    color: #fff;
-  }
-  .flow-step.green .step-text strong {
-    color: #fff;
-  }
-  .flow-arrow {
-    text-align: center;
-    font-size: 16px;
-    color: #944A2D;
-    line-height: 1;
-    padding: 2px 0;
-  }
-
-  /* --- Right: Real Example --- */
-  .example-col {
-    width: 340px;
-    flex-shrink: 0;
-    display: flex;
-    flex-direction: column;
-  }
-  .example-box {
-    background: #3B2518;
-    border-radius: 12px;
-    padding: 16px 20px;
-    color: #F5EDE3;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-  }
-  .example-label {
-    font-size: 10px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1.2px;
-    color: #CE923C;
-    margin-bottom: 10px;
-  }
-  .example-scenario {
-    font-size: 12px;
-    color: #E8DDD0;
-    margin-bottom: 12px;
-    line-height: 1.4;
-  }
-  .example-scenario strong {
-    color: #fff;
-    font-weight: 700;
-  }
-  .stat-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
-    margin-bottom: 12px;
-  }
-  .stat-card {
-    background: rgba(255,255,255,0.08);
-    border-radius: 8px;
-    padding: 10px 12px;
-    text-align: center;
-  }
-  .stat-card .stat-val {
-    font-size: 22px;
-    font-weight: 900;
-    color: #E8713A;
-    line-height: 1;
-  }
-  .stat-card .stat-lbl {
-    font-size: 9px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
-    color: #E8DDD0;
-    margin-top: 4px;
-  }
-  .stat-card.green-card .stat-val {
-    color: #7DC496;
-  }
-  .example-math {
-    font-size: 11px;
-    color: #E8DDD0;
-    line-height: 1.6;
-    flex: 1;
-  }
-  .example-math .math-line {
-    display: flex;
-    justify-content: space-between;
-    padding: 2px 0;
-  }
-  .example-math .math-line.total {
-    border-top: 1px solid rgba(255,255,255,0.15);
-    margin-top: 4px;
-    padding-top: 6px;
-    font-weight: 700;
-    color: #fff;
-  }
-  .example-math .math-val {
-    font-weight: 700;
-    color: #E8713A;
-  }
-  .example-math .math-line.total .math-val {
-    color: #7DC496;
-  }
-  .small-note {
-    margin-top: 8px;
-    font-size: 10px;
-    color: #E8DDD0;
-    opacity: 0.7;
-    border-top: 1px solid rgba(255,255,255,0.1);
-    padding-top: 6px;
-  }
-
-  /* --- Bottom: Other Revenue + Margin --- */
-  .bottom-bar {
-    display: flex;
-    gap: 10px;
-    align-items: stretch;
-    margin-bottom: 6px;
-  }
-  .rev-item {
-    flex: 1;
-    background: #fff;
-    border-radius: 8px;
-    padding: 8px 12px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-    border-top: 3px solid #944A2D;
-  }
-  .rev-item .rev-name {
-    font-size: 10px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
-    color: #944A2D;
-    margin-bottom: 2px;
-  }
-  .rev-item .rev-price {
-    font-size: 14px;
-    font-weight: 800;
-    color: #3B2518;
-  }
-  .rev-item .rev-who {
-    font-size: 10px;
-    color: #888;
-    margin-top: 1px;
-  }
-
-  .margin-footer {
-    text-align: center;
-    font-size: 12px;
-    font-weight: 600;
-    color: #3B2518;
-    padding-top: 4px;
-  }
-  .margin-footer span {
-    color: #4A7C59;
-    font-weight: 800;
-  }
+.extras {
+  display: flex;
+  gap: 16px;
+  max-width: 1100px;
+  width: 100%;
+}
+.extra-card {
+  flex: 1;
+  background: var(--plaster);
+  border-radius: 12px;
+  padding: 18px 22px;
+}
+.extra-card .cl { font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--kiln); font-weight: 700; margin-bottom: 4px; }
+.extra-card .cp { font-size: 22px; font-weight: 800; color: var(--mahogany); margin-bottom: 4px; }
+.extra-card .cd { font-size: 11px; color: var(--mahogany); opacity: 0.55; line-height: 1.4; }
+.extra-card.green { background: var(--jobsite-green); }
+.extra-card.green .cl { color: rgba(255,255,255,0.6); }
+.extra-card.green .cp { color: #fff; }
+.extra-card.green .cd { color: rgba(255,255,255,0.6); }
 </style>
 </head>
 <body>
 
-<div class="page-title">How UP Makes Money</div>
-
-<!-- Hero -->
 <div class="hero">
-  <div class="hero-free">FREE FOR GENERAL CONTRACTORS</div>
-  <div class="hero-sub">Subs fund the platform. The GC never pays out of pocket.</div>
+  <h1>FREE</h1>
+  <p>for General Contractors</p>
 </div>
 
-<!-- Main Content Row -->
-<div class="main-row">
-
-  <!-- Left: Flow Diagram -->
-  <div class="flow-col">
-    <div class="flow-label">How It Works</div>
-    <div class="flow-track">
-      <div class="flow-step">
-        <div class="step-icon">1</div>
-        <div class="step-text">GC pays <strong>$15,000/year</strong> for the entire platform &mdash; estimating, bidding, accounting, PM, compliance, field ops, blockchain, change orders. Everything.</div>
-      </div>
-      <div class="flow-arrow">&darr;</div>
-      <div class="flow-step">
-        <div class="step-icon">2</div>
-        <div class="step-text"><strong>3 projects included</strong> in the annual license.</div>
-      </div>
-      <div class="flow-arrow">&darr;</div>
-      <div class="flow-step">
-        <div class="step-icon">3</div>
-        <div class="step-text">Each project: <strong>$5,000</strong> &mdash; split across all subs on the project.</div>
-      </div>
-      <div class="flow-arrow">&darr;</div>
-      <div class="flow-step highlight">
-        <div class="step-icon">4</div>
-        <div class="step-text">3 projects &times; $5,000 = <strong>$15,000</strong> &mdash; funded by subs. The GC gets their $15,000 back.</div>
-      </div>
-      <div class="flow-arrow">&darr;</div>
-      <div class="flow-step green">
-        <div class="step-icon">&infin;</div>
-        <div class="step-text"><strong>Every project after 3: $5,000 &mdash; also paid by subs. GC pays $0. Always.</strong></div>
-      </div>
-    </div>
+<div class="flow">
+  <div class="flow-step">
+    <div class="num">$15K/yr</div>
+    <div class="label">GC pays once.<br>Gets everything.</div>
   </div>
-
-  <!-- Right: Real Example -->
-  <div class="example-col">
-    <div class="example-box">
-      <div class="example-label">Real Example</div>
-      <div class="example-scenario">
-        A GC runs <strong>10 projects/year</strong> with <strong>28 subs per project</strong> on average.
-      </div>
-
-      <div class="stat-grid">
-        <div class="stat-card">
-          <div class="stat-val">$179</div>
-          <div class="stat-lbl">Per sub, per project</div>
-        </div>
-        <div class="stat-card green-card">
-          <div class="stat-val">$0</div>
-          <div class="stat-lbl">GC out of pocket</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-val">$50K</div>
-          <div class="stat-lbl">UP collects / year</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-val">10</div>
-          <div class="stat-lbl">Projects covered</div>
-        </div>
-      </div>
-
-      <div class="example-math">
-        <div class="math-line">
-          <span>Annual license</span>
-          <span class="math-val">$15,000</span>
-        </div>
-        <div class="math-line">
-          <span>First 3 projects fund the license</span>
-          <span class="math-val">-$15,000</span>
-        </div>
-        <div class="math-line">
-          <span>7 additional projects &times; $5,000</span>
-          <span class="math-val">$35,000</span>
-        </div>
-        <div class="math-line total">
-          <span>UP total revenue</span>
-          <span class="math-val">$50,000</span>
-        </div>
-      </div>
-
-      <div class="small-note">
-        $5,000 &divide; 28 subs = <strong>$179 each</strong>. Once. Done.<br>
-        Small / one-off projects: <strong>Free</strong>. No fee. GC uses UP because it's their system.
-      </div>
-    </div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step">
+    <div class="num">3 projects</div>
+    <div class="label">Included.</div>
   </div>
-
-</div>
-
-<!-- Bottom: Other Revenue Streams -->
-<div class="bottom-bar">
-  <div class="rev-item">
-    <div class="rev-name">Individual Seat</div>
-    <div class="rev-price">$200/mo</div>
-    <div class="rev-who">Paid by the person</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step">
+    <div class="num">$5K each</div>
+    <div class="label">Split across every<br>sub on the project.</div>
   </div>
-  <div class="rev-item">
-    <div class="rev-name">Sub Company License</div>
-    <div class="rev-price">$10,000/yr</div>
-    <div class="rev-who">Paid by the sub</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step">
+    <div class="num gold">3 × $5K = $15K</div>
+    <div class="label">Subs fund the<br>entire annual fee.</div>
   </div>
-  <div class="rev-item">
-    <div class="rev-name">Heavy AI Usage</div>
-    <div class="rev-price">Metered</div>
-    <div class="rev-who">Whoever exceeds allocation</div>
-  </div>
-  <div class="rev-item">
-    <div class="rev-name">Payment Processing</div>
-    <div class="rev-price">25 bps</div>
-    <div class="rev-who">Invisible &mdash; built into flow</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step">
+    <div class="num green">$0</div>
+    <div class="label">GC net cost.<br>Every year. Forever.</div>
   </div>
 </div>
 
-<div class="margin-footer">Target: <span>80%+ gross margins</span> across all revenue streams</div>
+<div class="result">
+  <div class="headline">10 projects. 28 subs each. Each sub pays <span>$179</span>. Once.</div>
+  <div class="sub">UP collects $50,000/year. GC pays nothing. Small projects are free.</div>
+</div>
+
+<div class="extras">
+  <div class="extra-card">
+    <div class="cl">Individual</div>
+    <div class="cp">$200/mo</div>
+    <div class="cd">Personal AI assistant. Try it yourself. Cancel anytime.</div>
+  </div>
+  <div class="extra-card">
+    <div class="cl">Sub Company</div>
+    <div class="cp">$10K/yr</div>
+    <div class="cd">Run your whole business on UP. Unlimited seats.</div>
+  </div>
+  <div class="extra-card">
+    <div class="cl">Heavy Usage</div>
+    <div class="cp">Metered</div>
+    <div class="cd">Exceed your allocation? Pay for what you use.</div>
+  </div>
+  <div class="extra-card green">
+    <div class="cl">Payments</div>
+    <div class="cp">25 bps</div>
+    <div class="cd">On every transaction. Invisible.</div>
+  </div>
+</div>
 
 </body>
 </html>
