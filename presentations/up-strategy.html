@@ -952,97 +952,38 @@ ul.clean li::before {
      SLIDE 7: PRICING STRATEGY
      ================================================================ -->
 <section class="slide slide-light" id="s7">
-  <div class="slide-content">
-    <div class="section-label section-label--kiln">Pricing Model</div>
-    <div class="slide-title">Four Revenue Layers, Utility-Priced</div>
-    <p style="margin-bottom:24px;">UP is priced as a project utility&mdash;like turning on the lights for a job. The cost is distributed across all project participants, keeping the per-company burden trivial.</p>
+  <div class="slide-content" style="display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:48px;">
 
-    <table class="data-table">
-      <thead>
-        <tr>
-          <th>Layer</th>
-          <th>Description</th>
-          <th>Price</th>
-          <th>Unit Economics</th>
-          <th>Gross Margin</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><strong>1. Individual Seat</strong></td>
-          <td>Single-user personal productivity. Estimating assist, document Q&amp;A, compliance lookup.</td>
-          <td class="num"><strong>$200/mo</strong></td>
-          <td>Per user, monthly recurring</td>
-          <td class="num green">~90%</td>
-        </tr>
-        <tr>
-          <td><strong>2. Project Utility</strong></td>
-          <td>Full platform access for an entire project. All participants (GC, subs, owner, architect) share a single project workspace. First 3 projects included in $15K annual minimum.</td>
-          <td class="num"><strong>$5,000/project</strong></td>
-          <td>30 companies on a project = $167 each</td>
-          <td class="num green">~85%</td>
-        </tr>
-        <tr>
-          <td><strong>3. Token / Usage Overage</strong></td>
-          <td>Metered billing (Stripe) for AI usage beyond the project allocation. Heavy document processing, complex estimating queries, large BIM analysis.</td>
-          <td class="num"><strong>Usage-based</strong></td>
-          <td>Marginal cost of compute</td>
-          <td class="num green">~80%</td>
-        </tr>
-        <tr>
-          <td><strong>4. Embedded Finance</strong></td>
-          <td>Transaction fees on payment processing. Pay applications, lien waiver settlements, retention releases. Long-tail revenue, not required at launch.</td>
-          <td class="num"><strong>25&ndash;50 bps <span class="def">(basis points&mdash;0.25&ndash;0.50%)</span></strong></td>
-          <td>% of GPV <span class="def">(Gross Payment Volume)</span></td>
-          <td class="num green">~80%</td>
-        </tr>
-      </tbody>
-    </table>
+    <div>
+      <div style="font-size:96px; font-weight:900; color:var(--jobsite-green); letter-spacing:-4px; line-height:1;">FREE</div>
+      <div style="font-size:24px; color:var(--mahogany); opacity:0.5; margin-top:8px;">for General Contractors</div>
+    </div>
 
-    <div class="two-col" style="margin-top:24px;">
-      <div style="background:var(--white); border-radius:8px; padding:24px; border-top:3px solid var(--jobsite-green);">
-        <h4 style="color:var(--jobsite-green);">The Per-Company Math</h4>
-        <table class="data-table data-table--sm" style="margin:12px 0 0;">
-          <tbody>
-            <tr>
-              <td>Project cost (example)</td>
-              <td class="num">$1,000,000</td>
-            </tr>
-            <tr>
-              <td>UP project fee</td>
-              <td class="num">$5,000</td>
-            </tr>
-            <tr>
-              <td>Participants on project</td>
-              <td class="num">~30 companies</td>
-            </tr>
-            <tr style="font-weight:700;">
-              <td>Cost per company</td>
-              <td class="num highlight">$167</td>
-            </tr>
-            <tr>
-              <td>% of project cost</td>
-              <td class="num">0.50%</td>
-            </tr>
-          </tbody>
-        </table>
-        <p style="font-size:12px; opacity:0.6; margin-top:10px;">At $167 per company per project, the adoption barrier is negligible. This is a rounding error on any construction budget.</p>
+    <div style="max-width:700px;">
+      <div style="font-size:22px; font-weight:500; line-height:1.8;">
+        <span style="color:var(--kiln); font-weight:800;">$15,000/year.</span> Run your entire business. Everything included.
       </div>
-      <div style="background:var(--white); border-radius:8px; padding:24px; border-top:3px solid var(--kiln);">
-        <h4 style="color:var(--kiln);">Blended Margin Target</h4>
-        <p style="font-size:13px;">All four layers operate above 80% gross margin. The revenue mix shifts over time as embedded finance scales, but margins remain consistently high due to:</p>
-        <ul class="clean" style="margin-top:10px;">
-          <li>Near-zero marginal cost of AI inference at scale</li>
-          <li>No per-customer infrastructure (multi-tenant)</li>
-          <li>No dedicated support headcount (product-led)</li>
-          <li>Network effects reduce CAC <span class="def">(Customer Acquisition Cost)</span> over time</li>
-        </ul>
+      <div style="font-size:22px; font-weight:500; line-height:1.8;">
+        <span style="color:var(--india-yellow); font-weight:800;">3 projects included.</span> One-time $5,000 per project &mdash; designed so the project shares the cost.
+      </div>
+      <div style="font-size:22px; font-weight:500; line-height:1.8;">
+        The project funds the $15K. <span style="color:var(--jobsite-green); font-weight:800;">GC net cost: $0.</span>
       </div>
     </div>
 
-    <div class="source">
-      Sources: Pricing benchmarked against Procore ($500&ndash;$2,000/mo per user), Autodesk ACC ($300&ndash;$500/mo per user), Claude Pro ($200/mo per user); gross margin targets based on Datadog (80%), Snowflake (73%), Twilio (51%) public filings
+    <div style="display:flex; gap:20px; max-width:600px; width:100%;">
+      <div style="flex:1; background:var(--plaster); border-radius:12px; padding:24px; text-align:center;">
+        <div style="font-size:11px; text-transform:uppercase; letter-spacing:1.5px; color:var(--kiln); font-weight:700; margin-bottom:8px;">Subcontractors</div>
+        <div style="font-size:28px; font-weight:800; margin-bottom:6px;">$10K/yr</div>
+        <div style="font-size:12px; opacity:0.5;">Run your whole business on UP. Unlimited seats.</div>
+      </div>
+      <div style="flex:0.7; opacity:0.7; background:var(--plaster); border-radius:12px; padding:24px; text-align:center;">
+        <div style="font-size:11px; text-transform:uppercase; letter-spacing:1.5px; color:var(--kiln); font-weight:700; margin-bottom:8px;">Just want to try it?</div>
+        <div style="font-size:28px; font-weight:800; margin-bottom:6px;">$200/mo</div>
+        <div style="font-size:12px; opacity:0.5;">One seat. No commitment.</div>
+      </div>
     </div>
+
   </div>
 </section>
 
